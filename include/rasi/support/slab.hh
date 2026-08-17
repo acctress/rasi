@@ -1,1 +1,48 @@
 #pragma once
+
+#include <algorithm>
+#include <cstdint>
+#include <cstring>
+#include <rasi/support/arena.hh>
+
+namespace rasi
+{
+
+    /// @brief A Slab<T> owns a growable array of T allocated from an arena.
+    template <typename T>
+    class Slab
+    {
+    public:
+        Slab( Arena& arena, const std::size_t init_capacity ) : m_arena( &arena ), m_capacity( init_capacity )
+        {
+            m_arr = reinterpret_cast< T* >( arena.alloc( init_capacity * sizeof( T ), alignof( T ) ) );
+        }
+
+        /// @brief Pushes a value into the slab, growing if necessary.
+        /// @return Index of the pushed value.
+        std::size_t push( T value ) noexcept
+        {
+            if ( m_count == m_capacity )
+            {
+                auto new_block = reinterpret_cast< T* >( m_arena->alloc( m_capacity * sizeof(T) * 2, alignof( T ) ) );
+                std::memcpy( new_block, m_arr, m_count * sizeof( T ) );
+                m_arr = new_block;
+                m_capacity *= 2;
+            }
+
+            new (m_arr + m_count) T{ std::move( value ) };
+            return m_count++;
+        }
+
+        T& operator[]( std::size_t index ) noexcept
+        {
+            assert( index < m_count );
+            return m_arr[ index ];
+        }
+    private:
+        Arena*      m_arena { nullptr };
+        T*          m_arr { nullptr };
+        std::size_t m_count { };
+        std::size_t m_capacity { };
+    };
+}
