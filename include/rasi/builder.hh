@@ -19,12 +19,19 @@ namespace rasi
         /// @brief Helper function for creating and pushing instructions into the pool.
         [[nodiscard]] ValueRef emit( Inst inst ) const;
 
+        /// @brief Helper function for creating and pushing terminator instructions.
+        void emit_term( const Inst &inst ) const;
+
         /// @brief Helper function for retrieving a parameters ValueRef.
         [[nodiscard]] ValueRef param( u32 idx ) const;
 
         /// @brief Helper for emitting and building an arithmetic instruction.
-        template<typename First, typename... Rest>
+        template <typename First, typename... Rest>
         [[nodiscard]] ValueRef build_arith_inst( InstKind kind, First first_operand, Rest... other_operands );
+
+        /// @brief Helper for emitting and building a comparison instruction.
+        template <typename Predicate, typename First, typename... Rest>
+        [[nodiscard]] ValueRef build_comp_inst( InstKind kind, Predicate predicate, First first_operand, Rest... other_operands );
 
         ValueRef iadd( ValueRef a, ValueRef b );
         ValueRef isub( ValueRef a, ValueRef b );
@@ -43,5 +50,17 @@ namespace rasi
         ValueRef shl( ValueRef a, ValueRef b );
         ValueRef shr( ValueRef a, ValueRef b );
         ValueRef sar( ValueRef a, ValueRef b );
+
+        ValueRef icmp( IntCC predicate, ValueRef a, ValueRef b );
+        ValueRef fcmp( FloatCC predicate, ValueRef a, ValueRef b );
+
+        void ret( ValueRef a );
+        void ret( ) const;
+
+        template <typename First, typename... Rest>
+        void br( BlockRef block, First first_arg, Rest... rest );
+        void br( BlockRef block ) const;
+
+        void cbr( ValueRef cond, BlockRef a, BlockRef b );
     };
 }

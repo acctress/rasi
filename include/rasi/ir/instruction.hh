@@ -52,6 +52,8 @@ namespace rasi
         Type     result_type{};
         u32      operand_offset{};
         u16      operand_count{};
+        BlockRef target_block{};
+        BlockRef false_block{};
         union { IntCC icc; FloatCC fcc; } predicate{};
     };
 }
