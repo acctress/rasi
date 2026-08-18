@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <cstring>
 #include <rasi/support/arena.hh>
+#include <span>
 
 namespace rasi
 {
@@ -38,6 +39,21 @@ namespace rasi
         {
             assert( index < m_count );
             return m_arr[ index ];
+        }
+
+        T* begin() noexcept
+        {
+            return m_arr;
+        }
+
+        T* end() noexcept
+        {
+            return m_arr + m_count;
+        }
+
+        std::span< T > as_span( ) noexcept
+        {
+            return std::span( m_arr, m_count );
         }
     private:
         Arena*      m_arena { nullptr };
