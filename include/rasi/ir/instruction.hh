@@ -28,7 +28,7 @@ namespace rasi
         fcmp,
         load,
         store,
-        alloca,
+        alloca_,
         call,
         ret,
         br,

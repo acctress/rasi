@@ -9,18 +9,35 @@ template < typename First, typename... Rest > u32 IRBuilder::push_operands( Firs
     return offset;
 }
 
-ValueRef IRBuilder::emit( const Inst &inst ) const
+ValueRef IRBuilder::emit( Inst inst ) const
 {
-    const u32 id = static_cast< u32 >( current_func->instructions.push( inst ) );
-    current_func->value_types.push( inst.result_type );
-    return ValueRef{ id };
+    auto& block = current_func->blocks[current_block.id];
+    const auto id = static_cast< u32 >( current_func->instructions.size( ) );
+
+    if ( block.instructions_count == 0 ) block.instructions_offset = id;
+    else assert( block.instructions_offset + block.instructions_count == id && "block instructions must be contiguous");
+
+    const auto value_id = static_cast< u32 >( current_func->value_types.push( inst.result_type ) );
+    const ValueRef result { value_id };
+
+    inst.result = result;
+    current_func->instructions.push( inst );
+    ++block.instructions_count;
+
+    return result;
 }
 
 ValueRef IRBuilder::param( const u32 idx ) const
 {
     const auto& block = current_func->blocks[ current_block.id ];
     assert( idx < block.params_count );
-    return current_func->block_params[block.params_offset + idx];
+
+    const auto id = current_func->block_params[block.params_offset + idx];
+
+    /// check if the id matches what was pushed in new_block
+    assert( current_func->value_types[id.id] == current_func->param_types[idx] );
+
+    return id;
 }
 
 ValueRef IRBuilder::iadd( const ValueRef a, const ValueRef b )

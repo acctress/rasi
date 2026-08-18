@@ -17,7 +17,7 @@ namespace rasi
         u32 push_operands( First first, Rest... rest );
 
         /// @brief Helper function for creating and pushing instructions into the pool.
-        ValueRef emit( const Inst &inst ) const;
+        ValueRef emit( Inst inst ) const;
 
         /// @brief Helper function for retrieving a parameters ValueRef.
         ValueRef param( u32 idx ) const;

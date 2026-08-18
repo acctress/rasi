@@ -17,5 +17,7 @@ TEST_CASE( "basic module test", "[ir]" )
     auto a   = builder.param( 0 );
     auto res = builder.iadd( a, a );
 
-    REQUIRE( fn.instructions.size() == 1 );
+    REQUIRE( res.id == 1 );
+    REQUIRE( fn.instructions[0].result.id == 1 );
+    REQUIRE( fn.blocks[0].instructions_count == 1 );
 }

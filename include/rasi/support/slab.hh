@@ -35,7 +35,13 @@ namespace rasi
             return m_count++;
         }
 
-        T& operator[]( std::size_t index ) noexcept
+        [[nodiscard]] T& operator[]( const std::size_t index ) noexcept
+        {
+            assert( index < m_count );
+            return m_arr[ index ];
+        }
+
+        [[nodiscard]] const T& operator[]( const std::size_t index ) const noexcept
         {
             assert( index < m_count );
             return m_arr[ index ];
@@ -51,12 +57,22 @@ namespace rasi
             return m_arr + m_count;
         }
 
+        const T* begin() const noexcept
+        {
+            return m_arr;
+        }
+
+        const T* end() const noexcept
+        {
+            return m_arr + m_count;
+        }
+
         std::span< T > as_span( ) noexcept
         {
             return std::span( m_arr, m_count );
         }
 
-        std::size_t size( ) const noexcept
+        [[nodiscard]] std::size_t size( ) const noexcept
         {
             return m_count;
         };
