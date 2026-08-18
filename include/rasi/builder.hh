@@ -6,7 +6,7 @@ namespace rasi
 {
     struct IRBuilder
     {
-        explicit IRBuilder( Function& func, const BlockRef block ) : current_func( &func ), current_block( block ) { }
+        explicit IRBuilder( Function& func ) : current_func( &func ), current_block( func.entry_block ) { }
 
         Function* current_func  { nullptr };
         BlockRef  current_block { };
@@ -18,6 +18,9 @@ namespace rasi
 
         /// @brief Helper function for creating and pushing instructions into the pool.
         ValueRef emit( const Inst &inst ) const;
+
+        /// @brief Helper function for retrieving a parameters ValueRef.
+        ValueRef param( u32 idx ) const;
 
         ValueRef iadd( ValueRef a, ValueRef b );
     };

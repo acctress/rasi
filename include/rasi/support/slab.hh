@@ -55,6 +55,12 @@ namespace rasi
         {
             return std::span( m_arr, m_count );
         }
+
+        std::size_t size( ) const noexcept
+        {
+            return m_count;
+        };
+
     private:
         Arena*      m_arena { nullptr };
         T*          m_arr { nullptr };

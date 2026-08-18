@@ -2,15 +2,16 @@
 
 using namespace rasi;
 
-FunctionRef Module::new_function( const std::string_view name, const std::span< const Type > param_types, const Type return_type )
+FunctionRef Module::new_function( const std::string_view name, const std::initializer_list< Type > param_types, const Type return_type )
 {
-    Function func { name, return_type, ( &arena ) };
-
-    for ( const auto type : param_types )
-        func.param_types.push( type );
-
+    Function func { name, param_types, return_type, &arena };
     const u32 idx = static_cast< u32 >( functions.push( std::move( func ) ) );
     return FunctionRef{ idx };
+}
+
+Function &Module::get_function( const FunctionRef fn )
+{
+    return functions[fn.id];
 }
 
 std::optional<

@@ -16,6 +16,13 @@ ValueRef IRBuilder::emit( const Inst &inst ) const
     return ValueRef{ id };
 }
 
+ValueRef IRBuilder::param( const u32 idx ) const
+{
+    const auto& block = current_func->blocks[ current_block.id ];
+    assert( idx < block.params_count );
+    return current_func->block_params[block.params_offset + idx];
+}
+
 ValueRef IRBuilder::iadd( const ValueRef a, const ValueRef b )
 {
     const auto ret_type = current_func->value_types[a.id];

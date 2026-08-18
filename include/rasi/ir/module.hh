@@ -15,7 +15,8 @@ namespace rasi
         Arena          arena;
         Slab<Function> functions;
 
-        FunctionRef new_function( std::string_view name, std::span< const Type > param_types, const Type return_type );
+        FunctionRef new_function( std::string_view name, std::initializer_list< Type > param_types, Type return_type );
+        Function& get_function( FunctionRef fn );
         std::optional<
             std::reference_wrapper<const Function>
         >   get_function( std::string_view name );
