@@ -12,8 +12,7 @@ TEST_CASE( "basic module test", "[ir]" )
     const auto fn_ref = module.new_function( "foo", { Type::i64 }, Type::i64 );
     auto& fn          = module.get_function( fn_ref );
 
-    IRBuilder builder { fn };
-
+    IRBuilder  builder { fn };
     auto a   = builder.param( 0 );
     auto res = builder.iadd( a, a );
 

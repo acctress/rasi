@@ -17,11 +17,31 @@ namespace rasi
         u32 push_operands( First first, Rest... rest );
 
         /// @brief Helper function for creating and pushing instructions into the pool.
-        ValueRef emit( Inst inst ) const;
+        [[nodiscard]] ValueRef emit( Inst inst ) const;
 
         /// @brief Helper function for retrieving a parameters ValueRef.
-        ValueRef param( u32 idx ) const;
+        [[nodiscard]] ValueRef param( u32 idx ) const;
+
+        /// @brief Helper for emitting and building an arithmetic instruction.
+        template<typename First, typename... Rest>
+        [[nodiscard]] ValueRef build_arith_inst( InstKind kind, First first_operand, Rest... other_operands );
 
         ValueRef iadd( ValueRef a, ValueRef b );
+        ValueRef isub( ValueRef a, ValueRef b );
+        ValueRef imul( ValueRef a, ValueRef b );
+        ValueRef sdiv( ValueRef a, ValueRef b );
+        ValueRef udiv( ValueRef a, ValueRef b );
+        ValueRef srem( ValueRef a, ValueRef b );
+        ValueRef urem( ValueRef a, ValueRef b );
+        ValueRef fadd( ValueRef a, ValueRef b );
+        ValueRef fsub( ValueRef a, ValueRef b );
+        ValueRef fmul( ValueRef a, ValueRef b );
+        ValueRef fdiv( ValueRef a, ValueRef b );
+        ValueRef band( ValueRef a, ValueRef b );
+        ValueRef bor( ValueRef a, ValueRef b );
+        ValueRef bxor( ValueRef a, ValueRef b );
+        ValueRef shl( ValueRef a, ValueRef b );
+        ValueRef shr( ValueRef a, ValueRef b );
+        ValueRef sar( ValueRef a, ValueRef b );
     };
 }
