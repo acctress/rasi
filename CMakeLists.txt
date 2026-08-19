@@ -32,8 +32,7 @@ target_compile_options(rasi PRIVATE
         -fno-exceptions -fno-rtti
     >
     $<$<CXX_COMPILER_ID:MSVC>:
-        /W4 /WX /GR- /EHs-c-
-        /MP
+        /W4 /WX /MP
     >
 )
 

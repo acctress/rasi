@@ -1,5 +1,8 @@
+#include "rasi/support/printer.hh"
+
 #include <Catch2/catch_test_macros.hpp>
 #include <array>
+#include <iostream>
 #include <rasi/builder.hh>
 #include <rasi/ir/module.hh>
 
@@ -15,6 +18,9 @@ TEST_CASE( "basic module test", "[ir]" )
     IRBuilder  builder { fn };
     auto a   = builder.param( 0 );
     auto res = builder.iadd( a, a );
+
+    IRPrinter printer { std::cout };
+    printer.print( module );
 
     REQUIRE( res.id == 1 );
     REQUIRE( fn.instructions[0].result.id == 1 );

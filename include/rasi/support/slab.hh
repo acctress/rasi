@@ -72,6 +72,11 @@ namespace rasi
             return std::span( m_arr, m_count );
         }
 
+        std::span< const T > as_span( ) const noexcept
+        {
+            return std::span( m_arr, m_count );
+        }
+
         [[nodiscard]] std::size_t size( ) const noexcept
         {
             return m_count;
