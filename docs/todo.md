@@ -4,12 +4,12 @@
 - [x] isub, imul, sdiv, udiv, srem, urem
 - [x] fadd, fsub, fmul, fdiv
 - [x] and, or, xor, shl, shr, sar
-- [ ] icmp
-- [ ] fcmp
-- [ ] load, store, alloca
-- [ ] call
-- [ ] ret, br, cbr
-- [ ] IR formatter
+- [x] icmp
+- [x] fcmp
+- [x] load, store, alloca
+- [x] call
+- [x] ret, br, cbr
+- [x] IR formatter
 
 ## Codegen
 - [ ] x86-64 instruction encoder

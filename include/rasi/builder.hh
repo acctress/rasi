@@ -19,6 +19,9 @@ namespace rasi
         /// @brief Helper function for creating and pushing instructions into the pool.
         [[nodiscard]] ValueRef emit( Inst inst ) const;
 
+        /// @brief Helper function for creating and pushing void instructions.
+        void emit_void( const Inst &inst ) const;
+
         /// @brief Helper function for creating and pushing terminator instructions.
         void emit_term( const Inst &inst ) const;
 
@@ -53,6 +56,10 @@ namespace rasi
 
         ValueRef icmp( IntCC predicate, ValueRef a, ValueRef b );
         ValueRef fcmp( FloatCC predicate, ValueRef a, ValueRef b );
+
+        ValueRef load( Type T, ValueRef ptr );
+        void store( Type T, ValueRef value, ValueRef addr );
+        ValueRef alloca_( Type T );
 
         void ret( ValueRef a );
         void ret( ) const;

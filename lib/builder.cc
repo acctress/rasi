@@ -29,6 +29,19 @@ ValueRef IRBuilder::emit( Inst inst ) const
     return result;
 }
 
+void IRBuilder::emit_void( const Inst &inst ) const
+{
+    auto      &block = current_func->blocks[ current_block.id ];
+    const auto id    = static_cast< u32 >( current_func->instructions.size( ) );
+
+    if ( block.instructions_count == 0 ) block.instructions_offset = id;
+    else
+        assert( block.instructions_offset + block.instructions_count == id && "block instructions must be contiguous" );
+
+    current_func->instructions.push( inst );
+    ++block.instructions_count;
+}
+
 void IRBuilder::emit_term( const Inst &inst ) const
 {
     auto      &block = current_func->blocks[ current_block.id ];
@@ -185,6 +198,37 @@ ValueRef IRBuilder::icmp( const IntCC predicate, const ValueRef a, const ValueRe
 ValueRef IRBuilder::fcmp( const FloatCC predicate, const ValueRef a, const ValueRef b )
 {
     return build_comp_inst( InstKind::fcmp, predicate, a, b );
+}
+
+ValueRef IRBuilder::load( const Type T, const ValueRef ptr )
+{
+    const auto offset = push_operands( ptr );
+    return emit( Inst {
+        .kind           = InstKind::load,
+        .result_type    = T,
+        .operand_offset = offset,
+        .operand_count  = 1,
+    } );
+}
+
+void IRBuilder::store( const Type T, const ValueRef value, const ValueRef addr )
+{
+    const auto offset = push_operands( value, addr );
+    emit_void( Inst {
+        .kind           = InstKind::store,
+        .t_type         = T,
+        .operand_offset = offset,
+        .operand_count  = 2,
+    } );
+}
+
+ValueRef IRBuilder::alloca_( const Type T )
+{
+    return emit( Inst {
+        .kind           = InstKind::alloca_,
+        .result_type    = Type::ptr,
+        .t_type         = T,
+    } );
 }
 
 void IRBuilder::ret( const ValueRef a )

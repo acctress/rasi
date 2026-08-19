@@ -50,6 +50,7 @@ namespace rasi
         InstKind kind{};
         ValueRef result{};
         Type     result_type{};
+        Type     t_type{};
         u32      operand_offset{};
         u16      operand_count{};
         BlockRef target_block{};
