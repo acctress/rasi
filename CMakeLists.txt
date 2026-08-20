@@ -53,6 +53,8 @@ if (RASIC_SOURCE)
     )
 endif()
 
+add_subdirectory(tools/islec)
+
 option(RASI_BUILD_TESTS "build tests" ON)
 
 include(FetchContent)
