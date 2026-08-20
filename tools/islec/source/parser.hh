@@ -65,15 +65,12 @@ private:
     lexer            m_lexer;
     token            m_current;
 
-    expr        parse_expr();
-    type_decl   parse_type_decl();
-    extern_decl parse_extern_decl();
-    rule        parse_rule();
+    expr        parse_expr( );
+    type_decl   parse_type_decl( );
+    extern_decl parse_extern_decl( );
+    rule        parse_rule( );
 
-    [[nodiscard]] std::string_view lexeme() const noexcept
-    {
-        return m_source.substr( m_current.start, m_current.end - m_current.start );
-    }
+    [[nodiscard]] std::string_view lexeme( ) const noexcept { return m_source.substr( m_current.start, m_current.end - m_current.start ); }
 
     [[nodiscard]] bool matches( const token_type t ) const noexcept { return m_current.type == t; }
 
