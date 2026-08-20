@@ -16,7 +16,7 @@
 - [ ] Instruction selection
 - [ ] Linear scan register allocator
 - [ ] prologue/epilogue emission
-- [ ] exec memory (with mmap or virtualalloc)
+- [x] exec memory (with mmap or virtualalloc)
 - [ ] JitCompiler
 
 ## Pass pipeline
