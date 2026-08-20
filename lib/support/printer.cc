@@ -8,7 +8,7 @@ void IRPrinter::print( const Module &module )
         print_function( func );
 }
 
-void IRPrinter::print_function( const Function &function )
+void IRPrinter::print_function( const Function &function ) const
 {
     m_stream << "fn @" << function.name;
     m_stream << "(";
@@ -27,7 +27,7 @@ void IRPrinter::print_function( const Function &function )
     m_stream << "}\n\n";
 }
 
-void IRPrinter::print_block( const Function& function, const BasicBlock &block )
+void IRPrinter::print_block( const Function& function, const BasicBlock &block ) const
 {
     m_stream << "bb" << block.ref.id << ":\n";
     for ( auto i { block.instructions_offset }; i < block.instructions_offset + block.instructions_count; ++i )
@@ -72,7 +72,10 @@ void IRPrinter::print_instruction( const Function &function, const Inst &inst ) 
     }
 
     for ( auto i = inst.operand_offset; i < inst.operand_offset + inst.operand_count; ++i )
+    {
+        if ( i > inst.operand_offset ) m_stream << ",";
         m_stream << " %" << function.operands[ i ].id;
+    }
 
     if ( inst.kind == InstKind::br || inst.kind == InstKind::cbr )
         m_stream << " bb" << inst.target_block.id;
