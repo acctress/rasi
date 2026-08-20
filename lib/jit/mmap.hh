@@ -104,6 +104,21 @@ namespace rasi
             m_pos += amount;
         }
 
+        template <typename T> requires std::integral< T >
+        [[nodiscard]] std::size_t reverse_immediate( )
+        {
+            const auto offset = m_pos;
+            skip( sizeof( offset ) );
+            return offset;
+        }
+
+        template <typename T> requires std::integral< T >
+        void patch_immediate( const std::size_t pos, T value )
+        {
+            if ( pos + sizeof( T ) > m_size ) throw std::runtime_error( "patch out of range" );
+            std::memcpy( m_memory.get(  ) + pos, &value, sizeof( T ) );
+        }
+
         [[nodiscard]] bool make_exec( ) const
         {
 #ifdef _WIN32
