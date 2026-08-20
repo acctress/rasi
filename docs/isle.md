@@ -44,3 +44,27 @@ calls constructors which is the assembler
 ;; enums which ISLE can match on directly
 (type CC (enum eq ne lt le gt ge ult ule ugt uge))
 ```
+
+### External Declarations
+
+ISLE names are bound to C++ functions which are implemented. For example there are **extractors** and **constructors**:
+
+Extractors take a value and try to decompose it, if the value doesnt match they return `std::nullopt` and ISLE will backtrack.
+
+```lisp
+(decl iadd      (Value Value) Value)    ; matches iadd
+(decl isub      (Value Value) Value)
+(decl imul      (Value Value) Value)
+(decl iconst    (I64)         Value)
+(decl value_type (Type)       Value)    ; will always run fine and yield the type
+```
+
+And constructors, they emit machine instructions and return a result register
+```
+(decl x86_add       (Type Reg Reg)      Reg)
+(decl x86_sub       (Type Reg Reg)      Reg)
+(decl x86_imul      (Type Reg Reg)      Reg)
+(decl x86_lea       (Type Reg I64)      Reg) ; base + disp
+(decl x86_leas      (Type Reg Reg U8)   Reg) ; base + index * scale
+(decl mov_imm       (Type I64)          Reg)
+```
