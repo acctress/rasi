@@ -2,56 +2,67 @@
 
 token lexer::next( )
 {
-    skip_ws( );
-
-    switch ( current( ) )
+    while ( true )
     {
-        case '\n' :
+        skip_ws( );
+
+        if ( !not_eof( ) ) return tok( token_type::EOF_, m_pos, m_pos );
+
+        switch ( current( ) )
         {
-            m_ln++;
-            m_col = 0;
-            advance( );
-            return next( );
-        }
-        case '(' :
-        {
-            advance( );
-            return tok( token_type::LPAREN, m_pos - 1, m_pos );
-        }
-        case ')' :
-        {
-            advance( );
-            return tok( token_type::RPAREN, m_pos - 1, m_pos );
-        }
-        case ';' :
-        {
-            while ( not_eof( ) && current( ) != '\n' )
+            case '\n' :
                 advance( );
-            return next( );
+                ++m_ln;
+                m_col = 0;
+                continue;
+
+            case ';' :
+                while ( not_eof( ) && current( ) != '\n' )
+                    advance( );
+                continue;
+
+            case '(' :
+            {
+                const auto start = m_pos;
+                advance( );
+                return tok( token_type::LPAREN, start, m_pos );
+            }
+
+            case ')' :
+            {
+                const auto start = m_pos;
+                advance( );
+                return tok( token_type::RPAREN, start, m_pos );
+            }
+
+            default : break;
         }
-        default :
+
+        if ( is_digit( current( ) ) || current( ) == '-' )
         {
-            if ( is_digit( current( ) ) || current( ) == '-' )
-            {
-                const auto start = m_pos;
-                if ( current( ) == '-' ) advance( );
-                while ( not_eof( ) && is_digit( current( ) ) )
-                    advance( );
-                return tok( token_type::INT, start, m_pos );
-            }
+            const auto start = m_pos;
 
-            if ( is_alpha( current( ) ) || current( ) == '_' )
-            {
-                const auto start = m_pos;
-                while ( not_eof( ) && ( is_alphanum( current( ) ) || current( ) == '_' || current( ) == '-' ) )
-                    advance( );
-                return tok( token_type::IDENT, start, m_pos );
-            }
+            if ( current( ) == '-' ) advance( );
 
-            advance( );
+            while ( not_eof( ) && is_digit( current( ) ) )
+                advance( );
 
-            return next( );
+            return tok( token_type::INT, start, m_pos );
         }
+
+        if ( is_alpha( current( ) ) || current( ) == '_' )
+        {
+            const auto start = m_pos;
+
+            while ( not_eof( ) && ( is_alphanum( current( ) ) || current( ) == '_' || current( ) == '-' ) )
+            {
+                advance( );
+            }
+
+            return tok( token_type::IDENT, start, m_pos );
+        }
+
+        advance( );
     }
 }
 
@@ -59,8 +70,8 @@ token lexer::tok( const token_type ty, const std::size_t start, const std::size_
 {
     return token {
         .type  = ty,
-        .start = start == 0 ? m_pos : start,
-        .end   = end == 0 ? m_pos : end,
+        .start = start,
+        .end   = end,
         .line  = m_ln,
         .col   = m_col,
     };
