@@ -8,9 +8,10 @@ struct dec_node;
 
 using children_map = std::unordered_map< std::string_view, std::unique_ptr< dec_node > >;
 
+using path_t = std::vector< std::size_t >;
+
 struct branch_node
 {
-    int          arg_idx;
     children_map children;
 };
 
@@ -34,6 +35,7 @@ public:
     dec_tree( )  = default;
     ~dec_tree( ) = default;
 
-    static dec_node build( std::vector< const rule_node * > rules );
-    static dec_node build_node( const std::vector< const rule_node * > &rules, std::size_t depth );
+    static dec_node         build( std::vector< const rule_node * > rules );
+    static dec_node         build_node( const std::vector< const rule_node * > &rules );
+    static const expr_node *at_path( const expr_node &root, const path_t &path );
 };

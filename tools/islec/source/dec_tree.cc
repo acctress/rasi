@@ -8,22 +8,35 @@ dec_node dec_tree::build( std::vector< const rule_node * > rules )
         return a->priority > b->priority;
     } );
 
-    return build_node( rules, 0 );
+    return build_node( rules );
 }
 
-dec_node dec_tree::build_node( const std::vector< const rule_node * > &rules, const std::size_t depth )
+dec_node dec_tree::build_node( const std::vector< const rule_node * > &rules )
 {
     if ( rules.empty( ) ) return fail_node {};
-    if ( rules.size( ) == 1 ) return leaf_node { rules[ 0 ] };
 
-    children_map                                                             children {};
-    std::unordered_map< std::string_view, std::vector< const rule_node * > > groups {};
+    std::unordered_map< std::string_view, std::vector< const rule_node * > > groups;
 
     for ( const auto *r : rules )
         groups[ r->pattern.head ].push_back( r );
 
-    for ( auto &[ head, group ] : groups )
-        children.emplace( head, std::make_unique< dec_node >( build_node( group , depth + 1 ) ) );
+    if ( groups.size( ) == 1 ) return leaf_node { groups.begin( )->second[ 0 ] };
 
-    return branch_node { static_cast< int >( depth ), std::move( children ) };
+    children_map children;
+    for ( auto &[ head, group ] : groups )
+        children.emplace( head, std::make_unique< dec_node >( leaf_node { group[ 0 ] } ) );
+
+    return branch_node { .children = std::move( children ) };
+}
+
+const expr_node *dec_tree::at_path( const expr_node &root, const path_t &path )
+{
+    const auto *cur = &root;
+    for ( const auto idx : path )
+    {
+        if ( idx >= cur->args.size( ) ) return nullptr;
+        cur = &cur->args[ idx ];
+    }
+
+    return cur;
 }
