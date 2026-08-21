@@ -9,10 +9,10 @@
 #include <variant>
 #include <vector>
 
-struct expr
+struct expr_node
 {
     std::string_view    head;
-    std::vector< expr > args;
+    std::vector< expr_node > args;
 };
 
 enum class extern_kind : bool
@@ -30,13 +30,13 @@ struct enum_type
     std::vector< std::string_view > variants;
 };
 
-struct type_decl
+struct type_decl_node
 {
     std::string_view                     name;
     std::variant< prim_type, enum_type > kind;
 };
 
-struct extern_decl
+struct extern_decl_node
 {
     std::string_view                name;
     std::vector< std::string_view > params;
@@ -44,14 +44,14 @@ struct extern_decl
     extern_kind                     kind;
 };
 
-struct rule
+struct rule_node
 {
     int  priority {};
-    expr pattern;
-    expr body;
+    expr_node pattern;
+    expr_node body;
 };
 
-using top_level = std::variant< type_decl, extern_decl, rule >;
+using top_level = std::variant< type_decl_node, extern_decl_node, rule_node >;
 
 class parser
 {
@@ -65,10 +65,10 @@ private:
     lexer            m_lexer;
     token            m_current;
 
-    expr        parse_expr( );
-    type_decl   parse_type_decl( );
-    extern_decl parse_extern_decl( );
-    rule        parse_rule( );
+    expr_node        parse_expr( );
+    type_decl_node   parse_type_decl( );
+    extern_decl_node parse_extern_decl( );
+    rule_node        parse_rule( );
 
     [[nodiscard]] std::string_view lexeme( ) const noexcept { return m_source.substr( m_current.start, m_current.end - m_current.start ); }
 

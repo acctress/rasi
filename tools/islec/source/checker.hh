@@ -15,12 +15,12 @@ public:
 private:
     const std::vector< top_level > &m_ast;
 
-    std::unordered_map< std::string_view, const extern_decl * > m_extractors_sym_table;
-    std::unordered_map< std::string_view, const extern_decl * > m_constructors_sym_table;
+    std::unordered_map< std::string_view, const extern_decl_node * > m_extractors_sym_table;
+    std::unordered_map< std::string_view, const extern_decl_node * > m_constructors_sym_table;
     std::unordered_set< std::string_view >                      m_types;
 
     void collect_decls( );
-    void check_rule( const rule & );
-    void check_expr_patt( const expr & );
-    void check_expr_body( const expr & );
+    void check_rule( const rule_node & );
+    void check_expr_patt( const expr_node & );
+    void check_expr_body( const expr_node & );
 };

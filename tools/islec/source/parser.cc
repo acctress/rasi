@@ -22,7 +22,7 @@ std::vector< top_level > parser::parse( )
     return result;
 }
 
-type_decl parser::parse_type_decl( )
+type_decl_node parser::parse_type_decl( )
 {
     const auto type_name = lexeme( );
     consume( );
@@ -35,7 +35,7 @@ type_decl parser::parse_type_decl( )
     {
         expect( token_type::RPAREN );
         expect( token_type::RPAREN );
-        return type_decl { .name = type_name, .kind = prim_type {} };
+        return type_decl_node { .name = type_name, .kind = prim_type {} };
     }
     if ( ty == "enum" )
     {
@@ -48,12 +48,12 @@ type_decl parser::parse_type_decl( )
 
         expect( token_type::RPAREN );
         expect( token_type::RPAREN );
-        return type_decl { .name = type_name, .kind = enum_type { .variants = std::move( variants ) } };
+        return type_decl_node { .name = type_name, .kind = enum_type { .variants = std::move( variants ) } };
     }
     throw std::runtime_error( std::format( "unknown top-level type kind '{}'", type_name ) );
 }
 
-extern_decl parser::parse_extern_decl( )
+extern_decl_node parser::parse_extern_decl( )
 {
     const auto kind = lexeme( );
     consume( );
@@ -78,10 +78,10 @@ extern_decl parser::parse_extern_decl( )
     consume( );
 
     expect( token_type::RPAREN );
-    return extern_decl { .name = name, .params = std::move( params ), .ret = ret, .kind = ek };
+    return extern_decl_node { .name = name, .params = std::move( params ), .ret = ret, .kind = ek };
 }
 
-expr parser::parse_expr( )
+expr_node parser::parse_expr( )
 {
     if ( matches( token_type::LPAREN ) )
     {
@@ -89,21 +89,21 @@ expr parser::parse_expr( )
         const auto head = lexeme( );
         consume( );
 
-        std::vector< expr > args;
+        std::vector< expr_node > args;
         while ( !matches( token_type::RPAREN ) )
             args.push_back( parse_expr( ) );
 
         expect( token_type::RPAREN );
-        return expr { .head = head, .args = std::move( args ) };
+        return expr_node { .head = head, .args = std::move( args ) };
     }
 
     const auto head = lexeme( );
     consume( );
 
-    return expr { .head = head, .args = {} };
+    return expr_node { .head = head, .args = {} };
 }
 
-rule parser::parse_rule( )
+rule_node parser::parse_rule( )
 {
     int prio { 0 };
     if ( matches( token_type::INT ) )
@@ -116,5 +116,5 @@ rule parser::parse_rule( )
     const auto body    = parse_expr( );
 
     expect( token_type::RPAREN );
-    return rule { .priority = prio, .pattern = pattern, .body = body };
+    return rule_node { .priority = prio, .pattern = pattern, .body = body };
 }

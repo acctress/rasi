@@ -28,6 +28,16 @@
 - [ ] rasic CLI
 - [ ] IR text parser
 
+## ISLE
+- [x] Lexer
+- [x] Parser
+- [x] Checker
+- [ ] Decision tree
+- [ ] C++ emitter
+- [ ] CMake regen on `.isle`
+- [ ] `x86_64.isle`
+- [ ] `IsleContext` x86-64s
+
 ## Tests
 - [ ] Instruction tests for all IR ops
 - [ ] compile and execute jit tests
