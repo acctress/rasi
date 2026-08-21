@@ -1,0 +1,16 @@
+(type Value (primitive))
+
+(decl extractor iadd (Value Value) Value)
+(decl extractor isub (Value Value) Value)
+(decl extractor neg (Value) Value)
+
+(decl constructor emit_add (Value Value) Value)
+(decl constructor emit_sub (Value Value) Value)
+(decl constructor emit_neg (Value) Value)
+
+(rule 3 (iadd lhs rhs)
+        (emit_add lhs rhs))
+(rule 2 (isub lhs rhs)
+        (emit_sub lhs rhs))
+(rule 1 (neg value)
+        (emit_neg value))
