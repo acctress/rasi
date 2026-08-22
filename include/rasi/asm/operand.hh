@@ -6,6 +6,11 @@
 
 namespace rasi::asm_
 {
+    struct SpillSlot
+    {
+        u32 offset;
+    };
+
     struct VReg
     {
         u32 id;
@@ -31,7 +36,7 @@ namespace rasi::asm_
 
         union
         {
-            VReg vreg;
+            VReg vreg {};
             i64  imm;
 
             struct
@@ -61,7 +66,7 @@ namespace rasi::asm_
         union
         {
             PhysReg fixed_reg;
-            u8      reuse_index;
+            u8      reuse_index{};
         };
     };
 } // namespace rasi::asm_
