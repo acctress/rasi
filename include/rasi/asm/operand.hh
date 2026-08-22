@@ -31,7 +31,7 @@ namespace rasi::asm_
 
         union
         {
-            VReg reg;
+            VReg vreg;
             i64  imm;
 
             struct
@@ -40,6 +40,18 @@ namespace rasi::asm_
                 i32  offset;
             } mem;
         };
+
+        static constexpr Operand from_reg( const VReg r ) noexcept { return { .kind = OperandKind::reg, .vreg = r }; }
+
+        static constexpr Operand from_imm( const i64 v ) noexcept { return { .kind = OperandKind::imm, .imm = v }; }
+
+        static constexpr Operand from_mem( const VReg base, const i32 offset ) noexcept
+        {
+            return {
+                .kind = OperandKind::mem,
+                .mem  = { base, offset }
+            };
+        }
     };
 
     struct OperandConstraint

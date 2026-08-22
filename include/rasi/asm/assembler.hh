@@ -11,13 +11,7 @@
 
 namespace rasi::asm_
 {
-    struct MachInst
-    {
-        InstKind               kind {};
-        std::vector< Operand > operands {};
-        OperandConstraint      output_constraint {};
-        VReg                   result {};
-    };
+
 
     class Assembler
     {

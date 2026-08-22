@@ -32,7 +32,7 @@ void emitter::emit_node( const dec_node &node )
 void emitter::emit_branch( const branch_node &node )
 {
     indent( );
-    m_out << "switch (inst.opcode) {\n";
+    m_out << "switch (inst.kind) {\n";
     ++m_indent;
 
     for ( const auto &[ head, child ] : node.children )
