@@ -53,6 +53,7 @@ namespace rasi::asm_
     {
         inline constexpr PhysReg rax   = PhysReg::gpr( GPR::rax );
         inline constexpr PhysReg rcx   = PhysReg::gpr( GPR::rcx );
+        inline constexpr PhysReg rbx   = PhysReg::gpr( GPR::rbx );
         inline constexpr PhysReg rdx   = PhysReg::gpr( GPR::rdx );
         inline constexpr PhysReg rsp   = PhysReg::gpr( GPR::rsp );
         inline constexpr PhysReg rbp   = PhysReg::gpr( GPR::rbp );
