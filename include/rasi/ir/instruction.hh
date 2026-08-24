@@ -32,7 +32,8 @@ namespace rasi
         call,
         ret,
         br,
-        cbr
+        cbr,
+        copy,
     };
 
     enum class IntCC : u8
