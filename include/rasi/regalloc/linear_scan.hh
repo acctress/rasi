@@ -36,7 +36,7 @@ namespace rasi::regalloc
         std::ranges::copy( callee_saved, result.begin( ) + caller_saved.size( ) );
 
         return result;
-    }( )    ;
+    }( );
 
     using AllocResult = std::variant< PhysReg, SpillSlot >;
 
@@ -46,6 +46,7 @@ namespace rasi::regalloc
         u32         start {};
         u32         end {};
         AllocResult assign;
+        bool        fixed {};
     };
 
     class LinearScan
