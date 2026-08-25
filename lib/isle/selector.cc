@@ -1,12 +1,12 @@
-#include <rasi/isle/selector.hh>
 #include "rasi/asm/x86_64/abi.hh"
+#include <rasi/isle/selector.hh>
 
 using namespace rasi::asm_;
 using namespace rasi::isle;
 
 void Selector::select( const Function &fn )
 {
-    m_vcode.call_conv = x86_64::resolve_cc(fn.call_conv);
+    m_vcode.call_conv = x86_64::resolve_cc( fn.call_conv );
     lower_args( fn );
 
     for ( const auto &blk : fn.blocks )
@@ -25,6 +25,12 @@ void Selector::select( const Function &fn )
 
             switch ( inst.kind )
             {
+                case InstKind::iconst :
+                {
+                    const auto r                  = lower_iconst( m_fn.immediates[ inst.imm_idx ] );
+                    m_value_map[ inst.result.id ] = r;
+                    break;
+                }
                 case InstKind::iadd :
                 {
                     const auto r                  = lower_iadd( use( 0 ), use( 1 ) );
@@ -70,6 +76,13 @@ VReg Selector::arg( const Inst &inst, const std::size_t idx ) const
     const auto iter   = m_value_map.find( id );
     assert( iter != m_value_map.end( ) && "use before def" );
     return iter->second;
+}
+
+i64 Selector::imm( const Inst &inst ) const { return m_fn.immediates[ inst.imm_idx ]; }
+
+VReg Selector::lower_iconst( const i64 imm ) const
+{
+    return m_vcode.append( InstKind::iconst, { Operand::from_imm( imm ) }, OperandConstraint { .kind = ConstraintKind::any } );
 }
 
 VReg Selector::lower_iadd( const VReg lhs, const VReg rhs ) const

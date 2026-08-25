@@ -30,6 +30,15 @@ void CodeGen::emit( const VCode &vcode, const std::unordered_map< u32, AllocResu
 
                 break;
             }
+
+            case InstKind::iconst:
+            {
+                const auto dst = resolve( inst.result, alloc );
+                const auto imm = vcode.operands[ inst.operand_offset ].imm;
+                emit_mov_ri64( buf, dst, imm );
+                break;
+            }
+
             case InstKind::iadd :
             {
                 const auto dst = resolve( inst.result, alloc );

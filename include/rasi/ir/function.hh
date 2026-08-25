@@ -19,6 +19,7 @@ namespace rasi
         Slab<ValueRef>   block_params;
         Slab<Type>       param_types;
         Slab<Type>       value_types;
+        Slab< i64 >      immediates;
         Type             return_type;
         BlockRef         entry_block{};
         CallConv         call_conv;
@@ -38,6 +39,7 @@ namespace rasi
             block_params( *arena, 64 ),
             param_types( *arena, 64 ),
             value_types( *arena, 64 ),
+            immediates( *arena, 64 ),
             return_type( ret_type ),
             call_conv( conv )
         {

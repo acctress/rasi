@@ -31,12 +31,20 @@ type_decl_node parser::parse_type_decl( )
     const auto ty = lexeme( );
     consume( );
 
+    if ( ty == "opaque" )
+    {
+        expect( token_type::RPAREN );
+        expect( token_type::RPAREN );
+        return type_decl_node { .name = type_name, .kind = opaque_type {} };
+    }
+
     if ( ty == "primitive" )
     {
         expect( token_type::RPAREN );
         expect( token_type::RPAREN );
         return type_decl_node { .name = type_name, .kind = prim_type {} };
     }
+
     if ( ty == "enum" )
     {
         std::vector< std::string_view > variants;

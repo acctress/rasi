@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(islec VERSION 0.1.0 LANGUAGES CXX)
+project(islec VERSION 0.1.2 LANGUAGES CXX)
 
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/source/*.hh"

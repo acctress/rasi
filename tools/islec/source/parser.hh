@@ -11,7 +11,7 @@
 
 struct expr_node
 {
-    std::string_view    head;
+    std::string_view         head;
     std::vector< expr_node > args;
 };
 
@@ -19,6 +19,10 @@ enum class extern_kind : bool
 {
     ex,
     co
+};
+
+struct opaque_type
+{
 };
 
 struct prim_type
@@ -30,10 +34,12 @@ struct enum_type
     std::vector< std::string_view > variants;
 };
 
+using type_kind = std::variant< prim_type, opaque_type, enum_type >;
+
 struct type_decl_node
 {
-    std::string_view                     name;
-    std::variant< prim_type, enum_type > kind;
+    std::string_view name;
+    type_kind        kind;
 };
 
 struct extern_decl_node
@@ -46,7 +52,7 @@ struct extern_decl_node
 
 struct rule_node
 {
-    int  priority {};
+    int       priority {};
     expr_node pattern;
     expr_node body;
 };

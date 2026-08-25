@@ -105,6 +105,16 @@ ValueRef IRBuilder::build_comp_inst( const InstKind kind, const Predicate predic
         } );
 }
 
+ValueRef IRBuilder::iconst( const i64 val )
+{
+    const auto idx = static_cast< u32 >( current_func->immediates.push( val ) );
+    return emit( Inst {
+        .kind = InstKind::iconst,
+        .result_type = Type::i64,
+        .imm_idx = idx,
+    } );
+}
+
 ValueRef IRBuilder::iadd( const ValueRef a, const ValueRef b )
 {
     return build_arith_inst( InstKind::iadd, a, b );

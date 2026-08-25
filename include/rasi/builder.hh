@@ -36,6 +36,7 @@ namespace rasi
         template <typename Predicate, typename First, typename... Rest>
         [[nodiscard]] ValueRef build_comp_inst( InstKind kind, Predicate predicate, First first_operand, Rest... other_operands );
 
+        ValueRef iconst( const i64 val );
         ValueRef iadd( ValueRef a, ValueRef b );
         ValueRef isub( ValueRef a, ValueRef b );
         ValueRef imul( ValueRef a, ValueRef b );
