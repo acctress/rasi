@@ -37,19 +37,15 @@ void CodeGen::emit( const VCode &vcode, const std::unordered_map< u32, AllocResu
                 const auto rhs = op_reg( 1 );
                 emit_mov_rr64( buf, dst, lhs );
                 emit_add_rr64( buf, dst, rhs );
-                std::printf(
-                    "iadd: dst=%u lhs=%u rhs=%u\n",
-                    dst.idx,
-                    lhs.idx,
-                    rhs.idx
-                );
                 break;
             }
 
             case InstKind::isub :
             {
                 const auto dst = resolve( inst.result, alloc );
+                const auto lhs = op_reg( 0 );
                 const auto rhs = op_reg( 1 );
+                emit_mov_rr64( buf, dst, lhs );
                 emit_sub_rr64( buf, dst, rhs );
                 break;
             }
@@ -57,7 +53,9 @@ void CodeGen::emit( const VCode &vcode, const std::unordered_map< u32, AllocResu
             case InstKind::imul :
             {
                 const auto dst = resolve( inst.result, alloc );
+                const auto lhs = op_reg( 0 );
                 const auto rhs = op_reg( 1 );
+                emit_mov_rr64( buf, dst, lhs );
                 emit_imul_rr64( buf, dst, rhs );
                 break;
             }
