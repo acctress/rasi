@@ -1,7 +1,8 @@
 #pragma once
 
 #include "block.hh"
-#include "rasi/support/slab.hh"
+#include <rasi/support/slab.hh>
+#include <rasi/ir/call_conv.hh>
 #include <string>
 #include <cassert>
 #include <utility>
@@ -20,12 +21,14 @@ namespace rasi
         Slab<Type>       value_types;
         Type             return_type;
         BlockRef         entry_block{};
+        CallConv         call_conv;
 
         explicit Function(
             const std::string_view name,
             const std::initializer_list< Type > params,
             const Type ret_type,
-            Arena* arena
+            Arena* arena,
+            CallConv conv = CallConv::native
         ) :
             arena( arena ),
             name( name ),
@@ -35,7 +38,8 @@ namespace rasi
             block_params( *arena, 64 ),
             param_types( *arena, 64 ),
             value_types( *arena, 64 ),
-            return_type( ret_type )
+            return_type( ret_type ),
+            call_conv( conv )
         {
             for ( const auto type : params ) param_types.push( type );
             entry_block = new_block( params );

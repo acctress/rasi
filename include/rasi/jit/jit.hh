@@ -1,7 +1,7 @@
 #pragma once
 
+#include <../support/buffer.hh>
 #include <rasi/asm/assembler.hh>
-#include <rasi/asm/buffer.hh>
 #include <rasi/asm/vcode.hh>
 #include <rasi/ir/function.hh>
 #include <rasi/isle/selector.hh>

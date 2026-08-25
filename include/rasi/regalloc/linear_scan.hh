@@ -30,7 +30,7 @@ namespace rasi::regalloc
 
     inline constexpr std::array allocatable = []
     {
-        std::array< PhysReg, callee_saved.size( ) + callee_saved.size( ) > result {};
+        std::array< PhysReg, caller_saved.size( ) + callee_saved.size( ) > result {};
 
         std::ranges::copy( caller_saved, result.begin( ) );
         std::ranges::copy( callee_saved, result.begin( ) + caller_saved.size( ) );

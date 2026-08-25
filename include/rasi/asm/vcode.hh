@@ -1,5 +1,7 @@
 #pragma once
+
 #include "operand.hh"
+#include "rasi/ir/call_conv.hh"
 #include "rasi/ir/instruction.hh"
 #include "rasi/support/arena.hh"
 #include "rasi/support/slab.hh"
@@ -21,6 +23,7 @@ namespace rasi::asm_
         Slab< MachInst > insts;
         Slab< Operand >  operands;
         u32              next_vreg {};
+        CallConv         call_conv { CallConv::native };
 
         explicit VCode( Arena *arena ) : arena { arena }, insts( *arena, 64 ), operands( *arena, 64 ) { }
 

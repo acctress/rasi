@@ -2,6 +2,8 @@
 (inst sub_rr64  (enc 0x29 ModRM(r $rs rm $rd))       (pattern (sub  (reg64 $rd) (reg64 $rs))))
 (inst imul_rr64 (enc 0x0F 0xAF ModRM(r $rd rm $rs))  (pattern (imul (reg64 $rd) (reg64 $rs))))
 (inst cmp_rr64  (enc 0x3B ModRM(r $rd rm $rs))       (pattern (cmp  (reg64 $rd) (reg64 $rs))))
+(inst push_r64  (enc 0x50+$rd)  (pattern (push (reg64 $rd))))
+(inst pop_r64   (enc 0x58+$rd)  (pattern (pop  (reg64 $rd))))
 (inst ret       (enc 0xC3)                            (pattern (ret)))
 (inst mov_rr64   (enc 0x89 ModRM(r $rs rm $rd))          (pattern (mov (reg64 $rd) (reg64 $rs))))
 (inst mov_ri64   (enc 0xB8+rd /imm64)                    (pattern (mov (reg64 $rd) (imm64 $imm))))
