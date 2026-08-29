@@ -1,0 +1,9 @@
+(inst mov_rr64  (enc REX(W=1 R=$rs B=$rd) 0x89 ModRM(r $rs rm $rd))  (pattern (mov (reg64 $rd) (reg64 $rs))))
+(inst mov_ri64  (enc REX(W=1 B=$rd) 0xB8+rd /imm64)                   (pattern (mov (reg64 $rd) (imm64 $imm))))
+(inst mov_mi32  (enc REX(W=1 B=$rd) 0xC7 /0 /imm32)                   (pattern (mov (reg64 $rd) (imm32 $imm))))
+
+(inst add_rr64  (enc REX(W=1 R=$rs B=$rd) 0x01 ModRM(r $rs rm $rd))  (pattern (add (reg64 $rd) (reg64 $rs))))
+(inst add_ri32  (enc REX(W=1 B=$rd) 0x81 /0 /imm32)                   (pattern (add (reg64 $rd) (imm32 $imm))))
+(inst add_ri8   (enc REX(W=1 B=$rd) 0x83 /0 /imm8)                    (pattern (add (reg64 $rd) (imm8  $imm))))
+
+(inst ret       (enc 0xC3)                                              (pattern (ret)))
