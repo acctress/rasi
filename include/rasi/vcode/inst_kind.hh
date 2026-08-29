@@ -1,0 +1,55 @@
+#pragma once
+
+#include <rasi/support/types.hh>
+
+namespace rasi
+{
+    enum class MachInstKind : u8
+    {
+        mov,
+        movsx,
+        movzx,
+        lea,
+        push,
+        pop,
+        add,
+        sub,
+        imul,
+        idiv,
+        udiv,
+        neg,
+        inc,
+        dec,
+        and_,
+        or_,
+        xor_,
+        not_,
+        shl,
+        shr,
+        sar,
+        cmp,
+        test,
+        movss,
+        movsd,
+        addss,
+        addsd,
+        subss,
+        subsd,
+        mulss,
+        mulsd,
+        divss,
+        divsd,
+        ucomiss,
+        ucomisd,
+        cvtsi2ss,
+        cvtsi2sd,
+        cvttss2si,
+        cvttsd2si,
+        jmp,
+        jcc,
+        call,
+        ret,
+        nop,
+        ud2,
+    };
+}
