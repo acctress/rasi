@@ -15,7 +15,7 @@ file(GLOB_RECURSE RASI_HEADERS CONFIGURE_DEPENDS
 )
 
 file(GLOB_RECURSE RASI_SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/lib/*.cc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/lib/**/*.cc"
 )
 
 add_library(rasi STATIC ${RASI_SOURCES} ${RASI_HEADERS})
@@ -41,10 +41,6 @@ set_target_properties(rasi PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin/lib"
 )
 
-file(GLOB_RECURSE RASIC_SOURCES CONFIGURE_DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/tools/rasic/*.cc"
-)
-
 if (RASIC_SOURCE)
     add_executable(rasic ${RASIC_SOURCES})
     target_link_libraries(rasic PRIVATE rasi)
@@ -52,8 +48,6 @@ if (RASIC_SOURCE)
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin/exe"
     )
 endif()
-
-add_subdirectory(tools/islec)
 
 option(RASI_BUILD_TESTS "build tests" ON)
 

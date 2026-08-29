@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ir/function.hh"
+#include <rasi/ir/function.hh>
 
 namespace rasi
 {
