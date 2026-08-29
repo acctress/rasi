@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "rasi/asm/x86_64/assembler.hh"
+#include "include/rasi/asm/x86_64/assembler.hh"
 #include <cstdint>
 #include <span>
 #include <string_view>
@@ -20,11 +20,11 @@ inline void dispatch(
     // add
     if ( op == "add" )
     {
-        if ( regs.size() == 2 && imm == 0 )
+        if ( regs.empty() && imm == 0 )
             { emit_add_rr64( buf, regs[0], regs[1] ); return; }
-        if ( regs.size() == 1 && imm >= -128 && imm <= 127 )
+        if ( regs.empty() && imm >= -128 && imm <= 127 )
             { emit_add_ri8( buf, regs[0], static_cast<std::uint8_t>(imm) ); return; }
-        if ( regs.size() == 1 && imm >= -2147483648LL && imm <= 2147483647LL )
+        if ( regs.empty() && imm >= -2147483648LL && imm <= 2147483647LL )
             { emit_add_ri32( buf, regs[0], static_cast<std::uint32_t>(imm) ); return; }
         return;
     }
@@ -32,11 +32,11 @@ inline void dispatch(
     // mov
     if ( op == "mov" )
     {
-        if ( regs.size() == 2 && imm == 0 )
+        if ( regs.empty() && imm == 0 )
             { emit_mov_rr64( buf, regs[0], regs[1] ); return; }
-        if ( regs.size() == 1 && imm >= -2147483648LL && imm <= 2147483647LL )
+        if ( regs.empty() && imm >= -2147483648LL && imm <= 2147483647LL )
             { emit_mov_mi32( buf, regs[0], static_cast<std::uint32_t>(imm) ); return; }
-        if ( regs.size() == 1 )
+        if ( regs.empty() )
             { emit_mov_ri64( buf, regs[0], static_cast<std::uint64_t>(imm) ); return; }
         return;
     }
@@ -44,7 +44,7 @@ inline void dispatch(
     // ret
     if ( op == "ret" )
     {
-        if ( regs.size() == 0 && imm == 0 )
+        if ( regs.empty() && imm == 0 )
             { emit_ret( buf ); return; }
         return;
     }
