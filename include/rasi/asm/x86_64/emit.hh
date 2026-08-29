@@ -1,6 +1,6 @@
 #pragma once
 
-#include <rasi/asm/x86_64/assembler.hpp>
+#include <rasi/asm/x86_64/assembler.hh>
 #include <rasi/regalloc/regalloc.hh>
 #include <rasi/vcode/vcode.hh>
 #include <vector>
