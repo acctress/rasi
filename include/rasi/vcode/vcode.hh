@@ -30,8 +30,8 @@ namespace rasi
 
         [[nodiscard]] VReg new_vreg( ) noexcept { return VReg { next_vreg++ }; }
 
-        VReg append( MachInstKind kind, const VReg result, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
-        VReg append( MachInstKind kind, const VReg result, std::span<const Operand> ops, i64 imm = 0, MemRef mem = {} );
+        VReg append( MachInstKind kind, VReg result, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
+        VReg append( MachInstKind kind, VReg result, std::span<const Operand> ops, i64 imm = 0, MemRef mem = {} );
         void append_void( MachInstKind kind, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
         void append_void( MachInstKind kind, std::span<const Operand> ops, i64 imm = 0, MemRef mem = {} );
     };
