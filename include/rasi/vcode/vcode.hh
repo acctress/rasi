@@ -8,6 +8,8 @@
 
 namespace rasi
 {
+    using namespace rasi::vcode;
+
     struct MachInst
     {
         MachInstKind kind {};

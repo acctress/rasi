@@ -4,44 +4,44 @@ using namespace rasi;
 using namespace rasi::isel;
 using namespace rasi::isel::x86_64;
 
-static ExtValueRefPair make_binop( const Inst &inst, const InstKind kind )
+static ExtValueRefPair make_binop( const Function &fn, const Inst &inst, const InstKind kind )
 {
     if ( inst.kind != kind ) return std::nullopt;
-    return std::pair { ValueRef { inst.operand_offset }, ValueRef { inst.operand_offset + 1 } };
+    return std::pair { fn.operands[ inst.operand_offset ], fn.operands[ inst.operand_offset + 1 ] };
 }
 
-ExtValueRefPair x86_64::extract_iadd( const Inst &inst ) { return make_binop( inst, InstKind::iadd ); }
+ExtValueRefPair x86_64::extract_iadd( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::iadd ); }
 
-ExtValueRefPair x86_64::extract_isub( const Inst &inst ) { return make_binop( inst, InstKind::isub ); }
+ExtValueRefPair x86_64::extract_isub( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::isub ); }
 
-ExtValueRefPair x86_64::extract_imul( const Inst &inst ) { return make_binop( inst, InstKind::imul ); }
+ExtValueRefPair x86_64::extract_imul( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::imul ); }
 
-ExtValueRefPair x86_64::extract_sdiv( const Inst &inst ) { return make_binop( inst, InstKind::sdiv ); }
+ExtValueRefPair x86_64::extract_sdiv( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::sdiv ); }
 
-ExtValueRefPair x86_64::extract_udiv( const Inst &inst ) { return make_binop( inst, InstKind::udiv ); }
+ExtValueRefPair x86_64::extract_udiv( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::udiv ); }
 
-ExtValueRefPair x86_64::extract_and( const Inst &inst ) { return make_binop( inst, InstKind::and_ ); }
+ExtValueRefPair x86_64::extract_and( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::and_ ); }
 
-ExtValueRefPair x86_64::extract_or( const Inst &inst ) { return make_binop( inst, InstKind::or_ ); }
+ExtValueRefPair x86_64::extract_or( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::or_ ); }
 
-ExtValueRefPair x86_64::extract_xor( const Inst &inst ) { return make_binop( inst, InstKind::xor_ ); }
+ExtValueRefPair x86_64::extract_xor( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::xor_ ); }
 
-ExtValueRefPair x86_64::extract_shl( const Inst &inst ) { return make_binop( inst, InstKind::shl ); }
+ExtValueRefPair x86_64::extract_shl( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::shl ); }
 
-ExtValueRefPair x86_64::extract_shr( const Inst &inst ) { return make_binop( inst, InstKind::shr ); }
+ExtValueRefPair x86_64::extract_shr( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::shr ); }
 
-ExtValueRefPair x86_64::extract_sar( const Inst &inst ) { return make_binop( inst, InstKind::sar ); }
+ExtValueRefPair x86_64::extract_sar( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::sar ); }
 
-std::optional< i64 > x86_64::extract_iconst( const Inst &inst )
+std::optional< u32 > x86_64::extract_iconst( const Inst &inst )
 {
     if ( inst.kind != InstKind::iconst ) return std::nullopt;
     return inst.imm_idx;
 }
 
-ExtValueRef x86_64::extract_ret( const Inst &inst )
+ExtValueRef x86_64::extract_ret( const Function &fn, const Inst &inst )
 {
     if ( inst.kind != InstKind::ret || inst.operand_count == 0 ) return std::nullopt;
-    return ValueRef { inst.operand_offset };
+    return fn.operands[ inst.operand_offset ];
 }
 
 ExtValueRef x86_64::extract_ret_void( const Inst &inst )

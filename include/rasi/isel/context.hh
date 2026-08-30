@@ -10,6 +10,8 @@ namespace rasi::isel
 {
     struct ISELCtx
     {
+        using LowerInstF = VReg ( * )( ISELCtx &, const Inst & );
+
         Function &fn;
         VCode    &vcode;
 
@@ -20,11 +22,30 @@ namespace rasi::isel
         /// > if use_counts[v.id] == 1, then sinking is legal
         std::vector< u32 > use_counts;
 
-        explicit ISELCtx( Function &fn, VCode &vcode ) : fn( fn ), vcode( vcode ) { init_use_counts( ); }
+        /// @brief Target agnostic instruction lower function
+        LowerInstF lower_inst;
 
-        VReg lower_value( ValueRef ref ) noexcept
+        explicit ISELCtx( Function &fn, VCode &vcode, LowerInstF lower_inst ) : fn( fn ), vcode( vcode ), lower_inst( lower_inst )
         {
+            init_use_counts( );
+        }
 
+        VReg lower_value( const ValueRef ref ) noexcept
+        {
+            if ( const auto reg = cached( ref ) ) return *reg;
+
+            const Inst *pro = producer( ref );
+            if ( !pro )
+            {
+                const auto reg = vcode.new_vreg( );
+                cache( ref, reg );
+                return reg;
+            }
+
+            const auto reg = lower_inst( *this, *pro );
+            cache( ref, reg );
+
+            return reg;
         }
 
         [[nodiscard]] bool legal_sink( const ValueRef ref ) const noexcept

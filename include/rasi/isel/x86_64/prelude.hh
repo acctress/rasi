@@ -11,19 +11,19 @@ namespace rasi::isel::x86_64
     using ExtValueRefPair = std::optional< std::pair< ValueRef, ValueRef > >;
     using ExtValueRef     = std::optional< ValueRef >;
 
-    ExtValueRefPair      extract_iadd( const Inst &inst );
-    ExtValueRefPair      extract_isub( const Inst &inst );
-    ExtValueRefPair      extract_imul( const Inst &inst );
-    ExtValueRefPair      extract_sdiv( const Inst &inst );
-    ExtValueRefPair      extract_udiv( const Inst &inst );
-    ExtValueRefPair      extract_and( const Inst &inst );
-    ExtValueRefPair      extract_or( const Inst &inst );
-    ExtValueRefPair      extract_xor( const Inst &inst );
-    ExtValueRefPair      extract_shl( const Inst &inst );
-    ExtValueRefPair      extract_shr( const Inst &inst );
-    ExtValueRefPair      extract_sar( const Inst &inst );
-    std::optional< i64 > extract_iconst( const Inst &inst );
-    ExtValueRef          extract_ret( const Inst &inst );
+    ExtValueRefPair      extract_iadd( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_isub( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_imul( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_sdiv( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_udiv( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_and( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_or( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_xor( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_shl( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_shr( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_sar( const Function &fn, const Inst &inst );
+    std::optional< u32 > extract_iconst( const Inst &inst );
+    ExtValueRef          extract_ret( const Function &fn, const Inst &inst );
     ExtValueRef          extract_ret_void( const Inst &inst );
 
     VReg construct_add_rr( VCode &vcode, VReg a, VReg b );
