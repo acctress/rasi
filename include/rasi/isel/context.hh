@@ -22,6 +22,11 @@ namespace rasi::isel
 
         explicit ISELCtx( Function &fn, VCode &vcode ) : fn( fn ), vcode( vcode ) { init_use_counts( ); }
 
+        VReg lower_value( ValueRef ref ) noexcept
+        {
+
+        }
+
         [[nodiscard]] bool legal_sink( const ValueRef ref ) const noexcept
         {
             return ref.id < use_counts.size( ) && use_counts[ ref.id ] == 1;
@@ -31,7 +36,7 @@ namespace rasi::isel
         [[nodiscard]] std::optional< VReg > cached( const ValueRef ref ) const noexcept
         {
             const auto iter = value_cache.find( ref.id );
-            if ( iter != value_cache.end( ) ) return std::nullopt;
+            if ( iter == value_cache.end( ) ) return std::nullopt;
             return iter->second;
         }
 

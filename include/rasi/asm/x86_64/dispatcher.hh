@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "include/rasi/asm/x86_64/assembler.hh"
+#include "rasi/asm/x86_64/assembler.hh"
 #include <cstdint>
 #include <span>
 #include <string_view>
