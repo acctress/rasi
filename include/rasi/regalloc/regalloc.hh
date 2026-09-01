@@ -28,6 +28,7 @@ namespace rasi::regalloc
     {
         VReg vreg {};
         bool spilled { false };
+        bool pre_coloured { false };
 
         union
         {
@@ -41,6 +42,7 @@ namespace rasi::regalloc
         std::vector< LiveRange >  live_ranges;
         std::vector< Assignment > assignments;
         u32                       nx_spill_slot {};
+        u32                       param_count {};
         u8                        num_regs {};
 
         using WeightQueue = std::priority_queue< u32, std::vector< u32 >,
@@ -51,6 +53,6 @@ namespace rasi::regalloc
     };
 
     void compute_liveness( AllocContext &ctx, const VCode &vcode );
-    void alloc( AllocContext &ctx );
+    void alloc( AllocContext &ctx, VCode &vcode );
     void apply( AllocContext &ctx, VCode &vcode );
 } // namespace rasi::regalloc

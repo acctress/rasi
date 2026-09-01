@@ -32,6 +32,8 @@ namespace rasi
     struct PhysReg
     {
         u8 id;
+
+        bool operator==(const PhysReg &) const = default;
     };
 
     struct MemRef

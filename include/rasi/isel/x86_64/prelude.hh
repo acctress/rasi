@@ -23,6 +23,8 @@ namespace rasi::isel::x86_64
     ExtValueRefPair      extract_shr( const Function &fn, const Inst &inst );
     ExtValueRefPair      extract_sar( const Function &fn, const Inst &inst );
     std::optional< u32 > extract_iconst( const Inst &inst );
+    ExtValueRef          extract_load( const Function &fn, const Inst &inst );
+    ExtValueRefPair      extract_store( const Function &fn, const Inst &inst );
     ExtValueRef          extract_ret( const Function &fn, const Inst &inst );
     ExtValueRef          extract_ret_void( const Inst &inst );
 
@@ -41,6 +43,8 @@ namespace rasi::isel::x86_64
     VReg construct_sar_rr( VCode &vcode, VReg a, VReg b );
     VReg construct_mov_ri( VCode &vcode, i64 imm );
     VReg construct_mov_rr( VCode &vcode, VReg src );
+    VReg construct_load( VCode &vcode, VReg base, i32 offset );
+    void construct_store( VCode &vcode, VReg src, VReg base, i32 offset );
     void construct_ret( VCode &vcode, VReg val );
     void construct_ret_void( VCode &vcode );
 

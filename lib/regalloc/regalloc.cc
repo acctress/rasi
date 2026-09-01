@@ -27,7 +27,7 @@ void rasi::regalloc::compute_liveness( AllocContext &ctx, const VCode &vcode )
     }
 }
 
-void rasi::regalloc::alloc( AllocContext &ctx )
+void rasi::regalloc::alloc( AllocContext &ctx, VCode &vcode )
 {
     /* all live ranges are sorted by start */
     std::vector< u32 > order( ctx.live_ranges.size( ) );
@@ -38,13 +38,27 @@ void rasi::regalloc::alloc( AllocContext &ctx )
         return ctx.live_ranges[ a ].start < ctx.live_ranges[ b ].start;
     } );
 
+    ctx.assignments.resize( ctx.live_ranges.size( ) );
+
     std::vector< u32 > active {};
     std::vector        free( ctx.num_regs, true );
 
-    ctx.assignments.resize( ctx.live_ranges.size( ) );
+    /* pre colour any operands with the policy fixed */
+    for ( const auto &op : vcode.operands.as_span( ) )
+    {
+        if ( op.policy != OperandPolicy::fixed ) continue;
+        const u32 id = op.vreg.id;
+
+        ctx.assignments[ id ] = { .vreg = op.vreg, .spilled = false, .pre_coloured = true, .reg = op.fixed_reg };
+
+        assert( free[ op.fixed_reg.id ] && "conflicting fixed preg assignments" );
+        free[ op.fixed_reg.id ] = false;
+    }
 
     for ( const u32 idx : order )
     {
+        if ( ctx.assignments[ idx ].pre_coloured || ctx.assignments[ idx ].spilled ) continue;
+
         const auto &range = ctx.live_ranges[ idx ];
 
         /* remove / expire all over intervals */
@@ -59,8 +73,7 @@ void rasi::regalloc::alloc( AllocContext &ctx )
             return false;
         } );
 
-        auto iter = std::ranges::find( free, true );
-        if ( iter != free.end( ) )
+        if ( auto iter = std::ranges::find( free, true ); iter != free.end( ) )
         {
             const auto reg = static_cast< u8 >( iter - free.begin( ) );
 

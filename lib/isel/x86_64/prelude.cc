@@ -32,6 +32,18 @@ ExtValueRefPair x86_64::extract_shr( const Function &fn, const Inst &inst ) { re
 
 ExtValueRefPair x86_64::extract_sar( const Function &fn, const Inst &inst ) { return make_binop( fn, inst, InstKind::sar ); }
 
+ExtValueRef x86_64::extract_load( const Function &fn, const Inst &inst )
+{
+    if ( inst.kind != InstKind::load ) return std::nullopt;
+    return fn.operands[ inst.operand_offset ];
+}
+
+ExtValueRefPair x86_64::extract_store( const Function &fn, const Inst &inst )
+{
+    if ( inst.kind != InstKind::store ) return std::nullopt;
+    return std::pair { fn.operands[ inst.operand_offset ], fn.operands[ inst.operand_offset + 1 ] };
+}
+
 std::optional< u32 > x86_64::extract_iconst( const Inst &inst )
 {
     if ( inst.kind != InstKind::iconst ) return std::nullopt;
@@ -47,112 +59,129 @@ ExtValueRef x86_64::extract_ret( const Function &fn, const Inst &inst )
 ExtValueRef x86_64::extract_ret_void( const Inst &inst )
 {
     if ( inst.kind != InstKind::ret || inst.operand_count != 0 ) return std::nullopt;
-    return ValueRef { 0 };
+    return ValueRef {};
 }
 
 VReg x86_64::construct_add_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::add, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::add_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_add_ri( VCode &vcode, const VReg a, const i64 imm )
 {
-    const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::add, rd, { Operand::def( rd ), Operand::use( a ) }, imm );
+    const auto rd   = vcode.new_vreg( );
+    const auto kind = ( imm >= -128 && imm <= 127 )                   ? MachInstKind::add_ri8
+                    : ( imm >= -2147483648LL && imm <= 2147483647LL ) ? MachInstKind::add_ri32
+                                                                      : MachInstKind::add_ri32;
+    vcode.append( kind, rd, { Operand::def( rd ), Operand::use( a ) }, imm );
     return rd;
 }
 
 VReg x86_64::construct_sub_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::sub, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::sub_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_sub_ri( VCode &vcode, const VReg a, const i64 imm )
 {
-    const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::sub, rd, { Operand::def( rd ), Operand::use( a ) }, imm );
+    const auto rd   = vcode.new_vreg( );
+    const auto kind = ( imm >= -128 && imm <= 127 ) ? MachInstKind::sub_ri8 : MachInstKind::sub_ri32;
+    vcode.append( kind, rd, { Operand::def( rd ), Operand::use( a ) }, imm );
     return rd;
 }
 
 VReg x86_64::construct_imul_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::imul, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::imul_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_idiv_r( VCode &vcode, const VReg a )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::idiv, rd, { Operand::def( rd ), Operand::use( a ) } );
+    vcode.append( MachInstKind::idiv_r64, rd, { Operand::def( rd ), Operand::use( a ) } );
     return rd;
 }
 
 VReg x86_64::construct_udiv_r( VCode &vcode, const VReg a )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::udiv, rd, { Operand::def( rd ), Operand::use( a ) } );
+    vcode.append( MachInstKind::udiv_r64, rd, { Operand::def( rd ), Operand::use( a ) } );
     return rd;
 }
 
 VReg x86_64::construct_and_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::and_, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::and_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_or_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::or_, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::or_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_xor_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::xor_, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::xor_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_shl_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::shl, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::shl_ri8, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_shr_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::shr, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::shr_ri8, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_sar_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::sar, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::sar_ri8, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
     return rd;
 }
 
 VReg x86_64::construct_mov_ri( VCode &vcode, const i64 imm )
 {
-    const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::mov, rd, { Operand::def( rd ) }, imm );
+    const auto rd   = vcode.new_vreg( );
+    const auto kind = ( imm >= -2147483648LL && imm <= 2147483647LL ) ? MachInstKind::mov_mi32 : MachInstKind::mov_ri64;
+    vcode.append( kind, rd, { Operand::def( rd ) }, imm );
     return rd;
 }
 
 VReg x86_64::construct_mov_rr( VCode &vcode, const VReg src )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::mov, rd, { Operand::def( rd ), Operand::use( src ) } );
+    vcode.append( MachInstKind::mov_rr64, rd, { Operand::def( rd ), Operand::use( src ) } );
     return rd;
+}
+
+VReg x86_64::construct_load( VCode &vcode, const VReg base, const i32 offset )
+{
+    const auto rd = vcode.new_vreg( );
+    vcode.append( MachInstKind::load_rm64, rd, { Operand::def( rd ), Operand::use( base ) }, 0, MemRef { base, offset } );
+    return rd;
+}
+
+void x86_64::construct_store( VCode &vcode, const VReg src, const VReg base, const i32 offset )
+{
+    vcode.append_void( MachInstKind::store_mr64, { Operand::use( src ), Operand::use( base ) }, 0, MemRef { base, offset } );
 }
 
 void x86_64::construct_ret( VCode &vcode, const VReg val ) { vcode.append_void( MachInstKind::ret, { Operand::use( val ) } ); }

@@ -341,6 +341,22 @@ template<typename Buffer> void emit_call_rel32(Buffer& buf, std::uint32_t imm) n
 	buf.emit_u32(static_cast<std::uint32_t>(imm));
 }
 
+template<typename Buffer> void emit_store_mr64(Buffer& buf, Reg base, std::int32_t disp, Reg rs) noexcept
+{
+	buf.emit(rex(true, rs.extended(), false, base.extended()));
+	buf.emit(0x89);
+	buf.emit(modrm(3, rs.index() & 7, base.index() & 7));
+	buf.emit_u32(static_cast<std::uint32_t>(disp));
+}
+
+template<typename Buffer> void emit_load_rm64(Buffer& buf, Reg rd, Reg base, std::int32_t disp) noexcept
+{
+	buf.emit(rex(true, rd.extended(), false, base.extended()));
+	buf.emit(0x8B);
+	buf.emit(modrm(3, rd.index() & 7, base.index() & 7));
+	buf.emit_u32(static_cast<std::uint32_t>(disp));
+}
+
 template<typename Buffer> void emit_ret(Buffer& buf) noexcept
 {
 	buf.emit(0xC3);

@@ -12,173 +12,159 @@ namespace rasi::x86
 
 template<typename Buffer>
 void dispatch(
-	Buffer&                    buf,
-	const rasi::vcode::MachInstKind kind,
-	const Reg                  rd,
-	std::span<const Reg>       uses,
-	const std::int64_t         imm = 0 ) noexcept
+	Buffer&                          buf,
+	const rasi::vcode::MachInstKind  kind,
+	const Reg                        rd,
+	std::span<const Reg>             uses,
+	const std::int64_t               imm      = 0,
+	const Reg                        mem_base = Reg{0},
+	const std::int32_t               mem_disp = 0 ) noexcept
 {
 	switch ( kind )
-	    {
-        case rasi::vcode::MachInstKind::add:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_add_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_add_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_add_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::and_:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_and_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_and_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_and_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::call:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_call_r64( buf, rd ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_call_rel32( buf, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::cmp:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_cmp_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_cmp_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_cmp_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::dec:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_dec_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::idiv:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_idiv_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::imul:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_imul_rr64( buf, rd, uses[0] ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::inc:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_inc_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::jmp:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_jmp_r64( buf, rd ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_jmp_rel32( buf, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::lea:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_lea_rr64( buf, rd, uses[0] ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::mov:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_mov_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_mov_mi32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            if ( uses.size() == 0 ) { emit_mov_ri64( buf, rd, static_cast<std::uint64_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::movsx:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_movsx_rr64( buf, rd, uses[0] ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::movzx:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_movzx_rr64( buf, rd, uses[0] ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::neg:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_neg_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::nop:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_nop( buf ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::not_:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_not_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::or_:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_or_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_or_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_or_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::pop:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_pop_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::push:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_push_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::ret:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_ret( buf ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::sar:
-        {
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_sar_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::shl:
-        {
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_shl_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::shr:
-        {
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_shr_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::sub:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_sub_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_sub_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_sub_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::test:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_test_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_test_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::ud2:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_ud2( buf ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::udiv:
-        {
-            if ( uses.size() == 0 && imm == 0 ) { emit_udiv_r64( buf, rd ); return; }
-            return;
-        }
-        case rasi::vcode::MachInstKind::xor_:
-        {
-            if ( uses.size() == 1 && imm == 0 ) { emit_xor_rr64( buf, rd, uses[0] ); return; }
-            if ( uses.size() == 0 && imm >= -128 && imm <= 127 ) { emit_xor_ri8( buf, rd, static_cast<std::uint8_t>(imm) ); return; }
-            if ( uses.size() == 0 && imm >= -2147483648LL && imm <= 2147483647LL ) { emit_xor_ri32( buf, rd, static_cast<std::uint32_t>(imm) ); return; }
-            return;
-        }
-        default: return;
-    }
+	{
+	case rasi::vcode::MachInstKind::mov_rr64:
+		emit_mov_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::mov_ri64:
+		emit_mov_ri64( buf, rd, static_cast<std::uint64_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::mov_mi32:
+		emit_mov_mi32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::movsx_rr64:
+		emit_movsx_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::movzx_rr64:
+		emit_movzx_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::lea_rr64:
+		emit_lea_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::push_r64:
+		emit_push_r64( buf, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::pop_r64:
+		emit_pop_r64( buf, rd );
+		return;
+	case rasi::vcode::MachInstKind::add_rr64:
+		emit_add_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::add_ri32:
+		emit_add_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::add_ri8:
+		emit_add_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::sub_rr64:
+		emit_sub_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::sub_ri32:
+		emit_sub_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::sub_ri8:
+		emit_sub_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::imul_rr64:
+		emit_imul_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::idiv_r64:
+		emit_idiv_r64( buf, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::udiv_r64:
+		emit_udiv_r64( buf, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::neg_r64:
+		emit_neg_r64( buf, rd );
+		return;
+	case rasi::vcode::MachInstKind::inc_r64:
+		emit_inc_r64( buf, rd );
+		return;
+	case rasi::vcode::MachInstKind::dec_r64:
+		emit_dec_r64( buf, rd );
+		return;
+	case rasi::vcode::MachInstKind::and_rr64:
+		emit_and_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::and_ri32:
+		emit_and_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::and_ri8:
+		emit_and_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::or_rr64:
+		emit_or_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::or_ri32:
+		emit_or_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::or_ri8:
+		emit_or_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::xor_rr64:
+		emit_xor_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::xor_ri32:
+		emit_xor_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::xor_ri8:
+		emit_xor_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::not_r64:
+		emit_not_r64( buf, rd );
+		return;
+	case rasi::vcode::MachInstKind::shl_ri8:
+		emit_shl_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::shr_ri8:
+		emit_shr_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::sar_ri8:
+		emit_sar_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::cmp_rr64:
+		emit_cmp_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::cmp_ri32:
+		emit_cmp_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::cmp_ri8:
+		emit_cmp_ri8( buf, rd, static_cast<std::uint8_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::test_rr64:
+		emit_test_rr64( buf, rd, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::test_ri32:
+		emit_test_ri32( buf, rd, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::jmp_r64:
+		emit_jmp_r64( buf, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::jmp_rel32:
+		emit_jmp_rel32( buf, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::call_r64:
+		emit_call_r64( buf, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::call_rel32:
+		emit_call_rel32( buf, static_cast<std::uint32_t>(imm) );
+		return;
+	case rasi::vcode::MachInstKind::store_mr64:
+		emit_store_mr64( buf, mem_base, mem_disp, uses[0] );
+		return;
+	case rasi::vcode::MachInstKind::load_rm64:
+		emit_load_rm64( buf, rd, mem_base, mem_disp );
+		return;
+	case rasi::vcode::MachInstKind::ret:
+		emit_ret( buf );
+		return;
+	case rasi::vcode::MachInstKind::nop:
+		emit_nop( buf );
+		return;
+	case rasi::vcode::MachInstKind::ud2:
+		emit_ud2( buf );
+		return;
+	default: return;
+	}
 }
 
 } // namespace rasi::x86

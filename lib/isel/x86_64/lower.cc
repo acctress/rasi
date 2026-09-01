@@ -1,5 +1,6 @@
 #include <rasi/isel/x86_64/lower.hh>
 #include <rasi/isel/x86_64/prelude.hh>
+#include <rasi/vcode/call_conv.hh>
 
 using namespace rasi;
 using namespace rasi::isel;
@@ -81,11 +82,21 @@ VReg x86_64::lower_inst( ISELCtx &ctx, const Inst &inst ) noexcept
         return construct_sar_rr( ctx.vcode, ctx.lower_value( lhs ), ctx.lower_value( rhs ) );
     }
 
+    if ( const auto ptr = extract_load( ctx.fn, inst ) ) return construct_load( ctx.vcode, ctx.lower_value( *ptr ), 0 );
+
+    if ( const auto ops = extract_store( ctx.fn, inst ) )
+    {
+        const auto [ value, addr ] = *ops;
+        construct_store( ctx.vcode, ctx.lower_value( value ), ctx.lower_value( addr ), 0 );
+        return VReg {};
+    }
+
     if ( const auto val = extract_ret( ctx.fn, inst ) )
     {
         construct_ret( ctx.vcode, ctx.lower_value( *val ) );
         return VReg {};
     }
+
     if ( extract_ret_void( inst ) )
     {
         construct_ret_void( ctx.vcode );
@@ -97,12 +108,21 @@ VReg x86_64::lower_inst( ISELCtx &ctx, const Inst &inst ) noexcept
 
 void x86_64::lower_function( ISELCtx &ctx ) noexcept
 {
+    const auto &cc      = conv_regs( ctx.fn.call_conv );
+    u8          arg_idx = 0;
+
     for ( const auto &block : ctx.fn.blocks.as_span( ) )
         for ( u32 i { block.params_offset }; i < block.params_offset + block.params_count; ++i )
         {
             const auto param_ref = ctx.fn.block_params[ i ];
             const auto reg       = ctx.vcode.new_vreg( );
             ctx.cache( param_ref, reg );
+
+            if ( arg_idx < cc.args_int.count )
+            {
+                const PhysReg preg { cc.args_int.data[ arg_idx++ ] };
+                ctx.vcode.append_void( MachInstKind::nop, { Operand::def_fixed( reg, preg ) } );
+            }
         }
 
     for ( const auto &block : ctx.fn.blocks.as_span( ) )
