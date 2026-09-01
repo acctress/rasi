@@ -6,6 +6,7 @@
 #include <rasi/isel/x86_64/lower.hh>
 #include <rasi/module/module.hh>
 #include <rasi/regalloc/regalloc.hh>
+#include <print>
 
 using namespace rasi;
 using namespace rasi::isel;
@@ -24,12 +25,24 @@ Buffer rasi::jit_compile_fn( Function &fn )
 
     regalloc::compute_liveness( alloc_ctx, vcode );
     regalloc::alloc( alloc_ctx, vcode );
-    regalloc::apply( alloc_ctx, vcode );
+    // regalloc::apply( alloc_ctx, vcode );
 
     print_vcode( std::cout, vcode, alloc_ctx );
 
-    Buffer buff { 1024 * 1024 };
-    buff.write( azm::x86_64::emit( vcode, alloc_ctx ).bytes );
+    FrameLayout frame {};
+
+    auto buff = azm::x86_64::emit( vcode, alloc_ctx, frame );
+
+    std::println("printing jit compile fn buff bytes");
+    for ( const auto byte : buff.bytes() )
+    {
+        std::print(
+            "{:02x} ",
+            std::to_integer<u8>( byte )
+        );
+    }
+
+    std::println();
 
     return buff;
 }

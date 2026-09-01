@@ -1,7 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include <cstdint>
 #include <cstring>
 #include <rasi/support/arena.hh>
 #include <span>

@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstdint>
+#include <rasi/support/buffer.hh>
 #include <vector>
 
 namespace rasi::x86
@@ -15,21 +16,14 @@ struct Reg
 	constexpr bool extended() const noexcept { return idx >= 8; }
 };
 
-struct Buffer
-{
-    std::vector<std::uint8_t> bytes;
-
-    void emit(const std::uint8_t b)          { bytes.push_back(b); }
-    void emit_u16(const std::uint16_t v)     { emit(v & 0xFF); emit((v >> 8) & 0xFF); }
-    void emit_u32(const std::uint32_t v)     { emit(v & 0xFF); emit((v >> 8) & 0xFF); emit((v >> 16) & 0xFF); emit((v >> 24) & 0xFF); }
-    void emit_u64(const std::uint64_t v)     { emit_u32(v & 0xFFFFFFFF); emit_u32(v >> 32); }
-};
-
 static constexpr std::uint8_t modrm(const std::uint8_t mod, const std::uint8_t reg, const std::uint8_t rm) noexcept
 { return (mod << 6) | ((reg & 7) << 3) | (rm & 7); }
 
 static constexpr std::uint8_t rex(const bool W, const bool R, const bool X, const bool B) noexcept
 { return 0x40 | (W ? 0x08 : 0) | (R ? 0x04 : 0) | (X ? 0x02 : 0) | (B ? 0x01 : 0); }
+
+static constexpr std::uint8_t sib(const std::uint8_t scale, const std::uint8_t index, const std::uint8_t base) noexcept
+{ return (scale << 6) | ((index & 7) << 3) | (base & 7); }
 
 template<typename Buffer> void emit_mov_rr64(Buffer& buf, Reg rd, Reg rs) noexcept
 {
@@ -78,13 +72,13 @@ template<typename Buffer> void emit_lea_rr64(Buffer& buf, Reg rd, Reg rs) noexce
 
 template<typename Buffer> void emit_push_r64(Buffer& buf, Reg rs) noexcept
 {
-	buf.emit(rex(true, false, false, rs.extended()));
+	if ( rs.extended() ) buf.emit( rex(false, false, false, true) );
 	buf.emit(0x50 | (rs.index() & 7));
 }
 
 template<typename Buffer> void emit_pop_r64(Buffer& buf, Reg rd) noexcept
 {
-	buf.emit(rex(true, false, false, rd.extended()));
+	if ( rd.extended() ) buf.emit( rex(false, false, false, true) );
 	buf.emit(0x58 | (rd.index() & 7));
 }
 
@@ -317,7 +311,7 @@ template<typename Buffer> void emit_test_ri32(Buffer& buf, Reg rd, std::uint32_t
 
 template<typename Buffer> void emit_jmp_r64(Buffer& buf, Reg rs) noexcept
 {
-	buf.emit(rex(true, false, false, rs.extended()));
+	buf.emit(rex(false, false, false, rs.extended()));
 	buf.emit(0xFF);
 	buf.emit(modrm(3, 4, rs.index() & 7));
 }
@@ -330,14 +324,14 @@ template<typename Buffer> void emit_jmp_rel32(Buffer& buf, std::uint32_t imm) no
 
 template<typename Buffer> void emit_call_r64(Buffer& buf, Reg rs) noexcept
 {
-	buf.emit(rex(true, false, false, rs.extended()));
+	buf.emit(rex(false, false, false, rs.extended()));
 	buf.emit(0xFF);
 	buf.emit(modrm(3, 2, rs.index() & 7));
 }
 
 template<typename Buffer> void emit_call_rel32(Buffer& buf, std::uint32_t imm) noexcept
 {
-	buf.emit(0xE9);
+	buf.emit(0xE8);
 	buf.emit_u32(static_cast<std::uint32_t>(imm));
 }
 
@@ -345,7 +339,9 @@ template<typename Buffer> void emit_store_mr64(Buffer& buf, Reg base, std::int32
 {
 	buf.emit(rex(true, rs.extended(), false, base.extended()));
 	buf.emit(0x89);
-	buf.emit(modrm(3, rs.index() & 7, base.index() & 7));
+	buf.emit(modrm(2, rs.index() & 7, base.index() & 7));
+	if ((base.index() & 7) == 4)
+		buf.emit(sib(0, 4, base.index() & 7));
 	buf.emit_u32(static_cast<std::uint32_t>(disp));
 }
 
@@ -353,7 +349,9 @@ template<typename Buffer> void emit_load_rm64(Buffer& buf, Reg rd, Reg base, std
 {
 	buf.emit(rex(true, rd.extended(), false, base.extended()));
 	buf.emit(0x8B);
-	buf.emit(modrm(3, rd.index() & 7, base.index() & 7));
+	buf.emit(modrm(2, rd.index() & 7, base.index() & 7));
+	if ((base.index() & 7) == 4)
+		buf.emit(sib(0, 4, base.index() & 7));
 	buf.emit_u32(static_cast<std::uint32_t>(disp));
 }
 

@@ -117,8 +117,8 @@ namespace rasi
             requires std::integral< T >
         [[nodiscard]] std::size_t reverse_immediate( )
         {
-            const auto offset = m_pos;
-            skip( sizeof( offset ) );
+            const auto offset = m_pos;  
+            skip( sizeof( T ) );
             return offset;
         }
 

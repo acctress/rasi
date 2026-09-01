@@ -9,7 +9,7 @@ using namespace rasi;
 TEST_CASE( "codegen: adder execs", "[codegen]" )
 {
     Module     m;
-    const auto ref = m.new_function( "add", { Type::i64, Type::i64 }, Type::i64 );
+    const auto ref = m.new_function( "add", { Type::i64, Type::i64 }, Type::i64, CallConv::win_fastcall );
     auto      &fn  = m.get_function( ref );
     IRBuilder  builder { fn };
 

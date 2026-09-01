@@ -1,97 +1,91 @@
+#include <rasi/asm/x86_64/assembler.hh>
 #include <rasi/isel/x86_64/abi.hh>
-
-#include "rasi/isel/x86_64/prelude.hh"
+#include <rasi/isel/x86_64/prelude.hh>
 
 namespace rasi::isel::x86_64
 {
     using namespace registers;
 
-    void emit_prologue( VCode &vcode, FrameLayout &frame )
+    namespace detail
     {
-        /// 16 =
-        ///      8 for saved rbp
-        ///      +
-        ///      8 for return address
-        frame.setup_area_size = 16;
-
-        const auto rbp_push = vcode.new_vreg( );
-        vcode.append_void( MachInstKind::push_r64, { Operand::use_fixed( rbp_push, PhysReg { RBP } ) } );
-
-        const auto dst = vcode.new_vreg( );
-        const auto src = vcode.new_vreg( );
-        vcode.append( MachInstKind::mov_rr64, dst,
-                      {
-                          Operand::def_fixed( dst, PhysReg { RBP } ),
-                          Operand::use_fixed( src, PhysReg { RSP } ),
-                      } );
-
-        const u32 min_outgoing = ( vcode.call_conv == CallConv::win_fastcall ) ? 32u : 0u;
-        const u32 outgoing     = std::max( frame.outgoing_args_size, min_outgoing );
-        const u32 stack_size   = frame.fixed_frame_stor_size + frame.clobber_size + outgoing;
-        const u32 pre_sub_disp = 16 + frame.clobber_size;
-
-        if ( const u32 sub_sz = ( ( stack_size + pre_sub_disp + 15u ) & ~15u ) - pre_sub_disp; sub_sz > 0 )
+        [[nodiscard]] constexpr u32 align_16( const u32 value, const u32 alignment ) noexcept
         {
-            const auto rsp = vcode.new_vreg( );
-            vcode.append_void( sub_sz <= 127 ? MachInstKind::sub_ri8 : MachInstKind::sub_ri32,
-                               { Operand::def_fixed( rsp, PhysReg { RSP } ), Operand::use_fixed( rsp, PhysReg { RSP } ) }, sub_sz );
+            return ( value + alignment - 1 ) & ~( alignment - 1 );
         }
 
-        const u32 clobber_base = outgoing + frame.fixed_frame_stor_size;
-        u32       cur_offset   = 0;
-        for ( const auto preg : frame.clobbered_callee_saves )
+        [[nodiscard]] u32 outgoing_size( const FrameLayout &frame, const CallConv call_conv ) noexcept
         {
-            const auto rsp = vcode.new_vreg( );
-            const auto reg = vcode.new_vreg( );
-            vcode.append_void( MachInstKind::store_mr64,
-                               {
-                                   Operand::use_fixed( reg, preg ),
-                                   Operand::use_fixed( rsp, PhysReg { RSP } ),
-                               },
-                               0, MemRef { rsp, static_cast< i32 >( clobber_base + cur_offset ) } );
-            cur_offset += 8;
+            const u32 mini = call_conv == CallConv::win_fastcall ? 32u : 0u;
+            return std::max( frame.outgoing_args_size, mini );
+        }
+
+        [[nodiscard]] u32 stack_alloc_size( const FrameLayout &frame, const CallConv call_conv ) noexcept
+        {
+            const u32 req = outgoing_size( frame, call_conv ) + frame.fixed_frame_stor_size + frame.clobber_size;
+            return align_16( req, 16u );
+        }
+
+        [[nodiscard]] constexpr x86::Reg reg( const u8 id ) noexcept { return x86::Reg { id }; }
+    } // namespace detail
+
+    void emit_prologue( Buffer &buffer, const FrameLayout &frame, const CallConv call_conv )
+    {
+        constexpr auto rsp = detail::reg( RSP );
+        constexpr auto rbp = detail::reg( RBP );
+
+        x86::emit_push_r64( buffer, rbp );
+        x86::emit_mov_rr64( buffer, rbp, rsp );
+
+        if ( const u32 alloc_size = detail::stack_alloc_size( frame, call_conv ); alloc_size <= 127 )
+        {
+            if ( alloc_size != 0 ) x86::emit_sub_ri8( buffer, rsp, static_cast< u8 >( alloc_size ) );
+        }
+        else
+        {
+            x86::emit_sub_ri32( buffer, rsp, alloc_size );
+        }
+
+        const u32 clobber_base = detail::outgoing_size( frame, call_conv ) + frame.fixed_frame_stor_size;
+
+        for ( u32 i {}; i < frame.clobbered_callee_saves.size( ); ++i )
+        {
+            const auto saved_reg = detail::reg( frame.clobbered_callee_saves[ i ].id );
+            const u32  offset    = clobber_base + i * 8u;
+            x86::emit_store_mr64( buffer, rsp, static_cast< i32 >( offset ), saved_reg );
         }
     }
 
-    void emit_epilogue( VCode &vcode, FrameLayout &frame )
+    void emit_epilogue( Buffer &buffer, const FrameLayout &frame, CallConv call_conv )
     {
-        const u32 min_outgoing = ( vcode.call_conv == CallConv::win_fastcall ) ? 32u : 0u;
-        const u32 outgoing     = std::max( frame.outgoing_args_size, min_outgoing );
-        const u32 stack_size   = frame.fixed_frame_stor_size + frame.clobber_size + outgoing;
-        const u32 pre_sub_disp = 16 + frame.clobber_size;
-        const u32 sub_sz       = ( ( stack_size + pre_sub_disp + 15u ) & ~15u ) - pre_sub_disp;
+        constexpr auto rsp = detail::reg( RSP );
+        constexpr auto rbp = detail::reg( RBP );
 
-        const u32 clobber_base = outgoing + frame.fixed_frame_stor_size;
-        for ( auto i { frame.clobbered_callee_saves.size( ) }; i > 0; --i )
+        const u32 clobber_base = detail::outgoing_size( frame, call_conv ) + frame.fixed_frame_stor_size;
+
+        for ( auto i { frame.clobbered_callee_saves.size(  ) }; i > 0; --i )
         {
-            const auto preg   = frame.clobbered_callee_saves[ i ];
-            const auto rsp    = vcode.new_vreg( );
-            const auto reg    = vcode.new_vreg( );
-            const u32  offset = clobber_base + static_cast< u32 >( ( i - 1 ) * 8 );
+            const auto idx = i - 1;
+            const auto saved = detail::reg( frame.clobbered_callee_saves[ idx ].id );
+            const u32 offset = clobber_base + static_cast<u32>( idx ) * 8u;
 
-            vcode.append( MachInstKind::load_rm64, reg,
-                          {
-                              Operand::def_fixed( reg, preg ),
-                              Operand::use_fixed( rsp, PhysReg { RSP } ),
-                          },
-                          0, MemRef { rsp, static_cast< i32 >( offset ) } );
+            x86::emit_load_rm64(
+                buffer,
+                saved,
+                rsp,
+                static_cast<i32>( offset )
+            );
         }
 
-        if ( sub_sz > 0 )
+        if ( const u32 alloc_size = detail::stack_alloc_size( frame, call_conv ); alloc_size <= 127 )
         {
-            const auto rsp = vcode.new_vreg( );
-            vcode.append_void( sub_sz <= 127 ? MachInstKind::add_ri8 : MachInstKind::add_ri32,
-                               { Operand::def_fixed( rsp, PhysReg { RSP } ), Operand::use_fixed( rsp, PhysReg { RSP } ) }, sub_sz );
+            if ( alloc_size != 0 ) x86::emit_add_ri8( buffer, rsp, static_cast< u8 >( alloc_size ) );
+        }
+        else
+        {
+            x86::emit_add_ri32( buffer, rsp, alloc_size );
         }
 
-        const auto rsp_dst = vcode.new_vreg( );
-        const auto rbp_src = vcode.new_vreg( );
-        vcode.append(MachInstKind::mov_rr64, rsp_dst, {
-            Operand::def_fixed( rsp_dst, PhysReg { RSP } ),
-            Operand::use_fixed( rbp_src, PhysReg { RBP } ),
-        });
-
-        const auto rbp = vcode.new_vreg( );
-        vcode.append_void( MachInstKind::pop_r64, { Operand::def_fixed( rbp, PhysReg { RBP } ) } );
+        x86::emit_pop_r64( buffer, rbp );
     }
+
 } // namespace rasi::isel::x86_64

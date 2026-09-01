@@ -1,5 +1,7 @@
 #include <rasi/isel/x86_64/prelude.hh>
 
+#include "rasi/vcode/registers.hh"
+
 using namespace rasi;
 using namespace rasi::isel;
 using namespace rasi::isel::x86_64;
@@ -65,17 +67,19 @@ ExtValueRef x86_64::extract_ret_void( const Inst &inst )
 VReg x86_64::construct_add_rr( VCode &vcode, const VReg a, const VReg b )
 {
     const auto rd = vcode.new_vreg( );
-    vcode.append( MachInstKind::add_rr64, rd, { Operand::def( rd ), Operand::use( a ), Operand::use( b ) } );
+    vcode.append( MachInstKind::mov_rr64, rd, { Operand::def( rd ), Operand::use( a ) } );
+    vcode.append( MachInstKind::add_rr64, rd, { Operand::def( rd ), Operand::use( b ), Operand::use( rd ) } );
     return rd;
 }
 
 VReg x86_64::construct_add_ri( VCode &vcode, const VReg a, const i64 imm )
 {
-    const auto rd   = vcode.new_vreg( );
+    const auto rd = vcode.new_vreg( );
+    vcode.append( MachInstKind::mov_rr64, rd, { Operand::def( rd ), Operand::use( a ) } );
     const auto kind = ( imm >= -128 && imm <= 127 )                   ? MachInstKind::add_ri8
                     : ( imm >= -2147483648LL && imm <= 2147483647LL ) ? MachInstKind::add_ri32
                                                                       : MachInstKind::add_ri32;
-    vcode.append( kind, rd, { Operand::def( rd ), Operand::use( a ) }, imm );
+    vcode.append( kind, rd, { Operand::def( rd ), Operand::use( rd ) }, imm );
     return rd;
 }
 
@@ -184,6 +188,9 @@ void x86_64::construct_store( VCode &vcode, const VReg src, const VReg base, con
     vcode.append_void( MachInstKind::store_mr64, { Operand::use( src ), Operand::use( base ) }, 0, MemRef { base, offset } );
 }
 
-void x86_64::construct_ret( VCode &vcode, const VReg val ) { vcode.append_void( MachInstKind::ret, { Operand::use( val ) } ); }
+void x86_64::construct_ret( VCode &vcode, const VReg val )
+{
+    vcode.append_void_epi( MachInstKind::ret, { Operand::use_fixed( val, PhysReg { registers::RAX } ) } );
+}
 
 void x86_64::construct_ret_void( VCode &vcode ) { vcode.append_void( MachInstKind::ret, {} ); }

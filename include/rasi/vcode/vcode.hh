@@ -18,6 +18,7 @@ namespace rasi
         VReg         result {};
         i64          imm {};
         MemRef       mem {};
+        bool         epi_ph {}; /// epilogue placeholder
     };
 
     struct VCode
@@ -33,8 +34,9 @@ namespace rasi
         [[nodiscard]] VReg new_vreg( ) noexcept { return VReg { next_vreg++ }; }
 
         VReg append( MachInstKind kind, VReg result, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
-        VReg append( MachInstKind kind, VReg result, std::span<const Operand> ops, i64 imm = 0, MemRef mem = {} );
+        VReg append( MachInstKind kind, VReg result, std::span< const Operand > ops, i64 imm = 0, MemRef mem = {} );
         void append_void( MachInstKind kind, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
-        void append_void( MachInstKind kind, std::span<const Operand> ops, i64 imm = 0, MemRef mem = {} );
+        void append_void( MachInstKind kind, std::span< const Operand > ops, i64 imm = 0, MemRef mem = {} );
+        void append_void_epi( MachInstKind kind, std::initializer_list< Operand > ops, i64 imm = 0, MemRef mem = {} );
     };
 } // namespace rasi
