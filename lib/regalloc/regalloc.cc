@@ -41,7 +41,15 @@ void rasi::regalloc::alloc( AllocContext &ctx, VCode &vcode )
     ctx.assignments.resize( ctx.live_ranges.size( ) );
 
     std::vector< u32 > active {};
-    std::vector        free( ctx.num_regs, true );
+    const auto        &cc = conv_regs( vcode.call_conv );
+
+    std::vector allocatable( ctx.num_regs, false );
+    for ( const u8 id : cc.allocatable.span( ) )
+    {
+        if ( id < allocatable.size( ) ) allocatable[ id ] = true;
+    }
+
+    std::vector free = allocatable;
 
     /* pre colour any operands with the policy fixed */
     for ( const auto &op : vcode.operands.as_span( ) )
@@ -66,7 +74,8 @@ void rasi::regalloc::alloc( AllocContext &ctx, VCode &vcode )
         {
             if ( ctx.live_ranges[ a ].end <= range.start )
             {
-                free[ ctx.assignments[ a ].reg.id ] = true;
+                const u8 id = ctx.assignments[ a ].reg.id;
+                free[ id ]  = allocatable[ id ];
                 return true;
             }
 
@@ -111,6 +120,8 @@ void rasi::regalloc::apply( AllocContext &ctx, VCode &vcode )
 {
     for ( auto &op : vcode.operands.as_span( ) )
     {
+        if ( op.policy != OperandPolicy::fixed ) continue;
+
         const u32 id = op.vreg.id;
         if ( id >= ctx.assignments.size( ) ) continue;
 

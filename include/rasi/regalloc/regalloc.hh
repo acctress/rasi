@@ -4,6 +4,7 @@
 #include <rasi/support/types.hh>
 #include <rasi/vcode/operand.hh>
 #include <rasi/vcode/vcode.hh>
+#include <rasi/vcode/call_conv.hh>
 #include <vector>
 
 namespace rasi::regalloc

@@ -1,12 +1,12 @@
 #include "rasi/vcode/printer.hh"
 
 #include <iostream>
+#include <print>
 #include <rasi/asm/x86_64/emit.hh>
 #include <rasi/isel/context.hh>
 #include <rasi/isel/x86_64/lower.hh>
 #include <rasi/module/module.hh>
 #include <rasi/regalloc/regalloc.hh>
-#include <print>
 
 using namespace rasi;
 using namespace rasi::isel;
@@ -25,24 +25,23 @@ Buffer rasi::jit_compile_fn( Function &fn )
 
     regalloc::compute_liveness( alloc_ctx, vcode );
     regalloc::alloc( alloc_ctx, vcode );
-    // regalloc::apply( alloc_ctx, vcode );
 
     print_vcode( std::cout, vcode, alloc_ctx );
 
-    FrameLayout frame {};
+    const auto &cc          = conv_regs( vcode.call_conv );
+    const auto  param_count = static_cast< u32 >( fn.param_types.size( ) );
+
+    FrameLayout frame = compute_frame_layout( alloc_ctx, cc, param_count );
 
     auto buff = azm::x86_64::emit( vcode, alloc_ctx, frame );
 
-    std::println("printing jit compile fn buff bytes");
-    for ( const auto byte : buff.bytes() )
+    std::println( "printing jit compile fn buff bytes" );
+    for ( const auto byte : buff.bytes( ) )
     {
-        std::print(
-            "{:02x} ",
-            std::to_integer<u8>( byte )
-        );
+        std::print( "{:02x} ", std::to_integer< u8 >( byte ) );
     }
 
-    std::println();
+    std::println( );
 
     return buff;
 }
