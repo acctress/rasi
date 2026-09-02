@@ -1,5 +1,8 @@
 #pragma once
-#include "rasi/ir/types.hh"
+
+#include <cassert>
+#include <rasi/support/types.hh>
+#include <vector>
 
 #ifdef _WIN32
 #define NOMINMAX
@@ -41,6 +44,7 @@ namespace rasi
     class Buffer
     {
     public:
+
         explicit Buffer( const std::size_t size ) :
             m_size( size ),
             m_memory( [ & ]( ) -> std::byte *
@@ -63,6 +67,11 @@ namespace rasi
         [[nodiscard]] std::size_t pos( ) const noexcept { return m_pos; }
 
         [[nodiscard]] std::span< const std::byte > bytes( ) const noexcept { return { m_memory.get( ), m_pos }; }
+
+        void write( const std::vector< std::uint8_t > &data )
+        {
+            write_bytes( { reinterpret_cast< const std::byte * >( data.data( ) ), data.size( ) } );
+        }
 
         void emit( const std::uint8_t b ) { write_byte( static_cast< std::byte >( b ) ); }
 
@@ -108,8 +117,8 @@ namespace rasi
             requires std::integral< T >
         [[nodiscard]] std::size_t reverse_immediate( )
         {
-            const auto offset = m_pos;
-            skip( sizeof( offset ) );
+            const auto offset = m_pos;  
+            skip( sizeof( T ) );
             return offset;
         }
 

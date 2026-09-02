@@ -1,30 +1,60 @@
-#include "rasi/support/printer.hh"
-
-#include <Catch2/catch_test_macros.hpp>
-#include <array>
-#include <iostream>
-#include <rasi/builder.hh>
+#include <catch2/catch_test_macros.hpp>
+#include <rasi/ir/builder.hh>
 #include <rasi/ir/module.hh>
+#include <rasi/support/printer.hh>
+#include <sstream>
 
 using namespace rasi;
 
-TEST_CASE( "basic module test", "[ir]" )
+static std::string print_module( const Module &m )
 {
-    Module module;
+    std::ostringstream os;
+    IRPrinter { os }.print( m );
+    return os.str( );
+}
 
-    const auto fn_ref = module.new_function( "foo", { Type::i64, Type::i64 }, Type::i64 );
-    auto& fn          = module.get_function( fn_ref );
+TEST_CASE( "module: new func added", "[ir]" )
+{
+    Module     m;
+    const auto ref = m.new_function( "foo", {}, Type::void_ );
+    REQUIRE( m.get_function( ref ).name == "foo" );
+}
 
-    IRBuilder  builder { fn };
-    auto a   = builder.param( 0 );
-    auto b   = builder.param( 1 );
-    auto res = builder.iadd( a, b );
-    builder.ret( res );
+TEST_CASE( "module: lookup func by name", "[ir]" )
+{
+    Module m;
+    m.new_function( "foo", {}, Type::void_ );
+    const auto result = m.get_function( "foo" );
+    REQUIRE( result.has_value( ) );
+    REQUIRE( result->get( ).name == "foo" );
+}
 
-    IRPrinter printer { std::cout };
-    printer.print( module );
+TEST_CASE( "module: force lookup no real function", "[ir]" )
+{
+    Module m;
+    REQUIRE_FALSE( m.get_function( "foo" ).has_value( ) );
+}
 
-    REQUIRE( res.id == 2 );
-    REQUIRE( fn.instructions[0].result.id == 2 );
-    REQUIRE( fn.blocks[0].instructions_count == 2 );
+TEST_CASE( "function: entry block exists after construction", "[ir]" )
+{
+    Module      m;
+    const auto  ref = m.new_function( "foo", { Type::i64 }, Type::void_ );
+    const auto &fn  = m.get_function( ref );
+    REQUIRE( fn.blocks.size( ) == 1 );
+    REQUIRE( fn.blocks[ fn.entry_block.id ].params_count == 1 );
+}
+
+TEST_CASE( "builder: iconst stores immediate", "[ir]" )
+{
+    Module     m;
+    const auto ref = m.new_function( "foo", {}, Type::i64 );
+    auto      &fn  = m.get_function( ref );
+    IRBuilder  b { fn };
+
+    auto [ id ] = b.iconst( 1234 );
+    auto &inst  = fn.instructions[ 0 ];
+
+    REQUIRE( inst.kind == InstKind::iconst );
+    REQUIRE( fn.immediates[ inst.imm_idx ] == 1234 );
+    REQUIRE( fn.value_types[ id ] == Type::i64 );
 }
