@@ -1,4 +1,16 @@
-use crate::{operand::{Mem, Rm}, regs::Size};
+use crate::{operand::{Mem, Rm}, regs::{Gpr, Size}};
+
+#[derive(Clone, Copy)]
+pub enum RegField {
+    Reg(Gpr),
+    Ext(u8)
+}
+
+impl From<Gpr> for RegField { fn from(value: Gpr) -> Self { Self::Reg(value) } }
+impl From<u8>  for RegField { fn from(value: u8)  -> Self { Self::Ext(value) } }
+
+/// byte needs rex
+const fn byte_nr(r: Gpr) -> bool { matches!(r.num(), 4..=7) }
 
 pub const fn rex(w: bool, r: bool, x: bool, b: bool) -> u8 {
     0x40 | ((w as u8) << 3) | ((r as u8) << 2) | ((x as u8) << 1) | b as u8
@@ -12,22 +24,30 @@ pub const fn sib(scale: u8, index: u8, base: u8) -> u8 {
     (scale << 6) | ((index & 7) << 3) | (base & 7)
 }
 
-pub fn emit_rm(buf: &mut Vec<u8>, size: Size, opcode: &[u8], reg: u8, rm: &Rm, frex: bool) {
-    if size == Size::S16 { buf.push(0x66); }
+pub fn emit_rm(buf: &mut Vec<u8>, size: Size, opcode: &[u8], reg: impl Into<RegField>, rm: &Rm) {
+    let reg = reg.into();
 
-    let (x, b) = match rm {
-        Rm::Reg(r) => (false, r.hi()),
-        Rm::Mem(m) => (m.index.is_some_and(|(i, _)| i.hi()), m.base.hi()),
+    let (bits, r, byte) = match reg {
+        RegField::Reg(gpr) => (gpr.enc(), gpr.hi(), byte_nr(gpr)),
+        RegField::Ext(val) => (val, false, false)
     };
 
-    let (w, r) = (size == Size::S64, reg >= 8);
+    let (x, b) = match rm {
+        Rm::Reg(gpr) => (false, gpr.hi()),
+        Rm::Mem(mem) => (mem.index.is_some_and(|(i, _)| i.hi()), mem.base.hi()),
+    };
 
-    if w || r || x || b || frex { buf.push(rex(w, r, x, b)); }
+    let rm_byte = matches!(rm, Rm::Reg(gpr) if byte_nr(*gpr));
+    let f = size == Size::S8 && (byte || rm_byte);
+    let w = size == Size::S64;
+
+    if size == Size::S16 { buf.push(0x66); }
+    if w || r || x || b || f { buf.push(rex(w, r, x, b)); }
+
     buf.extend_from_slice(opcode);
-
     match rm {
-        Rm::Reg(r) => buf.push(modrm(0b11, reg, r.enc())),
-        Rm::Mem(m) => emit_mem(buf, reg, m),
+        Rm::Reg(gpr) => buf.push(modrm(0b11, bits, gpr.enc())),
+        Rm::Mem(mem) => emit_mem(buf, bits, mem),
     }
 }
 
