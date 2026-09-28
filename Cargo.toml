@@ -5,10 +5,10 @@ edition = "2024"
 
 [workspace]
 members = [
-    "lib/rasi-ir",
+    "lib/*",
     ".",
 ]
-resolver = "2"
+resolver = "3"
 
 [dependencies]
 rasi-ir = { path = "lib/rasi-ir" }

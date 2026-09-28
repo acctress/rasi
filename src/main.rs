@@ -5,7 +5,7 @@ fn main() {
     let mut builder = IRBuilder::new(&mut func);
 
     let a = builder.iconst(42i32);
-    let b = builder.iconst(89i32);
+    let b = builder.iconst(89i64);
     let c = builder.iadd(a, b);
     builder.ret(Some(c));
 
