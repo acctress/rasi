@@ -1,6 +1,6 @@
 # rasi
 
-[![CI](https://github.com/acctress/rasi/actions/workflows/ci.yml/badge.svg)](https://github.com/acctress/rasi/actions/workflows/ci.yml)
+[![CI](https://github.com/acctress/rasi/actions/workflows/rust.yml/badge.svg?branch=rust)](https://github.com/acctress/rasi/actions/workflows/rust.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Rust](https://img.shields.io/badge/rust-2024-orange?logo=rust)
 ![Targets](https://img.shields.io/badge/target-x86--64-informational)
