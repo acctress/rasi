@@ -5,7 +5,8 @@ edition = "2024"
 
 [workspace]
 members = [
-    "lib/*",
+    "lib/rasi-ir",
+    "lib/rasi-x86-64-asm",
     ".",
 ]
 resolver = "3"
