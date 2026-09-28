@@ -25,6 +25,16 @@ impl X86Assembler {
             }
         }
     }
+
+    pub fn mov(&mut self, size: Size, dst: impl Into<Rm>, src: impl Into<RegImm>) {
+        let dst: Rm = dst.into();
+        let src: RegImm = src.into();
+        
+        match src {
+            RegImm::Reg(r) => emit_rm(&mut self.buf, size, &[0x89], r.num(), &dst, false),
+            RegImm::Imm(_) => todo!()
+        }
+    }
 }
 
 macro_rules! alu { ($($name:ident = $n:expr),* $(,)?) => {
