@@ -134,7 +134,7 @@ impl fmt::Display for Function {
 
 impl Function {
     fn fmt_inst(&self, f: &mut Formatter, i: &Inst) -> fmt::Result {
-        write!(f, "\t")?;
+        write!(f, "    ")?;
 
         if let Some(r) = i.result { write!(f, "{r} = ")?; }
         let a = &i.args;
