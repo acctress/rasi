@@ -3,5 +3,12 @@ name = "rasi"
 version = "0.1.0"
 edition = "2024"
 
+[workspace]
+members = [
+    "lib/rasi-ir",
+    ".",
+]
+resolver = "2"
+
 [dependencies]
-rasi-ir = { path = "crates/rasi-ir" }
+rasi-ir = { path = "lib/rasi-ir" }

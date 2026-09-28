@@ -1,14 +1,13 @@
-use rasi_ir::builder::IRBuilder;
-use rasi_ir::function::Function;
-use rasi_ir::types::Type;
+use rasi_ir::{builder::IRBuilder, function::Function, types::Type};
 
 fn main() {
-    let mut func = Function::new("foo", vec![ Type::I64 ], Type::I64 );
-
+    let mut func = Function::new("foo", &[ Type::I32 ], Type::I32 );
     let mut builder = IRBuilder::new(&mut func);
 
     let a = builder.iconst(42i32);
     let b = builder.iconst(89i32);
     let c = builder.iadd(a, b);
-    builder.ret(Option::from(c));
+    builder.ret(Some(c));
+
+    println!("{}", builder.func);
 }

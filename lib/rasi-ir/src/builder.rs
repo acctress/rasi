@@ -21,8 +21,8 @@ impl IntoConst for i64 {
 }
 
 pub struct IRBuilder<'a> {
-    func: &'a mut Function,
-    current: Block,
+    pub func: &'a mut Function,
+    pub current: Block,
 }
 
 impl<'a> IRBuilder<'a> {
@@ -38,24 +38,29 @@ impl<'a> IRBuilder<'a> {
     pub fn iconst(&mut self, val: impl IntoConst) -> Value {
         let ty = val.ty();
         let cref = self.func.alloc_const(val.as_i64());
-        let v = self.func.alloc_value(ty);
-        self.push(Inst::new(Opcode::Iconst(cref), vec![], ty ));
-        v
+        self.emit(Opcode::Iconst(cref), &[], ty)
     }
 
     pub fn iadd(&mut self, a: Value, b: Value) -> Value {
         let ty = self.func.value_type(a);
-        let val = self.func.alloc_value(ty);
-        self.push(Inst::new(Opcode::Iadd, vec![a, b], ty ));
-        val
+        self.emit(Opcode::Iadd, &[a, b], ty)
     }
 
     pub fn ret(&mut self, val: Option<Value>) {
-        let args = val.map(|v| vec![v]).unwrap_or_default();
-        self.push(Inst::new(Opcode::Ret, args, Type::Void));
+        self.emit_void(Opcode::Ret, val.as_slice());
     }
 
-    fn push(&mut self, inst: Inst) {
-        self.func.blocks.get_mut(&self.current).unwrap().insts.push(inst);
+    fn emit(&mut self, op: Opcode, args: &[Value], ty: Type) -> Value {
+        debug_assert!(!self.func.is_terminated(self.current));
+
+        let res = self.func.alloc_value(ty);
+        self.func.push(self.current, Inst::new(op, Vec::from(args), Some(res), ty));
+        res
+    }
+
+    fn emit_void(&mut self, op: Opcode, args: &[Value]) {
+        debug_assert!(!self.func.is_terminated(self.current));
+
+        self.func.push(self.current, Inst::new(op, Vec::from(args), None, Type::Void));
     }
 }
