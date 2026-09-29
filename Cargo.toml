@@ -7,7 +7,7 @@ edition = "2024"
 members = [
     "lib/rasi-ir",
     "lib/rasi-x86-64-asm",
-    ".",
+    ".", "lib/rasi-x86-64", "lib/rasi-codegen",
 ]
 resolver = "3"
 

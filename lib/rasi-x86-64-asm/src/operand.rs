@@ -2,6 +2,17 @@ use crate::regs::Gpr;
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 #[repr(u8)]
+pub enum Cc { O = 0, No, B, Ae, E, Ne, Be, A, S, Ns, P, Np, L, Ge, Le, G }
+
+impl Cc {
+    const ALL: [Cc; 16] = [Cc::O, Cc::No, Cc::B, Cc::Ae, Cc::E, Cc::Ne, Cc::Be, Cc::A,
+        Cc::S, Cc::Ns, Cc::P, Cc::Np, Cc::L, Cc::Ge, Cc::Le, Cc::G];
+
+    pub const fn invert(self) -> Cc { Self::ALL[(self as u8 ^ 1) as usize] }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+#[repr(u8)]
 pub enum Scale { X1 = 0, X2 = 1, X4 = 2, X8 = 3 }
 
 #[derive(Clone, Copy)]
