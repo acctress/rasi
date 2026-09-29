@@ -2,6 +2,7 @@ pub mod regs;
 pub mod operand;
 pub mod encode;
 pub mod asm;
+pub mod dis;
 
 #[cfg(test)]
 mod tests {
@@ -176,5 +177,23 @@ mod tests {
         assert_eq!(enc(|a| a.jmp_rm(RAX)),  [0xFF, 0xE0]);
         assert_eq!(enc(|a| a.call_rm(RAX)), [0xFF, 0xD0]);
         assert_eq!(enc(|a| a.call_rm(R11)), [0x41, 0xFF, 0xD3]);
+    }
+
+    #[cfg(target_arch = "x86_64")]
+    #[test]
+    fn jit() {
+        use rasi_codegen::ExecBuf;
+
+        let mut b = Buffer::new();
+        {
+            let mut a = X86Assembler::new(&mut b);
+            a.mov(S32, RAX, 23);
+            a.add(S32, RAX, 78);
+            a.ret();
+        }
+
+        let code = ExecBuf::new(&b.finish());
+        let f: extern "C" fn() -> i32 = unsafe { code.as_fn() };
+        assert_eq!(f(), 101);
     }
 }
