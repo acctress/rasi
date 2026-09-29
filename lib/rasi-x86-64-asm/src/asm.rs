@@ -44,6 +44,21 @@ impl X86Assembler {
         }
     }
 
+    fn shift(&mut self, n: u8, size: Size, dst: Rm, c: ShiftCount) {
+        let (op, imm) = match c {
+            ShiftCount::One | ShiftCount::Imm(1) => (0xD0, None),
+            ShiftCount::Cl                       => (0xD2, None),
+            ShiftCount::Imm(i)                   => (0xC0, Some(i)),
+        };
+
+        emit_rm(&mut self.buf, size, &[op | wbit(size)], n, &dst);
+        if let Some(i) = imm { self.buf.push(i); }
+    }
+
+    fn unary(&mut self, n: u8, size: Size, dst: Rm) {
+        emit_rm(&mut self.buf, size, &[0xF6 | wbit(size)], n, &dst);
+    }
+
     pub fn mov(&mut self, size: Size, dst: impl Into<Rm>, src: impl Into<RegImm>) {
         let dst: Rm = dst.into();
         match src.into() {
@@ -76,4 +91,34 @@ macro_rules! alu { ($($name:ident = $n:expr),* $(,)?) => {
     }
 }}
 
+macro_rules! shifts { ($($name:ident = $n:expr),* $(,)?) => {
+    impl X86Assembler {$(
+        pub fn $name(&mut self, size: Size, dst: impl Into<Rm>, c: impl Into<ShiftCount>) {
+            self.shift($n, size, dst.into(), c.into());
+        }
+    )*
+    }
+}}
+
+macro_rules! unary { ($($name:ident = $n:expr),* $(,)?) => {
+    impl X86Assembler {$(
+        pub fn $name(&mut self, size: Size, dst: impl Into<Rm>) {
+            self.unary($n, size, dst.into());
+        }
+    )*
+    }
+}}
+
+macro_rules! fixed { ($($name:ident = [$($b:expr),+]),* $(,)?) => {
+    impl X86Assembler {$(
+        pub fn $name(&mut self) {
+            self.buf.extend_from_slice(&[$($b),+]);
+        }
+    )*
+    }
+}}
+
 alu!(add = 0, or = 1, adc = 2, sbb = 3, and = 4, sub = 5, xor = 6, cmp = 7);
+shifts!(rol = 0, ror = 1, rcl = 2, rcr = 3, shl = 4, shr = 5, sar = 7);
+unary!(not = 2, neg = 3, mul = 4, imul1 = 5, div = 6, idiv = 7);
+fixed!(ret = [0xC3], cqo = [0x48, 0x99], cdq = [0x99], nop = [0x90], int3 = [0xCC], leave = [0xC9], ud2 = [0x0F, 0x0B]);

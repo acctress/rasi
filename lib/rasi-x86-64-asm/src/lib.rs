@@ -24,6 +24,17 @@ mod tests {
         assert_eq!(enc(|a| a.sub(S64, RAX, RCX)), [0x48, 0x29, 0xC8]);
         assert_eq!(enc(|a| a.xor(S64, RAX, RCX)), [0x48, 0x31, 0xC8]);
         assert_eq!(enc(|a| a.cmp(S64, RAX, RCX)), [0x48, 0x39, 0xC8]);
+        assert_eq!(enc(|a| a.add(S64, RAX, 8)), [0x48, 0x83, 0xC0, 0x08]);
+        assert_eq!(enc(|a| a.or (S64, RAX, 8)), [0x48, 0x83, 0xC8, 0x08]);
+        assert_eq!(enc(|a| a.adc(S64, RAX, 8)), [0x48, 0x83, 0xD0, 0x08]);
+        assert_eq!(enc(|a| a.sbb(S64, RAX, 8)), [0x48, 0x83, 0xD8, 0x08]);
+        assert_eq!(enc(|a| a.and(S64, RAX, 8)), [0x48, 0x83, 0xE0, 0x08]);
+        assert_eq!(enc(|a| a.xor(S64, RAX, 8)), [0x48, 0x83, 0xF0, 0x08]);
+        assert_eq!(enc(|a| a.cmp(S64, RAX, 8)), [0x48, 0x83, 0xF8, 0x08]);
+        assert_eq!(enc(|a| a.and(S32, RAX, -16)), [0x83, 0xE0, 0xF0]);
+        assert_eq!(enc(|a| a.cmp(S32, Mem::base(RAX), 5)),          [0x83, 0x38, 0x05]);
+        assert_eq!(enc(|a| a.xor(S64, R9, R10)),                    [0x4D, 0x31, 0xD1]);
+        assert_eq!(enc(|a| a.add(S8, Mem::base(RBX), RSI)),         [0x40, 0x00, 0x33]);
     }
 
     #[test]
@@ -82,5 +93,32 @@ mod tests {
             enc(|a| a.sub(S64, Mem::base(RAX).index(RCX, Scale::X4).disp(8), RDX)),
             [0x48, 0x29, 0x54, 0x88, 0x08]
         );
+    }
+
+    #[test]
+    fn unary_all() {
+        assert_eq!(enc(|a| a.not (S64, RAX)), [0x48, 0xF7, 0xD0]);
+        assert_eq!(enc(|a| a.neg (S64, RAX)), [0x48, 0xF7, 0xD8]);
+        assert_eq!(enc(|a| a.mul (S64, RAX)), [0x48, 0xF7, 0xE0]);
+        assert_eq!(enc(|a| a.imul1(S64, RAX)), [0x48, 0xF7, 0xE8]);
+        assert_eq!(enc(|a| a.div (S64, RAX)), [0x48, 0xF7, 0xF0]);
+        assert_eq!(enc(|a| a.idiv(S64, RAX)), [0x48, 0xF7, 0xF8]);
+        assert_eq!(enc(|a| a.not(S32, RCX)),  [0xF7, 0xD1]);
+        assert_eq!(enc(|a| a.not(S16, RAX)),  [0x66, 0xF7, 0xD0]);
+        assert_eq!(enc(|a| a.neg(S8,  RAX)),  [0xF6, 0xD8]);
+        assert_eq!(enc(|a| a.not(S8,  RSI)),  [0x40, 0xF6, 0xD6]);
+        assert_eq!(enc(|a| a.neg(S64, R9)),                 [0x49, 0xF7, 0xD9]);
+        assert_eq!(enc(|a| a.div(S32, Mem::base(RBX))),     [0xF7, 0x33]);
+    }
+
+    #[test]
+    fn fixed_all() {
+        assert_eq!(enc(|a| a.ret()),   [0xC3]);
+        assert_eq!(enc(|a| a.cqo()),   [0x48, 0x99]);
+        assert_eq!(enc(|a| a.cdq()),   [0x99]);
+        assert_eq!(enc(|a| a.nop()),   [0x90]);
+        assert_eq!(enc(|a| a.int3()),  [0xCC]);
+        assert_eq!(enc(|a| a.leave()), [0xC9]);
+        assert_eq!(enc(|a| a.ud2()),   [0x0F, 0x0B]);
     }
 }

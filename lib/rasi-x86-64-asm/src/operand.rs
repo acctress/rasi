@@ -4,6 +4,17 @@ use crate::regs::Gpr;
 #[repr(u8)]
 pub enum Scale { X1 = 0, X2 = 1, X4 = 2, X8 = 3 }
 
+#[derive(Clone, Copy)]
+pub enum ShiftCount {
+    One,
+    Cl,
+    Imm(u8)
+}
+
+impl From<u8> for ShiftCount { fn from(value: u8) -> Self { Self::Imm(value) }}
+
+pub const CL: ShiftCount = ShiftCount::Cl;
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub struct Mem {
     pub base: Gpr,
