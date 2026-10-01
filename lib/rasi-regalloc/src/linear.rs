@@ -24,6 +24,12 @@ impl LinearScan {
     }
 
     pub fn run(mut self) -> (HashMap<u32, PReg>, Vec<u32>) {
-        todo!()
+        self.intervals.sort_by_key(|v| v.start());
+
+        for interval in &self.intervals {
+
+        }
+
+        (self.assignments, self.spilled)
     }
 }

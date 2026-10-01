@@ -17,6 +17,16 @@ pub struct LiveIntervals {
     pub intervals: Vec<LiveInterval>
 }
 
+impl LiveInterval {
+    pub fn start(&self) -> Point {
+        self.ranges.iter().map(|r| r.start).min().unwrap()
+    }
+
+    pub fn end(&self) -> Point {
+        self.ranges.iter().map(|r| r.end).max().unwrap()
+    }
+}
+
 impl LiveIntervals {
     pub fn build<I: MachInst + Clone>(vc: &VCode<I>, liveness: &Liveness) -> Self {
         let mut ranges: HashMap<u32, Vec<Range<Point>>> = HashMap::new();
