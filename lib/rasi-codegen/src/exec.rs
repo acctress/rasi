@@ -18,7 +18,7 @@ mod sys {
         fn VirtualFree(addr: *mut c_void, size: usize, ty: u32) -> i32;
     }
 
-    pub unsafe fn allow_rw(len: usize) -> *mut u8 {
+    pub unsafe fn alloc_rw(len: usize) -> *mut u8 {
         unsafe { VirtualAlloc(std::ptr::null_mut(), len, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE) as *mut u8 }
     }
 
@@ -73,7 +73,7 @@ impl ExecBuf {
         let len = code.len().max(1).next_multiple_of(PAGE);
 
         unsafe {
-            let ptr = sys::allow_rw(len);
+            let ptr = sys::alloc_rw(len);
             assert!(!ptr.is_null(), "exec memory alloc failed");
 
             std::ptr::copy_nonoverlapping(code.as_ptr(), ptr, code.len());

@@ -77,6 +77,10 @@ impl Function {
     pub fn is_terminated(&self, b: Block) -> bool {
         self.block(b).insts.last().is_some_and(Inst::is_terminator)
     }
+    
+    pub fn constant(&self, cref: ConstRef) -> i64 {
+        self.constants[cref.0 as usize]
+    }
 }
 
 impl fmt::Display for Value { fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result { write!(f, "%{}", self.0) } }
@@ -143,8 +147,6 @@ impl Function {
         match &i.opcode {
             Opcode::Iconst(c) => write!(f, "iconst {} {}", i.ty, self.constants[c.0 as usize]),
             Opcode::Icmp(cc)  => write!(f, "icmp {cc} {} {}, {}", ty(0), a[0], a[1]),
-            Opcode::Br(b)     => write!(f, "br {b}"),
-            Opcode::Brif(t, e) => write!(f, "brif {}, {t}, {e}", a[0]),
             Opcode::Load(off) => { write!(f, "load {} ", i.ty)?; write_addr(f, a[0], *off) }
             Opcode::Store(off) => {
                 write!(f, "store {} {}, ", ty(1), a[1])?;
@@ -156,7 +158,33 @@ impl Function {
                 write_list(f, a)?;
                 write!(f, ")")
             }
-            
+
+            Opcode::Br(b, args) => {
+                write!(f, "br {b}")?;
+                if !args.is_empty() {
+                    write!(f, "(")?;
+                    write_list(f, args)?;
+                    write!(f, ")")?;
+                }
+                Ok(())
+            }
+
+            Opcode::Brif(cond, t, targs, e, eargs) => {
+                write!(f, "brif {cond}, {t}")?;
+                if !targs.is_empty() {
+                    write!(f, "(")?;
+                    write_list(f, targs)?;
+                    write!(f, ")")?;
+                }
+                write!(f, ", {e}")?;
+                if !eargs.is_empty() {
+                    write!(f, "(")?;
+                    write_list(f, eargs)?;
+                    write!(f, ")")?;
+                }
+                Ok(())
+            }
+
             Opcode::Ret if a.is_empty() => write!(f, "ret void"),
             Opcode::Ret => write!(f, "ret {} {}", ty(0), a[0]),
             op => {

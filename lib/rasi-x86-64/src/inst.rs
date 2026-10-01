@@ -1,3 +1,4 @@
+use std::fmt;
 use rasi_x86_64_asm::{asm::X86Assembler, operand::RegImm, regs::{Gpr, Size}};
 use rasi_codegen::{
     operand::{Constraint, OpKind, RegVisitor},
@@ -17,23 +18,28 @@ pub enum RegOImm { Reg(Reg), Imm(i32) }
 #[derive(Clone, Debug)]
 pub enum X86Inst {
     MovImm { size: Size, dst: Reg, imm: i32 },
+    Mov { size: Size, dst: Reg, src: Reg },
     Alu { op: AluOp, size: Size, dst: Reg, src: RegOImm },
     Ret,
 }
 
 fn gpr(r: Reg) -> Gpr { Gpr::name(r.preg().hw) }
 
+macro_rules! reg {
+    ($v:expr, $r:expr, Def)    => { $v.reg($r, OpKind::Def, Constraint::Any) };
+    ($v:expr, $r:expr, Use)    => { $v.reg($r, OpKind::Use, Constraint::Any) };
+    ($v:expr, $r:expr, UseDef) => { $v.reg($r, OpKind::UseDef, Constraint::Any) };
+}
+
 impl MachInst for X86Inst {
     fn visit_regs(&mut self, v: &mut impl RegVisitor) {
         match self {
-            X86Inst::MovImm { dst, .. } => v.reg(dst, OpKind::Def, Constraint::Any),
+            X86Inst::MovImm { dst, .. }     =>   reg!(v, dst, Def),
+            X86Inst::Mov { dst, src, .. }   => { reg!(v, dst, Def); reg!(v, src, Use); },
             X86Inst::Alu { op, dst, src, .. } => {
-                let opkind = if *op == AluOp::Cmp { OpKind::Use } else { OpKind::UseDef };
-                v.reg(dst, opkind, Constraint::Any);
-
-                if let RegOImm::Reg(r) = src { v.reg(r, OpKind::Use, Constraint::Any); }
+                if *op == AluOp::Cmp { reg!(v, dst, Use); } else { reg!(v, dst, UseDef); }
+                if let RegOImm::Reg(r) = src { reg!(v, r, Use); }
             }
-
             X86Inst::Ret => {}
         }
     }
@@ -43,6 +49,7 @@ impl MachInst for X86Inst {
 
         match *self {
             X86Inst::MovImm { size, dst, imm } => a.mov(size, gpr(dst), imm),
+            X86Inst::Mov { size, dst, src } => a.mov(size, gpr(dst), gpr(src)),
             X86Inst::Alu { op, size, dst, src } => {
                 let d = gpr(dst);
                 let s = match src {
@@ -63,6 +70,29 @@ impl MachInst for X86Inst {
             }
 
             X86Inst::Ret => a.ret(),
+        }
+    }
+}
+
+impl fmt::Display for RegOImm {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            RegOImm::Reg(r) => write!(f, "{r}"),
+            RegOImm::Imm(i) => write!(f, "{i}"),
+        }
+    }
+}
+
+impl fmt::Display for X86Inst {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            X86Inst::MovImm { size, dst, imm } =>
+                write!(f, "MovImm {{ size: {size:?}, dst: {dst}, imm: {imm} }}"),
+            X86Inst::Mov { size, dst, src } =>
+                write!(f, "Mov {{ size: {size:?}, dst: {dst}, src: {src} }}"),
+            X86Inst::Alu { op, size, dst, src } =>
+                write!(f, "Alu {{ op: {op:?}, size: {size:?}, dst: {dst}, src: {src} }}"),
+            X86Inst::Ret => write!(f, "Ret"),
         }
     }
 }

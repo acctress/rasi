@@ -9,7 +9,7 @@ members = [
     "lib/rasi-x86-64-asm",
     "lib/rasi-x86-64",
     "lib/rasi-codegen",
-    ".",
+    ".", "lib/rasi-regalloc",
 ]
 resolver = "3"
 

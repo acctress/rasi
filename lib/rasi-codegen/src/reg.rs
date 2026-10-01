@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub enum RegClass { Int, Float }
 
@@ -24,3 +26,30 @@ impl Reg {
 
 impl From<VReg> for Reg { fn from(value: VReg) -> Self { Reg::V(value) } }
 impl From<PReg> for Reg { fn from(value: PReg) -> Self { Reg::P(value) } }
+
+const GPR_NAMES: [&str; 16] = [
+    "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi",
+    "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15",
+];
+
+impl fmt::Display for PReg {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self.class {
+            RegClass::Int => write!(f, "{}", GPR_NAMES.get(self.hw as usize).unwrap_or(&"r?")),
+            RegClass::Float => write!(f, "xmm{}", self.hw),
+        }
+    }
+}
+
+impl fmt::Display for VReg {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { write!(f, "v{}", self.0) }
+}
+
+impl fmt::Display for Reg {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Reg::V(v) => write!(f, "{v}"),
+            Reg::P(p) => write!(f, "{p}"),
+        }
+    }
+}

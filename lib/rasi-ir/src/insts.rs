@@ -29,8 +29,8 @@ pub enum Opcode {
     Shr,
     Sar,
     Icmp(IntCC),
-    Br(Block),
-    Brif(Block, Block),
+    Br(Block, Vec<Value>),
+    Brif(Value, Block, Vec<Value>, Block, Vec<Value>),
     Call(FuncRef),
     Ret,
     Load(i32),
@@ -51,7 +51,7 @@ impl Inst {
     }
 
     pub fn is_terminator(&self) -> bool {
-        matches!(self.opcode, Opcode::Br(_) | Opcode::Brif(..) | Opcode::Ret)
+        matches!(self.opcode, Opcode::Br(..) | Opcode::Brif(..) | Opcode::Ret)
     }
 }
 

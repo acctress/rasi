@@ -25,9 +25,28 @@ impl<'a> X86Assembler<'a> {
         match src.into() {
             RegImm::Reg(r) => emit_rm(self.buf, size, &[0x88 | wbit(size)], r, &dst),
             RegImm::Imm(i) => {
+                if let (Size::S32, Rm::Reg(r)) = (size, dst) {
+                    if r.hi() { self.buf.put_u8(0x41); }
+                    self.buf.put_u8(0xB8 + r.enc());
+                    self.buf.put(&i.to_le_bytes());
+                    return;
+                }
+
                 let op = if size == Size::S8 { 0xC6 } else { 0xC7 };
                 emit_rm(self.buf, size, &[op], 0u8, &dst);
                 self.imm(size, i);
+            }
+        }
+    }
+
+    pub fn test(&mut self, size: Size, dst: impl Into<Rm>, src: impl Into<RegImm>) {
+        let dst = dst.into();
+        match src.into() {
+            RegImm::Reg(r) => emit_rm(self.buf, size, &[0x84 | wbit(size)], r, &dst),
+            RegImm::Imm(i) => {
+                emit_rm(self.buf, size, &[0xF6 | wbit(size)], 0u8, &dst);
+                self.imm(size, i);
+                
             }
         }
     }
