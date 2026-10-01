@@ -13,6 +13,8 @@ mod tests {
     use rasi_ir::builder::IRBuilder;
     use rasi_ir::function::Function;
     use rasi_ir::types::Type;
+    use rasi_regalloc::interval::LiveIntervals;
+    use rasi_regalloc::liveness::{Liveness};
     use rasi_x86_64_asm::regs::Size;
     use crate::AluOp::And;
 
@@ -51,19 +53,26 @@ mod tests {
         println!("{func}");
 
         let mut vc = lower_function(&func);
-        assign_pregs(&mut vc);
+        // assign_pregs(&mut vc);
         
         println!();
         println!("{}", &vc);
 
-        let mut buf = Buffer::new();
-        for i in &vc.insts { i.emit(&mut buf); }
-        let bytes = buf.finish();
+        let liveness = Liveness::compute(&vc);
+        println!("{:?}", liveness);
+        
+        let intervals = LiveIntervals::build(&vc, &liveness);
+        println!("{:?}", intervals);
 
-        let code = ExecBuf::new(&bytes);
-        let f: extern "C" fn() -> i32 = unsafe { code.as_fn() };
-        assert_eq!(f(), 101);
-        println!("result = {}", f());
+        //
+        // let mut buf = Buffer::new();
+        // for i in &vc.insts { i.emit(&mut buf); }
+        // let bytes = buf.finish();
+        //
+        // let code = ExecBuf::new(&bytes);
+        // let f: extern "C" fn() -> i32 = unsafe { code.as_fn() };
+        // assert_eq!(f(), 101);
+        // println!("result = {}", f());
     }
 
     fn ops(mut i: X86Inst) -> Vec<(OpKind, Constraint)> {

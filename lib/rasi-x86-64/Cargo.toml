@@ -7,3 +7,4 @@ edition = "2024"
 rasi-codegen = { path = "../rasi-codegen" }
 rasi-x86-64-asm = { path = "../rasi-x86-64-asm" }
 rasi-ir = { path = "../rasi-ir" }
+rasi-regalloc = { path = "../rasi-regalloc" }
