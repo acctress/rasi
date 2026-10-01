@@ -35,6 +35,11 @@ pub enum Opcode {
     Ret,
     Load(i32),
     Store(i32),
+    Srem,
+    Urem,
+    Sext,
+    Zext,
+    Trunc,
 }
 
 #[derive(Debug, Clone)]
@@ -79,6 +84,11 @@ impl Opcode {
             Ret => "ret",
             Load(..) => "load", 
             Store(..) => "store",
+            Srem => "srem",
+            Urem => "urem",
+            Sext => "sext",
+            Zext => "zext",
+            Trunc => "trunc",
         }
     }
 }

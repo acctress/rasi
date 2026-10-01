@@ -24,3 +24,4 @@ fn main() {
     let f: extern "C" fn() -> i32 = unsafe { module.get(id) };
     println!("{}", f());
 }
+

@@ -18,6 +18,8 @@ impl TargetIsa for X86Isa {
     fn compile(&self, func: &Function) -> CompiledCode {
         let mut vc = lower_function(func);
         RegAlloc::run(&mut vc);
+        
+        println!("{}", vc);
 
         let mut buf = Buffer::new();
         for inst in &vc.insts {

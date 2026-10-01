@@ -53,6 +53,17 @@ impl<'a> IRBuilder<'a> {
     binop!(iadd, Iadd);
     binop!(isub, Isub);
     binop!(imul, Imul);
+    binop!(iand, And);
+    binop!(ior, Or);
+    binop!(ixor, Xor);
+    binop!(srem, Srem);
+    binop!(urem, Urem);
+
+    pub fn sext(&mut self, v: Value, to: Type) -> Value  { self.emit(Opcode::Sext, &[v], to) }
+    
+    pub fn zext(&mut self, v: Value, to: Type) -> Value  { self.emit(Opcode::Zext, &[v], to) }
+    
+    pub fn trunc(&mut self, v: Value, to: Type) -> Value { self.emit(Opcode::Trunc, &[v], to) }
     
     pub fn ret(&mut self, val: Option<Value>) {
         self.emit_void(Opcode::Ret, val.as_slice());

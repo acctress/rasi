@@ -12,6 +12,9 @@ pub const RDX: PReg = PReg::int(2);
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum AluOp { Add, Or, Adc, Sbb, And, Sub, Xor, Cmp }
 
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub enum DivOp { Div, Idiv }
+
 #[derive(Clone, Copy, Debug)]
 pub enum RegOImm { Reg(Reg), Imm(i32) }
 
@@ -20,6 +23,11 @@ pub enum X86Inst {
     MovImm { size: Size, dst: Reg, imm: i32 },
     Mov { size: Size, dst: Reg, src: Reg },
     Alu { op: AluOp, size: Size, dst: Reg, src: RegOImm },
+    Imul { size: Size, dst: Reg, src: Reg },
+    Cdq { size: Size, rax: Reg, rdx: Reg },
+    Div { op: DivOp, size: Size, rax: Reg, rdx: Reg, src: Reg },
+    Movzx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
+    Movsx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
     Ret,
 }
 
@@ -40,6 +48,10 @@ impl MachInst for X86Inst {
                 if *op == AluOp::Cmp { reg!(v, dst, Use); } else { reg!(v, dst, UseDef); }
                 if let RegOImm::Reg(r) = src { reg!(v, r, Use); }
             }
+            X86Inst::Imul { dst, src, .. } => { reg!(v, dst, UseDef); reg!(v, src, Use); }
+            X86Inst::Cdq { rax, rdx, .. } => { reg!(v, rax, Use); reg!(v, rdx, Def); }
+            X86Inst::Div { rax, rdx, src, .. } => { reg!(v, rax, UseDef); reg!(v, rdx, UseDef); reg!(v, src, Use); }
+            X86Inst::Movzx { dst, src, .. } | X86Inst::Movsx { dst, src, .. } => { reg!(v, dst, Def); reg!(v, src, Use); },
             X86Inst::Ret => {}
         }
     }
@@ -68,7 +80,18 @@ impl MachInst for X86Inst {
                     AluOp::Cmp => a.cmp(size, d, s),
                 }
             }
-
+            X86Inst::Imul { size, dst, src } => a.imul(size, gpr(dst), gpr(src)),
+            X86Inst::Cdq { size, .. } => match size {
+                Size::S64 => a.cqo(),
+                Size::S32 => a.cdq(),
+                s => panic!("cdq/cqo undefined for size {s:?}"),
+            }
+            X86Inst::Div { op, size, src, .. } => match op {
+                DivOp::Div  => a.div(size, gpr(src)),
+                DivOp::Idiv => a.idiv(size, gpr(src)),
+            }
+            X86Inst::Movzx { dsz, ssz, dst, src } => a.movzx(dsz, gpr(dst), ssz, gpr(src)),
+            X86Inst::Movsx { dsz, ssz, dst, src } => a.movsx(dsz, gpr(dst), ssz, gpr(src)),
             X86Inst::Ret => a.ret(),
         }
     }
@@ -92,7 +115,12 @@ impl fmt::Display for X86Inst {
                 write!(f, "Mov {{ size: {size:?}, dst: {dst}, src: {src} }}"),
             X86Inst::Alu { op, size, dst, src } =>
                 write!(f, "Alu {{ op: {op:?}, size: {size:?}, dst: {dst}, src: {src} }}"),
+            X86Inst::Imul { size, dst, src } =>
+                write!(f, "Imul {{ size: {size:?}, dst: {dst}, src: {src} }}"),
             X86Inst::Ret => write!(f, "Ret"),
+            X86Inst::Movzx { dsz, ssz, dst, src } => write!(f, "Movzx {{ dsz: {dsz:?}, ssz: {ssz:?}, dst: {dst}, src: {src} }}"),
+            X86Inst::Movsx { dsz, ssz, dst, src } => write!(f, "Movsx {{ dsz: {dsz:?}, ssz: {ssz:?}, dst: {dst}, src: {src} }}"),
+            X86Inst::Cdq { .. } | X86Inst::Div { .. } => todo!(),
         }
     }
 }
