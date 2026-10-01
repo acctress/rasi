@@ -1,3 +1,3 @@
 pub mod liveness;
 pub mod interval;
-mod linear;
+pub mod linear;

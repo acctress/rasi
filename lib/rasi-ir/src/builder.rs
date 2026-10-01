@@ -5,6 +5,15 @@ use crate::{
     types::Type
 };
 
+macro_rules! binop {
+    ($name:ident, $opcode:ident) => {
+        pub fn $name(&mut self, a: Value, b: Value) -> Value {
+            let ty = self.func.value_type(a);
+            self.emit(Opcode::$opcode, &[a, b], ty)
+        }
+    };
+}
+
 pub trait IntoConst {
     fn ty(&self) -> Type;
     fn as_i64(self) -> i64;
@@ -41,11 +50,10 @@ impl<'a> IRBuilder<'a> {
         self.emit(Opcode::Iconst(cref), &[], ty)
     }
 
-    pub fn iadd(&mut self, a: Value, b: Value) -> Value {
-        let ty = self.func.value_type(a);
-        self.emit(Opcode::Iadd, &[a, b], ty)
-    }
-
+    binop!(iadd, Iadd);
+    binop!(isub, Isub);
+    binop!(imul, Imul);
+    
     pub fn ret(&mut self, val: Option<Value>) {
         self.emit_void(Opcode::Ret, val.as_slice());
     }

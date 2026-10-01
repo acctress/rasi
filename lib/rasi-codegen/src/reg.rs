@@ -35,14 +35,14 @@ const GPR_NAMES: [&str; 16] = [
 impl fmt::Display for PReg {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.class {
-            RegClass::Int => write!(f, "{}", GPR_NAMES.get(self.hw as usize).unwrap_or(&"r?")),
-            RegClass::Float => write!(f, "xmm{}", self.hw),
+            RegClass::Int => write!(f, "\x1b[38;5;218m{}\x1b[0m", GPR_NAMES.get(self.hw as usize).unwrap_or(&"r?")),
+            RegClass::Float => write!(f, "\x1b[38;5;218mxmm{}\x1b[0m", self.hw),
         }
     }
 }
 
 impl fmt::Display for VReg {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { write!(f, "v{}", self.0) }
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { write!(f, "\x1b[38;5;230mv{}\x1b[0m", self.0) }
 }
 
 impl fmt::Display for Reg {

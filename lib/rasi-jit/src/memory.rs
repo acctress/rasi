@@ -1,6 +1,7 @@
 use std::ffi::c_void;
 
 const PAGE: usize = 4096;
+const CHUNK: usize = 64 * PAGE;
 
 #[cfg(windows)]
 mod sys {
@@ -66,31 +67,50 @@ mod sys {
     }
 }
 
-pub struct ExecBuf { ptr: *mut u8, len: usize }
 
-impl ExecBuf {
-    pub fn new(code: &[u8]) -> Self {
-        let len = code.len().max(1).next_multiple_of(PAGE);
+struct Region { ptr: *mut u8, capacity: usize, len: usize }
+pub struct ExecMemory { regions: Vec<Region> }
 
-        unsafe {
-            let ptr = sys::alloc_rw(len);
-            assert!(!ptr.is_null(), "exec memory alloc failed");
+impl Region {
+    fn new(min: usize) -> Self {
+        let capacity = min.next_multiple_of(PAGE);
+        let ptr = unsafe { sys::alloc_rw(capacity) };
+        assert!(!ptr.is_null(), "exec memory alloc failed");
 
-            std::ptr::copy_nonoverlapping(code.as_ptr(), ptr, code.len());
-            assert!(sys::make_rx(ptr, len), "failed to make mem executable");
-
-            Self { ptr, len }
-        }
+        Self { ptr, capacity, len: 0 }
     }
 
-    pub fn as_ptr(&self) -> *const u8 { self.ptr }
+    fn rem(&self) -> usize { self.capacity - self.len }
 
-    pub unsafe fn as_fn<F: Copy>(&self) -> F {
-        debug_assert_eq!(size_of::<F>(), size_of::<usize>());
-        unsafe { std::mem::transmute_copy(&self.ptr) }
+    unsafe fn write(&mut self, code: &[u8]) -> *mut u8 {
+        let dst = unsafe { self.ptr.add(self.len) };
+        unsafe { std::ptr::copy_nonoverlapping(code.as_ptr(), dst, code.len()) };
+        self.len += code.len();
+
+        dst
     }
 }
 
-impl Drop for ExecBuf {
-    fn drop(&mut self) { unsafe { sys::free(self.ptr, self.len) } }
+impl ExecMemory {
+    pub fn new() -> Self { Self { regions: Vec::new() } }
+
+    pub fn append(&mut self, code: &[u8]) -> *mut u8 {
+        if self.regions.last().is_none_or(|r| r.rem() < code.len()) {
+            self.regions.push(Region::new(code.len().max(CHUNK)));
+        }
+
+        unsafe { self.regions.last_mut().unwrap().write(code) }
+    }
+
+    pub fn finalize(&mut self) {
+        for reg in &self.regions {
+            assert!(unsafe { sys::make_rx(reg.ptr, reg.capacity) }, "failed to make region executable");
+        }
+    }
+}
+
+impl Drop for ExecMemory {
+    fn drop(&mut self) {
+        for reg in &self.regions { unsafe { sys::free(reg.ptr, reg.capacity) } }
+    }
 }
