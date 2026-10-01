@@ -5,7 +5,6 @@
 #include <rasi/ir/call_conv.hh>
 #include <string>
 #include <cassert>
-#include <utility>
 
 namespace rasi
 {
