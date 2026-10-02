@@ -2,6 +2,7 @@ pub mod inst;
 pub mod lower;
 pub mod alloc;
 pub mod isa;
+pub mod frame;
 
 pub use inst::*;
 pub use lower::*;

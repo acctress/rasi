@@ -4,6 +4,8 @@ use rasi_codegen::{
     operand::{Constraint, OpKind, RegVisitor},
     Buffer, MachInst, PReg, Reg,
 };
+use rasi_x86_64_asm::operand::Mem;
+use rasi_x86_64_asm::regs::RBP;
 
 pub const RAX: PReg = PReg::int(0);
 pub const RCX: PReg = PReg::int(1);
@@ -21,6 +23,8 @@ pub enum RegOImm { Reg(Reg), Imm(i32) }
 #[derive(Clone, Debug)]
 pub enum X86Inst {
     MovImm { size: Size, dst: Reg, imm: i32 },
+    MovToMem { size: Size, dsp: i32, src: Reg },
+    MovFromMem { size: Size, dst: Reg, dsp: i32 },
     Mov { size: Size, dst: Reg, src: Reg },
     Alu { op: AluOp, size: Size, dst: Reg, src: RegOImm },
     Imul { size: Size, dst: Reg, src: Reg },
@@ -28,6 +32,7 @@ pub enum X86Inst {
     Div { op: DivOp, size: Size, rax: Reg, rdx: Reg, src: Reg },
     Movzx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
     Movsx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
+    LeaFrame { size: Size, dst: Reg, dsp: i32 },
     Ret,
 }
 
@@ -52,6 +57,9 @@ impl MachInst for X86Inst {
             X86Inst::Cdq { rax, rdx, .. } => { reg!(v, rax, Use); reg!(v, rdx, Def); }
             X86Inst::Div { rax, rdx, src, .. } => { reg!(v, rax, UseDef); reg!(v, rdx, UseDef); reg!(v, src, Use); }
             X86Inst::Movzx { dst, src, .. } | X86Inst::Movsx { dst, src, .. } => { reg!(v, dst, Def); reg!(v, src, Use); },
+            X86Inst::LeaFrame { dst, .. } => reg!(v, dst, Def),
+            X86Inst::MovToMem { src, .. } => reg!(v, src, Use),
+            X86Inst::MovFromMem { dst, .. } => reg!(v, dst, Def),
             X86Inst::Ret => {}
         }
     }
@@ -92,7 +100,10 @@ impl MachInst for X86Inst {
             }
             X86Inst::Movzx { dsz, ssz, dst, src } => a.movzx(dsz, gpr(dst), ssz, gpr(src)),
             X86Inst::Movsx { dsz, ssz, dst, src } => a.movsx(dsz, gpr(dst), ssz, gpr(src)),
-            X86Inst::Ret => a.ret(),
+            X86Inst::LeaFrame { size, dst, dsp } => a.lea(size, gpr(dst), Mem::base(RBP).disp(dsp)),
+            X86Inst::MovToMem { size, dsp, src } => a.mov(size, Mem::base(RBP).disp(dsp), gpr(src)),
+            X86Inst::MovFromMem { size, dst, dsp } => a.mov_load(size, gpr(dst), Mem::base(RBP).disp(dsp)),
+            X86Inst::Ret => { a.leave(); a.ret(); },
         }
     }
 }
@@ -120,7 +131,12 @@ impl fmt::Display for X86Inst {
             X86Inst::Ret => write!(f, "Ret"),
             X86Inst::Movzx { dsz, ssz, dst, src } => write!(f, "Movzx {{ dsz: {dsz:?}, ssz: {ssz:?}, dst: {dst}, src: {src} }}"),
             X86Inst::Movsx { dsz, ssz, dst, src } => write!(f, "Movsx {{ dsz: {dsz:?}, ssz: {ssz:?}, dst: {dst}, src: {src} }}"),
-            X86Inst::Cdq { .. } | X86Inst::Div { .. } => todo!(),
+            X86Inst::Cdq { size, rax, rdx } => write!(f, "Cdq {{ size: {size:?}, rax: {rax}, rdx: {rdx} }}"),
+            X86Inst::Div { op, size, rax, rdx, src } =>
+                write!(f, "Div {{ op: {op:?}, size: {size:?}, rax: {rax}, rdx: {rdx}, src: {src} }}"),
+            X86Inst::LeaFrame { size, dst, dsp } => write!(f, "LeaFrame {{ size: {size:?}, dst: {dst}, dsp: {dsp} }}"),
+            X86Inst::MovToMem { size, dsp, src } => write!(f, "MovToMem {{ size: {size:?}, dsp: {dsp}, src: {src} }}"),
+            X86Inst::MovFromMem { size, dst, dsp } => write!(f, "MovFromMem {{ size: {size:?}, dst: {dst}, dsp: {dsp} }}"),
         }
     }
 }

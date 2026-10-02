@@ -4,6 +4,7 @@ use crate::{
     insts::{Inst, Opcode, Value},
     types::Type
 };
+use crate::insts::StackSlot;
 
 macro_rules! binop {
     ($name:ident, $opcode:ident) => {
@@ -58,12 +59,16 @@ impl<'a> IRBuilder<'a> {
     binop!(ixor, Xor);
     binop!(srem, Srem);
     binop!(urem, Urem);
+    binop!(sdiv, Sdiv);
+    binop!(udiv, Udiv);
 
     pub fn sext(&mut self, v: Value, to: Type) -> Value  { self.emit(Opcode::Sext, &[v], to) }
     
     pub fn zext(&mut self, v: Value, to: Type) -> Value  { self.emit(Opcode::Zext, &[v], to) }
     
     pub fn trunc(&mut self, v: Value, to: Type) -> Value { self.emit(Opcode::Trunc, &[v], to) }
+
+    pub fn stack_addr(&mut self, slot: StackSlot) -> Value { self.emit(Opcode::StackAddr(slot), &[], Type::I64) }
     
     pub fn ret(&mut self, val: Option<Value>) {
         self.emit_void(Opcode::Ret, val.as_slice());

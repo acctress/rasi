@@ -1,7 +1,10 @@
 use std::fmt;
 use std::fmt::{Debug, Formatter};
 use crate::{block::{Block, BasicBlock}, insts::{Value, ConstRef}, types::Type};
-use crate::insts::{FuncRef, Inst, IntCC, Opcode};
+use crate::insts::{FuncRef, Inst, IntCC, Opcode, StackSlot};
+
+#[derive(Debug, Clone, Copy)]
+pub struct StackSlotData { pub size: u32, pub align: u32 }
 
 #[derive(Debug)]
 pub struct Function {
@@ -12,6 +15,7 @@ pub struct Function {
     pub entry: Block,
     pub constants: Vec<i64>,
     pub value_types: Vec<Type>,
+    pub stack_slots: Vec<StackSlotData>,
 }
 
 impl Function {
@@ -24,6 +28,7 @@ impl Function {
             entry: Block(0),
             constants: vec![],
             value_types: vec![],
+            stack_slots: vec![],
         };
 
         let entry = fun.alloc_block();
@@ -80,6 +85,13 @@ impl Function {
     
     pub fn constant(&self, cref: ConstRef) -> i64 {
         self.constants[cref.0 as usize]
+    }
+
+    pub fn create_stack_slot(&mut self, size: u32, align: u32) -> StackSlot {
+        let s = StackSlot(self.stack_slots.len() as u32);
+        self.stack_slots.push(StackSlotData { size, align });
+
+        s
     }
 }
 

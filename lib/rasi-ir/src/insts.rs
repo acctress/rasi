@@ -10,9 +10,11 @@ pub struct ConstRef(pub u32);
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct FuncRef(pub u32);
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct StackSlot(pub u32);
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum IntCC { Eq, Ne, Slt, Sle, Sgt, Sge, Ult, Ule, Ugt, Uge }
-
 
 #[derive(Debug, Clone)]
 pub enum Opcode {
@@ -40,6 +42,7 @@ pub enum Opcode {
     Sext,
     Zext,
     Trunc,
+    StackAddr(StackSlot)
 }
 
 #[derive(Debug, Clone)]
@@ -89,6 +92,7 @@ impl Opcode {
             Sext => "sext",
             Zext => "zext",
             Trunc => "trunc",
+            StackAddr(..) => "stack",
         }
     }
 }

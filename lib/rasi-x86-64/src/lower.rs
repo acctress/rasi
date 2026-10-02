@@ -2,8 +2,9 @@ use rasi_ir::{function::Function, insts::{Opcode, Value}, types::Type};
 use rasi_codegen::{Block, PReg, Reg, RegClass, VCode, VCodeBuilder};
 use rasi_x86_64_asm::regs::Size;
 use std::collections::HashMap;
-use rasi_ir::insts::{ConstRef, Inst};
+use rasi_ir::insts::{ConstRef, Inst, StackSlot};
 use crate::{AluOp, DivOp, RegOImm, X86Inst, RAX, RDX};
+use crate::frame::FrameLayout;
 
 pub struct LowerCtx {
     builder: VCodeBuilder<X86Inst>,
@@ -126,33 +127,43 @@ fn lower_trunc(ctx: &mut LowerCtx, func: &Function, inst: &Inst) {
     ctx.bind(inst.result.unwrap(), dst);
 }
 
-pub fn lower_function(func: &Function) -> VCode<X86Inst> {
+fn lower_stack_addr(ctx: &mut LowerCtx, inst: &Inst, slot: StackSlot, frame: &FrameLayout) {
+    let dst = ctx.tmp(Type::I64);
+    let dsp = frame.slot_offsets[slot.0 as usize];
+
+    ctx.push(X86Inst::LeaFrame { size: Size::S64, dst, dsp });
+    ctx.bind(inst.result.unwrap(), dst);
+}
+
+pub fn lower_function(func: &Function) -> (VCode<X86Inst>, FrameLayout) {
     assert_eq!(func.blocks.len(), 1, "lower_function: multiple blocks not implemented");
 
+    let frame = FrameLayout::layout(&func.stack_slots);
     let mut ctx = LowerCtx::new();
     ctx.start_block();
 
     for inst in &func.block(func.entry).insts {
         match &inst.opcode {
-            Opcode::Iconst(cref) => lower_iconst(&mut ctx, func, inst, *cref),
-            Opcode::Iadd         => lower_binop (&mut ctx, inst, AluOp::Add),
-            Opcode::Isub         => lower_binop (&mut ctx, inst, AluOp::Sub),
-            Opcode::And          => lower_binop (&mut ctx, inst, AluOp::And),
-            Opcode::Or           => lower_binop (&mut ctx, inst, AluOp::Or),
-            Opcode::Xor          => lower_binop (&mut ctx, inst, AluOp::Xor),
-            Opcode::Imul         => lower_imul  (&mut ctx, inst),
-            Opcode::Ret          => lower_ret   (&mut ctx, func, inst),
-            Opcode::Sdiv         => lower_divmod(&mut ctx, inst, true,  RAX),
-            Opcode::Udiv         => lower_divmod(&mut ctx, inst, false, RAX),
-            Opcode::Srem         => lower_divmod(&mut ctx, inst, true,  RDX),
-            Opcode::Urem         => lower_divmod(&mut ctx, inst, false, RDX),
-            Opcode::Sext         => lower_ext   (&mut ctx, func, inst, true),
-            Opcode::Zext         => lower_ext   (&mut ctx, func, inst, false),
-            Opcode::Trunc        => lower_trunc (&mut ctx, func, inst),
+            Opcode::Iconst(cref) => lower_iconst    (&mut ctx, func, inst, *cref),
+            Opcode::Iadd         => lower_binop     (&mut ctx, inst, AluOp::Add),
+            Opcode::Isub         => lower_binop     (&mut ctx, inst, AluOp::Sub),
+            Opcode::And          => lower_binop     (&mut ctx, inst, AluOp::And),
+            Opcode::Or           => lower_binop     (&mut ctx, inst, AluOp::Or),
+            Opcode::Xor          => lower_binop     (&mut ctx, inst, AluOp::Xor),
+            Opcode::Imul         => lower_imul      (&mut ctx, inst),
+            Opcode::Ret          => lower_ret       (&mut ctx, func, inst),
+            Opcode::Sdiv         => lower_divmod    (&mut ctx, inst, true,  RAX),
+            Opcode::Udiv         => lower_divmod    (&mut ctx, inst, false, RAX),
+            Opcode::Srem         => lower_divmod    (&mut ctx, inst, true,  RDX),
+            Opcode::Urem         => lower_divmod    (&mut ctx, inst, false, RDX),
+            Opcode::Sext         => lower_ext       (&mut ctx, func, inst, true),
+            Opcode::Zext         => lower_ext       (&mut ctx, func, inst, false),
+            Opcode::Trunc        => lower_trunc     (&mut ctx, func, inst),
+            Opcode::StackAddr(s) => lower_stack_addr(&mut ctx, inst, *s, &frame),
             op                   => panic!("lower_function: unhandled op {op:?}"),
         }
     }
 
     ctx.end_block(&[]);
-    ctx.finish()
+    (ctx.finish(), frame)
 }
