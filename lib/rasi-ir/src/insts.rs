@@ -16,6 +16,12 @@ pub struct StackSlot(pub u32);
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum IntCC { Eq, Ne, Slt, Sle, Sgt, Sge, Ult, Ule, Ugt, Uge }
 
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct BlockCall {
+    pub block: Block,
+    pub args: Vec<Value>,
+}
+
 #[derive(Debug, Clone)]
 pub enum Opcode {
     Iconst(ConstRef),
@@ -31,8 +37,8 @@ pub enum Opcode {
     Shr,
     Sar,
     Icmp(IntCC),
-    Br(Block, Vec<Value>),
-    Brif(Value, Block, Vec<Value>, Block, Vec<Value>),
+    Br(BlockCall),
+    Brif(Value, BlockCall, BlockCall),
     Call(FuncRef),
     Ret,
     Load(i32),

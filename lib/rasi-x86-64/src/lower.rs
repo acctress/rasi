@@ -32,8 +32,8 @@ impl LowerCtx {
     }
 
     fn push(&mut self, inst: X86Inst) { self.builder.push(inst); }
-    fn start_block(&mut self) -> Block { self.builder.start_block() }
-    fn end_block(&mut self, succs: &[Block]) { self.builder.end_block(succs) }
+    fn start_block(&mut self, params: &[rasi_codegen::VReg]) -> Block { self.builder.start_block(params) }
+    fn end_block(&mut self, succs: &[Block], branch_args: Vec<Vec<rasi_codegen::VReg>>) { self.builder.end_block(succs, branch_args) }
     fn finish(self) -> VCode<X86Inst> { self.builder.finish() }
 }
 
@@ -140,7 +140,7 @@ pub fn lower_function(func: &Function) -> (VCode<X86Inst>, FrameLayout) {
 
     let frame = FrameLayout::layout(&func.stack_slots);
     let mut ctx = LowerCtx::new();
-    ctx.start_block();
+    ctx.start_block(&[]);
 
     for inst in &func.block(func.entry).insts {
         match &inst.opcode {
@@ -164,6 +164,6 @@ pub fn lower_function(func: &Function) -> (VCode<X86Inst>, FrameLayout) {
         }
     }
 
-    ctx.end_block(&[]);
+    ctx.end_block(&[], vec![]);
     (ctx.finish(), frame)
 }

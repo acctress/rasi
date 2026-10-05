@@ -1,10 +1,10 @@
 use crate::{
     block::Block,
     function::Function,
-    insts::{Inst, Opcode, Value},
+    insts::{Inst, Opcode, Value, StackSlot},
     types::Type
 };
-use crate::insts::StackSlot;
+use crate::insts::{BlockCall, IntCC};
 
 macro_rules! binop {
     ($name:ident, $opcode:ident) => {
@@ -69,7 +69,29 @@ impl<'a> IRBuilder<'a> {
     pub fn trunc(&mut self, v: Value, to: Type) -> Value { self.emit(Opcode::Trunc, &[v], to) }
 
     pub fn stack_addr(&mut self, slot: StackSlot) -> Value { self.emit(Opcode::StackAddr(slot), &[], Type::I64) }
-    
+
+    pub fn icmp(&mut self, cc: IntCC, a: Value, b: Value) -> Value {
+        self.emit(Opcode::Icmp(cc), &[a, b], Type::I8)
+    }
+
+    pub fn brif(
+        &mut self,
+        condition: Value,
+        then: Block,
+        then_args: &[Value],
+        els: Block,
+        else_args: &[Value],
+    ) {
+        self.emit_void(
+            Opcode::Brif(
+                condition,
+                BlockCall { block: then, args: then_args.to_vec() },
+                BlockCall { block: els, args: else_args.to_vec() },
+            ),
+            &[],
+        );
+    }
+
     pub fn ret(&mut self, val: Option<Value>) {
         self.emit_void(Opcode::Ret, val.as_slice());
     }

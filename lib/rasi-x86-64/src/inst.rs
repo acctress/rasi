@@ -1,11 +1,7 @@
 use std::fmt;
-use rasi_x86_64_asm::{asm::X86Assembler, operand::RegImm, regs::{Gpr, Size}};
-use rasi_codegen::{
-    operand::{Constraint, OpKind, RegVisitor},
-    Buffer, MachInst, PReg, Reg,
-};
-
-use rasi_x86_64_asm::operand::Mem;
+use rasi_x86_64_asm::{asm::X86Assembler, operand::{RegImm, Mem}, regs::{Gpr, Size}};
+use rasi_codegen::{operand::{Constraint, OpKind, RegVisitor}, Block, Buffer, MachInst, PReg, Reg};
+use rasi_x86_64_asm::operand::Cc;
 
 pub const RAX: PReg = PReg::int(0);
 pub const RCX: PReg = PReg::int(1);
@@ -46,6 +42,9 @@ pub enum X86Inst {
     Movzx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
     Movsx { dsz: Size, ssz: Size, dst: Reg, src: Reg },
     LeaFrame { size: Size, dst: Reg, dsp: i32 },
+    SetCC { cc: Cc, dst: Reg },
+    Jmp { target: Block },
+    Jcc { cc: Cc, target: Block },
     Ret,
 }
 
@@ -73,6 +72,8 @@ impl MachInst for X86Inst {
             X86Inst::LeaFrame { dst, .. } => reg!(v, dst, Def),
             X86Inst::MovToMem { src, .. } => reg!(v, src, Use),
             X86Inst::MovFromMem { dst, .. } => reg!(v, dst, Def),
+            X86Inst::SetCC { dst, .. } => reg!(v, dst, Def),
+            X86Inst::Jmp { .. } | X86Inst::Jcc { .. } => {}
             X86Inst::Ret => {}
         }
     }
@@ -116,6 +117,9 @@ impl MachInst for X86Inst {
             X86Inst::LeaFrame { size, dst, dsp } => a.lea(size, gpr(dst), Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp)),
             X86Inst::MovToMem { size, dsp, src } => a.mov(size, Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp), gpr(src)),
             X86Inst::MovFromMem { size, dst, dsp } => a.mov_load(size, gpr(dst), Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp)),
+            X86Inst::SetCC { cc, dst } => a.setcc(cc, gpr(dst)),
+            X86Inst::Jmp { .. } => todo!(),
+            X86Inst::Jcc { .. } => todo!(),
             X86Inst::Ret => { a.leave(); a.ret(); },
         }
     }
@@ -150,6 +154,9 @@ impl fmt::Display for X86Inst {
             X86Inst::LeaFrame { size, dst, dsp } => write!(f, "LeaFrame {{ size: {size:?}, dst: {dst}, dsp: {dsp} }}"),
             X86Inst::MovToMem { size, dsp, src } => write!(f, "MovToMem {{ size: {size:?}, dsp: {dsp}, src: {src} }}"),
             X86Inst::MovFromMem { size, dst, dsp } => write!(f, "MovFromMem {{ size: {size:?}, dst: {dst}, dsp: {dsp} }}"),
+            X86Inst::SetCC { cc, dst } => write!(f, "SetCC {{ cc: {cc:?}, dst: {dst} }}"),
+            X86Inst::Jmp { target } => write!(f, "Jmp {{ target: {target:?} }}"),
+            X86Inst::Jcc { cc, target } => write!(f, "Jcc {{ cc: {cc:?}, target: {target:?} }}"),
         }
     }
 }

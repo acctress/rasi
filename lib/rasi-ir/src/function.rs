@@ -171,27 +171,27 @@ impl Function {
                 write!(f, ")")
             }
 
-            Opcode::Br(b, args) => {
-                write!(f, "br {b}")?;
-                if !args.is_empty() {
+            Opcode::Br(bc) => {
+                write!(f, "br {}", bc.block)?;
+                if !bc.args.is_empty() {
                     write!(f, "(")?;
-                    write_list(f, args)?;
+                    write_list(f, &bc.args)?;
                     write!(f, ")")?;
                 }
                 Ok(())
             }
 
-            Opcode::Brif(cond, t, targs, e, eargs) => {
-                write!(f, "brif {cond}, {t}")?;
-                if !targs.is_empty() {
+            Opcode::Brif(cond, then, els) => {
+                write!(f, "brif {cond}, {}", then.block)?;
+                if !then.args.is_empty() {
                     write!(f, "(")?;
-                    write_list(f, targs)?;
+                    write_list(f, &then.args)?;
                     write!(f, ")")?;
                 }
-                write!(f, ", {e}")?;
-                if !eargs.is_empty() {
+                write!(f, ", {}", els.block)?;
+                if !els.args.is_empty() {
                     write!(f, "(")?;
-                    write_list(f, eargs)?;
+                    write_list(f, &els.args)?;
                     write!(f, ")")?;
                 }
                 Ok(())
