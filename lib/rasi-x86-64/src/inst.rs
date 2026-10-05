@@ -4,12 +4,25 @@ use rasi_codegen::{
     operand::{Constraint, OpKind, RegVisitor},
     Buffer, MachInst, PReg, Reg,
 };
+
 use rasi_x86_64_asm::operand::Mem;
-use rasi_x86_64_asm::regs::RBP;
 
 pub const RAX: PReg = PReg::int(0);
 pub const RCX: PReg = PReg::int(1);
 pub const RDX: PReg = PReg::int(2);
+pub const RBX: PReg = PReg::int(3);
+pub const RSP: PReg = PReg::int(4);
+pub const RBP: PReg = PReg::int(5);
+pub const RSI: PReg = PReg::int(6);
+pub const RDI: PReg = PReg::int(7);
+pub const R8:  PReg = PReg::int(8);
+pub const R9:  PReg = PReg::int(9);
+pub const R10: PReg = PReg::int(10);
+pub const R11: PReg = PReg::int(11);
+pub const R12: PReg = PReg::int(12);
+pub const R13: PReg = PReg::int(13);
+pub const R14: PReg = PReg::int(14);
+pub const R15: PReg = PReg::int(15);
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum AluOp { Add, Or, Adc, Sbb, And, Sub, Xor, Cmp }
@@ -100,9 +113,9 @@ impl MachInst for X86Inst {
             }
             X86Inst::Movzx { dsz, ssz, dst, src } => a.movzx(dsz, gpr(dst), ssz, gpr(src)),
             X86Inst::Movsx { dsz, ssz, dst, src } => a.movsx(dsz, gpr(dst), ssz, gpr(src)),
-            X86Inst::LeaFrame { size, dst, dsp } => a.lea(size, gpr(dst), Mem::base(RBP).disp(dsp)),
-            X86Inst::MovToMem { size, dsp, src } => a.mov(size, Mem::base(RBP).disp(dsp), gpr(src)),
-            X86Inst::MovFromMem { size, dst, dsp } => a.mov_load(size, gpr(dst), Mem::base(RBP).disp(dsp)),
+            X86Inst::LeaFrame { size, dst, dsp } => a.lea(size, gpr(dst), Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp)),
+            X86Inst::MovToMem { size, dsp, src } => a.mov(size, Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp), gpr(src)),
+            X86Inst::MovFromMem { size, dst, dsp } => a.mov_load(size, gpr(dst), Mem::base(rasi_x86_64_asm::regs::RBP).disp(dsp)),
             X86Inst::Ret => { a.leave(); a.ret(); },
         }
     }

@@ -1,25 +1,31 @@
 use std::fmt;
-use std::fmt::{write, Formatter};
-use rasi_codegen::{Buffer, CompiledCode, Flags, MachInst, TargetIsa};
+use std::fmt::Formatter;
+use rasi_codegen::{AbiSpec, Buffer, CompiledCode, Flags, MachInst, TargetIsa};
 use rasi_ir::function::Function;
 use rasi_x86_64_asm::asm::X86Assembler;
 use rasi_x86_64_asm::regs::{Size, RBP, RSP};
 use crate::{lower_function, RegAlloc, X86Inst};
+use crate::abi::host_abi;
 
 pub struct X86Isa {
-    flags: Flags
+    flags: Flags,
+    abi: &'static AbiSpec,
 }
 
 impl X86Isa {
     pub fn new(flags: Flags) -> Self {
-        Self { flags }
+        Self { flags, abi: host_abi() }
+    }
+
+    pub fn with_abi(flags: Flags, abi: &'static AbiSpec) -> Self {
+        Self { flags, abi: host_abi() }
     }
 }
 
 impl TargetIsa for X86Isa {
     fn compile(&self, func: &Function) -> CompiledCode {
         let (mut vc, frame) = lower_function(func);
-        let total_size = RegAlloc::run(&mut vc, &frame);
+        let total_size = RegAlloc::run(&mut vc, &frame, self.abi);
         
         println!("{}", vc);
 
