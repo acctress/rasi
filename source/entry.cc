@@ -24,5 +24,5 @@ int main() {
     IRVerifier verifier;
     verifier.visit_module(module);
     if (!verifier.ok())
-        for (const auto& [msg] : verifier.errs) std::println("[error] {}", msg);
+        for (const auto& [msg] : verifier.errs) std::println("\x1b[38;5;198m[error]\x1b[0m {}", msg);
 }
