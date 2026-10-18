@@ -1,4 +1,5 @@
 #include <rasi/ir/builder.hh>
+#include <rasi/ir/verifier.hh>
 #include <print>
 
 #include "rasi/ir/module.hh"
@@ -17,7 +18,11 @@ int main() {
     auto x = b.param(0);
     auto y = b.param(1);
     auto z = b.iadd(x, y);
-    b.ret(z);
+    // b.ret(z);
     b.finalise();
 
+    IRVerifier verifier;
+    verifier.visit_module(module);
+    if (!verifier.ok())
+        for (const auto& [msg] : verifier.errs) std::println("[error] {}", msg);
 }
