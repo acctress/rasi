@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <unordered_map>
 #include <rasi/support/arena.hh>
 #include <rasi/ir/function.hh>
 
@@ -55,9 +56,13 @@ namespace rasi::ir {
 
         //! @brief Intern a string; returns a StringRef + view pair.
         [[nodiscard]] std::pair<StringRef, std::string_view> intern(const std::string_view sv) {
+            if (const auto iter = m_lookup.find(sv); iter != m_lookup.end())
+                return { StringRef{ iter->second }, m_strings[iter->second] };
+
             auto view = m_arena.alloc_str(sv);
             const auto id = static_cast<uint32_t>(m_strings.size());
             m_strings.push_back(view);
+            m_lookup.emplace(view, id);
             return { StringRef{ id }, view };
         }
 
@@ -80,9 +85,10 @@ namespace rasi::ir {
 
         [[nodiscard]] support::Arena& arena() noexcept { return m_arena; }
     private:
-        support::Arena                  m_arena;
-        std::vector<IRFunction*>        m_functions;
-        std::vector<std::string_view>   m_strings;
-        std::size_t                     m_string_count{};
+        support::Arena                                  m_arena;
+        std::vector<IRFunction*>                        m_functions;
+        std::vector<std::string_view>                   m_strings;
+        std::unordered_map<std::string_view, uint32_t>  m_lookup;
+        std::size_t                                     m_string_count{};
     };
 }
