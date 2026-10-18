@@ -1,0 +1,166 @@
+\doxysection{rasi::ir::IRVisitor\texorpdfstring{$<$}{<} Derived \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classrasi_1_1ir_1_1IRVisitor}{}\label{classrasi_1_1ir_1_1IRVisitor}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+
+
+CRTP base for mutable IR visitors. Derive from \doxylink{classrasi_1_1ir_1_1IRVisitor}{IRVisitor} to implement any IR traversal for static dispatch only. Only override the hooks you need, or they default to no ops.  
+
+
+
+
+{\ttfamily \+\#include $<$visitor.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a8cb34f07f43a7b268fc8247261c7d389}{visit\+\_\+module}} (\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule}{IRModule}} \&m)
+\begin{DoxyCompactList}\small\item\em Visit all functions in a module. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a61f24c780fdcefa8359ddf6506c2cc9e}{visit\+\_\+function}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&fn)
+\begin{DoxyCompactList}\small\item\em Visit a function and all of its blocks. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_ac6d4ee7faac7c3b24cbf53be3a0f1e39}{visit\+\_\+block}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&fn, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&b)
+\begin{DoxyCompactList}\small\item\em Visit a block and all of its instructions. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_ad1fb57d79c97a094c5bd2bd23f3be05c}{visit\+\_\+inst}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&fn, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&b, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&in)
+\begin{DoxyCompactList}\small\item\em Visit an instructions and all of its operands. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a067c752c49f067afecb5fcf45e0239f6}{on\+\_\+function}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&)
+\begin{DoxyCompactList}\small\item\em Hook called on entry to each function. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a28821bf7dcf60ff06073d228fe50d8fe}{on\+\_\+function\+\_\+end}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&)
+\begin{DoxyCompactList}\small\item\em Hook called on exit of each function. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a3c2977c6b25d1f0aa6209ddfe507afde}{on\+\_\+block}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&)
+\begin{DoxyCompactList}\small\item\em Hook called on entry to each block. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a284614262c53198f7717ff205b0fefad}{on\+\_\+block\+\_\+end}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&)
+\begin{DoxyCompactList}\small\item\em Hook called on exit of each block. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a89d1eb04749e2ebf28b8257aced2c349}{on\+\_\+inst}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&)
+\begin{DoxyCompactList}\small\item\em Hook called for each instruction before its operands. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_aff503ccee0e55249f04a26c6e93a53ca}{on\+\_\+operand}} (\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&, \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&, \doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{Value\+Ref}})
+\begin{DoxyCompactList}\small\item\em Hook called for each operand of an instruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived$>$\newline
+class rasi::\+ir::\+\+IRVisitor$<$ Derived $>$}
+CRTP base for mutable IR visitors. Derive from \doxylink{classrasi_1_1ir_1_1IRVisitor}{IRVisitor} to implement any IR traversal for static dispatch only. Only override the hooks you need, or they default to no ops. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & The deriving visitor type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{classrasi_1_1ir_1_1IRVisitor_doc-func-members}
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a3c2977c6b25d1f0aa6209ddfe507afde}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_block@{on\_block}}
+\index{on\_block@{on\_block}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_block()}{on\_block()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a3c2977c6b25d1f0aa6209ddfe507afde} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+block (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called on entry to each block. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a284614262c53198f7717ff205b0fefad}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_block\_end@{on\_block\_end}}
+\index{on\_block\_end@{on\_block\_end}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_block\_end()}{on\_block\_end()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a284614262c53198f7717ff205b0fefad} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+block\+\_\+end (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called on exit of each block. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a067c752c49f067afecb5fcf45e0239f6}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_function@{on\_function}}
+\index{on\_function@{on\_function}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_function()}{on\_function()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a067c752c49f067afecb5fcf45e0239f6} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+function (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called on entry to each function. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a28821bf7dcf60ff06073d228fe50d8fe}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_function\_end@{on\_function\_end}}
+\index{on\_function\_end@{on\_function\_end}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_function\_end()}{on\_function\_end()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a28821bf7dcf60ff06073d228fe50d8fe} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+function\+\_\+end (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called on exit of each function. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a89d1eb04749e2ebf28b8257aced2c349}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_inst@{on\_inst}}
+\index{on\_inst@{on\_inst}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_inst()}{on\_inst()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a89d1eb04749e2ebf28b8257aced2c349} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+inst (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called for each instruction before its operands. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_aff503ccee0e55249f04a26c6e93a53ca}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!on\_operand@{on\_operand}}
+\index{on\_operand@{on\_operand}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{on\_operand()}{on\_operand()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_aff503ccee0e55249f04a26c6e93a53ca} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+on\+\_\+operand (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&}]{}{, }\item[{\doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{Value\+Ref}}}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hook called for each operand of an instruction. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_ac6d4ee7faac7c3b24cbf53be3a0f1e39}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!visit\_block@{visit\_block}}
+\index{visit\_block@{visit\_block}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{visit\_block()}{visit\_block()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_ac6d4ee7faac7c3b24cbf53be3a0f1e39} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+visit\+\_\+block (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{fn}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visit a block and all of its instructions. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a61f24c780fdcefa8359ddf6506c2cc9e}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!visit\_function@{visit\_function}}
+\index{visit\_function@{visit\_function}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{visit\_function()}{visit\_function()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a61f24c780fdcefa8359ddf6506c2cc9e} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+visit\+\_\+function (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visit a function and all of its blocks. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_ad1fb57d79c97a094c5bd2bd23f3be05c}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!visit\_inst@{visit\_inst}}
+\index{visit\_inst@{visit\_inst}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{visit\_inst()}{visit\_inst()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_ad1fb57d79c97a094c5bd2bd23f3be05c} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+visit\+\_\+inst (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \&}]{fn}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}} \&}]{b}{, }\item[{\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}} \&}]{in}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visit an instructions and all of its operands. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRVisitor_a8cb34f07f43a7b268fc8247261c7d389}\index{rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}!visit\_module@{visit\_module}}
+\index{visit\_module@{visit\_module}!rasi::ir::IRVisitor$<$ Derived $>$@{rasi::ir::IRVisitor$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{visit\_module()}{visit\_module()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRVisitor_a8cb34f07f43a7b268fc8247261c7d389} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{rasi::\+ir::\+\+IRVisitor}}$<$ Derived $>$::\+visit\+\_\+module (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule}{IRModule}} \&}]{m}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Visit all functions in a module. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+ir/\doxymbox{\hyperlink{visitor_8hh}{visitor.\+hh}}\end{DoxyCompactItemize}

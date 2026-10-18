@@ -1,0 +1,144 @@
+\doxysection{rasi::ir::IRModule Class Reference}
+\hypertarget{classrasi_1_1ir_1_1IRModule}{}\label{classrasi_1_1ir_1_1IRModule}\index{rasi::ir::IRModule@{rasi::ir::IRModule}}
+
+
+A module which owns the arena and interned strings.  
+
+
+
+
+{\ttfamily \+\#include $<$module.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} (const std::\+size\+\_\+t arena\+\_\+size=\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a35fd6f4f0566269b443a9494d97be753}{support::\+\+Arena::\+default\+\_\+slab\+\_\+size}})
+\item 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17ed865036c24428904dc51a90b2207f}{IRModule}} (IRModule \&\&) noexcept=default
+\item 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \& \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a0639f3d88b68231d55497379464d257a}{operator=}} (\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \&\&) noexcept=default
+\item 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a810c53005b82ea86fbeb05f4f193f6d5}{IRModule}} (const IRModule \&)=delete
+\item 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \& \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a4c0e3eb30508770b1001b2dd9afe5b49}{operator=}} (const \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \&)=delete
+\item 
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ae412d48e2ba5981beeb1653b2c151b4e}{declare}} (const std::\+string\+\_\+view name, const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} ret, const std::\+span$<$ const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} $>$ params=\{\})
+\item 
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a372488a05508ebb417b717f2dea8b2da}{declare}} (const std::\+string\+\_\+view name, const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} ret, const std::\+initializer\+\_\+list$<$ const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} $>$ params=\{\})
+\item 
+std::\+pair$<$ \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref}}, std::\+string\+\_\+view $>$ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4}{intern}} (const std::\+string\+\_\+view sv)
+\begin{DoxyCompactList}\small\item\em Intern a string; returns a \doxylink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref} + view pair. \end{DoxyCompactList}\item 
+std::\+string\+\_\+view \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_adeb2c44bc5be1bf248dc17ec572c5adb}{string}} (\doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref}} ref) const noexcept
+\begin{DoxyCompactList}\small\item\em Resolve a \doxylink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref} to its string\+\_\+view. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_af0d38641f8773226061c6ff4c45bf26c}{get}} (const \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} ref) noexcept
+\item 
+const \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a972b5eddceb06f4cb950c4d52bd36739}{get}} (const \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} ref) const noexcept
+\item 
+std::\+span$<$ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*}const $>$ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a954da539ba69099a075ad5d6bc3ba61b}{functions}} () const noexcept
+\item 
+\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena}{support::\+\+Arena}} \& \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a8f840147517711b327125601d1ed307c}{arena}} () noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A module which owns the arena and interned strings. 
+
+\label{classrasi_1_1ir_1_1IRModule_doc-constructors}
+\Hypertarget{classrasi_1_1ir_1_1IRModule_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!IRModule@{IRModule}}
+\index{IRModule@{IRModule}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{IRModule()}{IRModule()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb} 
+rasi::\+ir::\+\+IRModule::\+\+IRModule (\begin{DoxyParamCaption}\item[{const std::\+size\+\_\+t}]{arena\+\_\+size}{ = {\ttfamily \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a35fd6f4f0566269b443a9494d97be753}{support::\+\+Arena::\+default\+\_\+slab\+\_\+size}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a17ed865036c24428904dc51a90b2207f}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!IRModule@{IRModule}}
+\index{IRModule@{IRModule}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{IRModule()}{IRModule()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a17ed865036c24428904dc51a90b2207f} 
+rasi::\+ir::\+\+IRModule::\+\+IRModule (\begin{DoxyParamCaption}\item[{IRModule \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a810c53005b82ea86fbeb05f4f193f6d5}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!IRModule@{IRModule}}
+\index{IRModule@{IRModule}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{IRModule()}{IRModule()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a810c53005b82ea86fbeb05f4f193f6d5} 
+rasi::\+ir::\+\+IRModule::\+\+IRModule (\begin{DoxyParamCaption}\item[{const IRModule \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\label{classrasi_1_1ir_1_1IRModule_doc-func-members}
+\Hypertarget{classrasi_1_1ir_1_1IRModule_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a8f840147517711b327125601d1ed307c}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!arena@{arena}}
+\index{arena@{arena}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{arena()}{arena()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a8f840147517711b327125601d1ed307c} 
+\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena}{support::\+\+Arena}} \& rasi::\+ir::\+\+IRModule::\+arena (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a372488a05508ebb417b717f2dea8b2da}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!declare@{declare}}
+\index{declare@{declare}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{declare()}{declare()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a372488a05508ebb417b717f2dea8b2da} 
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} rasi::\+ir::\+\+IRModule::\+declare (\begin{DoxyParamCaption}\item[{const std::\+string\+\_\+view}]{name}{, }\item[{const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}}}]{ret}{, }\item[{const std::\+initializer\+\_\+list$<$ const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} $>$}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_ae412d48e2ba5981beeb1653b2c151b4e}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!declare@{declare}}
+\index{declare@{declare}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{declare()}{declare()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_ae412d48e2ba5981beeb1653b2c151b4e} 
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} rasi::\+ir::\+\+IRModule::\+declare (\begin{DoxyParamCaption}\item[{const std::\+string\+\_\+view}]{name}{, }\item[{const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}}}]{ret}{, }\item[{const std::\+span$<$ const \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} $>$}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a954da539ba69099a075ad5d6bc3ba61b}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!functions@{functions}}
+\index{functions@{functions}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{functions()}{functions()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a954da539ba69099a075ad5d6bc3ba61b} 
+std::\+span$<$ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*}const  $>$ rasi::\+ir::\+\+IRModule::\+functions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a972b5eddceb06f4cb950c4d52bd36739}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!get@{get}}
+\index{get@{get}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a972b5eddceb06f4cb950c4d52bd36739} 
+const \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*} rasi::\+ir::\+\+IRModule::\+get (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}}}]{ref}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_af0d38641f8773226061c6ff4c45bf26c}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!get@{get}}
+\index{get@{get}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_af0d38641f8773226061c6ff4c45bf26c} 
+\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}} \texorpdfstring{$\ast$}{*} rasi::\+ir::\+\+IRModule::\+get (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}}}]{ref}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!intern@{intern}}
+\index{intern@{intern}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{intern()}{intern()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4} 
+std::\+pair$<$ \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref}}, std::\+string\+\_\+view $>$ rasi::\+ir::\+\+IRModule::\+intern (\begin{DoxyParamCaption}\item[{const std::\+string\+\_\+view}]{sv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Intern a string; returns a \doxylink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref} + view pair. 
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a4c0e3eb30508770b1001b2dd9afe5b49}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!operator=@{operator=}}
+\index{operator=@{operator=}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a4c0e3eb30508770b1001b2dd9afe5b49} 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \& rasi::\+ir::\+\+IRModule::\+operator= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_a0639f3d88b68231d55497379464d257a}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!operator=@{operator=}}
+\index{operator=@{operator=}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_a0639f3d88b68231d55497379464d257a} 
+\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \& rasi::\+ir::\+\+IRModule::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classrasi_1_1ir_1_1IRModule_adeb2c44bc5be1bf248dc17ec572c5adb}\index{rasi::ir::IRModule@{rasi::ir::IRModule}!string@{string}}
+\index{string@{string}!rasi::ir::IRModule@{rasi::ir::IRModule}}
+\doxysubsubsection{\texorpdfstring{string()}{string()}}
+{\footnotesize\ttfamily \label{classrasi_1_1ir_1_1IRModule_adeb2c44bc5be1bf248dc17ec572c5adb} 
+std::\+string\+\_\+view rasi::\+ir::\+\+IRModule::\+string (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref}}}]{ref}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Resolve a \doxylink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref} to its string\+\_\+view. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+ir/\doxymbox{\hyperlink{module_8hh}{module.\+hh}}\end{DoxyCompactItemize}

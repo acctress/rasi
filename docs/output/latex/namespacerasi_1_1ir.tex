@@ -1,0 +1,335 @@
+\doxysection{rasi::ir Namespace Reference}
+\hypertarget{namespacerasi_1_1ir}{}\label{namespacerasi_1_1ir}\index{rasi::ir@{rasi::ir}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{IRBlock}}
+\begin{DoxyCompactList}\small\item\em A basic block in IR CFG. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRBuilder}{IRBuilder}}
+\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}}
+\begin{DoxyCompactList}\small\item\em Owns flat pools for one IR function,. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{IRInst}}
+\begin{DoxyCompactList}\small\item\em A single IR instruction in SSA form. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule}{IRModule}}
+\begin{DoxyCompactList}\small\item\em A module which owns the arena and interned strings. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRSig}{IRSig}}
+\begin{DoxyCompactList}\small\item\em Function signature. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRVerifier}{IRVerifier}}
+\begin{DoxyCompactList}\small\item\em Validates invariants structural of finalised IR. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{IRVisitor}}
+\begin{DoxyCompactList}\small\item\em CRTP base for mutable IR visitors. Derive from \doxylink{classrasi_1_1ir_1_1IRVisitor}{IRVisitor} to implement any IR traversal for static dispatch only. Only override the hooks you need, or they default to no ops. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}
+\begin{DoxyCompactList}\small\item\em A typed opaque index into an arena allocated IR table. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1ir_1_1Value}{Value}}
+\begin{DoxyCompactList}\small\item\em A single SSA value, holds its type and instruction ref which owns this value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{Value\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Value\+Tag$>$
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_add7dc92e75c0bdac6fc8e2b8b7a2bd27}{Block\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Block\+Tag$>$
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_ab59f1b9c8e35f63cc0860aad5b43930b}{Inst\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Inst\+Tag$>$
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{String\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct String\+Tag$>$
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{Function\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Function\+Tag$>$
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a7713d6100522af6a9b6fff983b3cc8b3}{Imm\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Imm\+Tag$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9c}{IROp}} \{ \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cad1d8c8867e00b97730133c8d89904508}{iconst}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca26492ed3ca1d3e998caa8e1392d161db}{iadd}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cade0e50f33dfe589aef2e02dcef8eb587}{isub}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca5ec8e69aa795aa3ba9d576b2101bb378}{imul}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca629b59f0a37e8082977e122f50445a1d}{idiv}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca1249ce19ef6180e143506b5287be8a7a}{icmp}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cadc634e2072827fe0b5be9a2063390544}{br}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9caade2f43ecd49341c7a1934e0dd9293bf}{brif}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca2cb9df9898e55fd0ad829dc202ddbd1c}{ret}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca53b9e9679a8ea25880376080b76f98ad}{call}}
+ \}
+\begin{DoxyCompactList}\small\item\em An enum of all IR instruction opcodes. \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560ac}{ICmp\+CC}} : uint8\+\_\+t \{ \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acadf22f17124884fc51f1ac69d610096ac}{eq}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acad4f917633649a3c47c7ab917fa990146}{ne}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca926435b4224ee910519100e761c58ba3}{slt}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acaaa7c2f8b74458aeae4e388c376197581}{sle}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca1ec1d0cd6f4a399c948f847d63a10c9e}{sgt}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca2a2ab400d355ac301859e4abb5432138}{sge}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca3c19c5dd9d58ca90ab5654b8a519b179}{ult}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca76cf56920355319ad148e25a340b0f18}{ule}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca46e4f6f9feb1d86bba749d5f30aa4e33}{ugt}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca4eb31516a4986c34fa297e5e5f4045a9}{uge}}
+ \}
+\begin{DoxyCompactList}\small\item\em Condition kinds for icmp. \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}} : uint8\+\_\+t \{ \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a5a32061159a30eeebb309052be870e00}{i8}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a2655f23011f3fe4c7c3d757d37d5f9a5}{i16}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0af89edb52b075b8bd95989bd3d0a04c0a}{i32}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0add1d26230d15c93e8fbdba07b0299a44}{i64}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a512dc597be7ae761876315165dc8bd2e}{f32}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a714b98e0a797e8f119f257a4ab802f86}{f64}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a4d9ad2b37053671b594b237bd061b3f2}{ptr}}
+, \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a3e34bdebd9bd5edda27e8728904a2552}{unit}}
+ \}
+\begin{DoxyCompactList}\small\item\em All of rasi\textquotesingle{}s data types which are representable in the IR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{namespacerasi_1_1ir_doc-typedef-members}
+\Hypertarget{namespacerasi_1_1ir_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacerasi_1_1ir_add7dc92e75c0bdac6fc8e2b8b7a2bd27}\index{rasi::ir@{rasi::ir}!BlockRef@{BlockRef}}
+\index{BlockRef@{BlockRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{BlockRef}{BlockRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_add7dc92e75c0bdac6fc8e2b8b7a2bd27} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_add7dc92e75c0bdac6fc8e2b8b7a2bd27}{rasi::\+ir::\+\+Block\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Block\+Tag$>$}
+
+\Hypertarget{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}\index{rasi::ir@{rasi::ir}!FunctionRef@{FunctionRef}}
+\index{FunctionRef@{FunctionRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{FunctionRef}{FunctionRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{rasi::\+ir::\+\+Function\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Function\+Tag$>$}
+
+\Hypertarget{namespacerasi_1_1ir_a7713d6100522af6a9b6fff983b3cc8b3}\index{rasi::ir@{rasi::ir}!ImmRef@{ImmRef}}
+\index{ImmRef@{ImmRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{ImmRef}{ImmRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_a7713d6100522af6a9b6fff983b3cc8b3} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a7713d6100522af6a9b6fff983b3cc8b3}{rasi::\+ir::\+\+Imm\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Imm\+Tag$>$}
+
+\Hypertarget{namespacerasi_1_1ir_ab59f1b9c8e35f63cc0860aad5b43930b}\index{rasi::ir@{rasi::ir}!InstRef@{InstRef}}
+\index{InstRef@{InstRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{InstRef}{InstRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_ab59f1b9c8e35f63cc0860aad5b43930b} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_ab59f1b9c8e35f63cc0860aad5b43930b}{rasi::\+ir::\+\+Inst\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Inst\+Tag$>$}
+
+\Hypertarget{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}\index{rasi::ir@{rasi::ir}!StringRef@{StringRef}}
+\index{StringRef@{StringRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{StringRef}{StringRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{rasi::\+ir::\+\+String\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct String\+Tag$>$}
+
+\Hypertarget{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}\index{rasi::ir@{rasi::ir}!ValueRef@{ValueRef}}
+\index{ValueRef@{ValueRef}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{ValueRef}{ValueRef}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74} 
+using \doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{rasi::\+ir::\+\+Value\+Ref}} = \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}$<$struct Value\+Tag$>$}
+
+
+
+\label{namespacerasi_1_1ir_doc-enum-members}
+\Hypertarget{namespacerasi_1_1ir_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560ac}\index{rasi::ir@{rasi::ir}!ICmpCC@{ICmpCC}}
+\index{ICmpCC@{ICmpCC}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{ICmpCC}{ICmpCC}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560ac} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560ac}{rasi::\+ir::\+\+ICmp\+CC}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Condition kinds for icmp. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{eq@{eq}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!eq@{eq}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acadf22f17124884fc51f1ac69d610096ac}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acadf22f17124884fc51f1ac69d610096ac} 
+eq&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ne@{ne}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ne@{ne}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acad4f917633649a3c47c7ab917fa990146}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acad4f917633649a3c47c7ab917fa990146} 
+ne&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{slt@{slt}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!slt@{slt}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca926435b4224ee910519100e761c58ba3}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca926435b4224ee910519100e761c58ba3} 
+slt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sle@{sle}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!sle@{sle}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acaaa7c2f8b74458aeae4e388c376197581}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560acaaa7c2f8b74458aeae4e388c376197581} 
+sle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sgt@{sgt}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!sgt@{sgt}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca1ec1d0cd6f4a399c948f847d63a10c9e}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca1ec1d0cd6f4a399c948f847d63a10c9e} 
+sgt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sge@{sge}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!sge@{sge}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca2a2ab400d355ac301859e4abb5432138}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca2a2ab400d355ac301859e4abb5432138} 
+sge&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ult@{ult}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ult@{ult}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca3c19c5dd9d58ca90ab5654b8a519b179}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca3c19c5dd9d58ca90ab5654b8a519b179} 
+ult&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ule@{ule}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ule@{ule}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca76cf56920355319ad148e25a340b0f18}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca76cf56920355319ad148e25a340b0f18} 
+ule&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ugt@{ugt}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ugt@{ugt}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca46e4f6f9feb1d86bba749d5f30aa4e33}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca46e4f6f9feb1d86bba749d5f30aa4e33} 
+ugt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{uge@{uge}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!uge@{uge}}
+}\Hypertarget{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca4eb31516a4986c34fa297e5e5f4045a9}\label{namespacerasi_1_1ir_a1aa2111ad1aacc7e26473d3007e560aca4eb31516a4986c34fa297e5e5f4045a9} 
+uge&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9c}\index{rasi::ir@{rasi::ir}!IROp@{IROp}}
+\index{IROp@{IROp}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{IROp}{IROp}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9c} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9c}{rasi::\+ir::\+\+IROp}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+An enum of all IR instruction opcodes. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{iconst@{iconst}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!iconst@{iconst}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cad1d8c8867e00b97730133c8d89904508}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cad1d8c8867e00b97730133c8d89904508} 
+iconst&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{iadd@{iadd}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!iadd@{iadd}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca26492ed3ca1d3e998caa8e1392d161db}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca26492ed3ca1d3e998caa8e1392d161db} 
+iadd&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{isub@{isub}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!isub@{isub}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cade0e50f33dfe589aef2e02dcef8eb587}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cade0e50f33dfe589aef2e02dcef8eb587} 
+isub&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{imul@{imul}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!imul@{imul}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca5ec8e69aa795aa3ba9d576b2101bb378}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca5ec8e69aa795aa3ba9d576b2101bb378} 
+imul&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{idiv@{idiv}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!idiv@{idiv}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca629b59f0a37e8082977e122f50445a1d}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca629b59f0a37e8082977e122f50445a1d} 
+idiv&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{icmp@{icmp}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!icmp@{icmp}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca1249ce19ef6180e143506b5287be8a7a}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca1249ce19ef6180e143506b5287be8a7a} 
+icmp&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{br@{br}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!br@{br}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cadc634e2072827fe0b5be9a2063390544}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9cadc634e2072827fe0b5be9a2063390544} 
+br&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{brif@{brif}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!brif@{brif}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9caade2f43ecd49341c7a1934e0dd9293bf}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9caade2f43ecd49341c7a1934e0dd9293bf} 
+brif&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ret@{ret}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ret@{ret}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca2cb9df9898e55fd0ad829dc202ddbd1c}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca2cb9df9898e55fd0ad829dc202ddbd1c} 
+ret&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{call@{call}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!call@{call}}
+}\Hypertarget{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca53b9e9679a8ea25880376080b76f98ad}\label{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9ca53b9e9679a8ea25880376080b76f98ad} 
+call&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}\index{rasi::ir@{rasi::ir}!Type@{Type}}
+\index{Type@{Type}!rasi::ir@{rasi::ir}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{rasi::\+ir::\+\+Type}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+All of rasi\textquotesingle{}s data types which are representable in the IR. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i8@{i8}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!i8@{i8}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a5a32061159a30eeebb309052be870e00}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a5a32061159a30eeebb309052be870e00} 
+i8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i16@{i16}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!i16@{i16}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a2655f23011f3fe4c7c3d757d37d5f9a5}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a2655f23011f3fe4c7c3d757d37d5f9a5} 
+i16&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i32@{i32}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!i32@{i32}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0af89edb52b075b8bd95989bd3d0a04c0a}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0af89edb52b075b8bd95989bd3d0a04c0a} 
+i32&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{i64@{i64}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!i64@{i64}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0add1d26230d15c93e8fbdba07b0299a44}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0add1d26230d15c93e8fbdba07b0299a44} 
+i64&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{f32@{f32}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!f32@{f32}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a512dc597be7ae761876315165dc8bd2e}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a512dc597be7ae761876315165dc8bd2e} 
+f32&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{f64@{f64}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!f64@{f64}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a714b98e0a797e8f119f257a4ab802f86}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a714b98e0a797e8f119f257a4ab802f86} 
+f64&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ptr@{ptr}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!ptr@{ptr}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a4d9ad2b37053671b594b237bd061b3f2}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a4d9ad2b37053671b594b237bd061b3f2} 
+ptr&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{unit@{unit}!rasi::ir@{rasi::ir}}
+\index{rasi::ir@{rasi::ir}!unit@{unit}}
+}\Hypertarget{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a3e34bdebd9bd5edda27e8728904a2552}\label{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a3e34bdebd9bd5edda27e8728904a2552} 
+unit&\\
+\hline
+
+\end{DoxyEnumFields}

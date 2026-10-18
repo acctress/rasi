@@ -1,0 +1,318 @@
+\doxysection{rasi::x86\+\_\+64 Namespace Reference}
+\hypertarget{namespacerasi_1_1x86__64}{}\label{namespacerasi_1_1x86__64}\index{rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1AddressMode}{Address\+Mode}}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} memory addressing mode \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632}{CC}} : uint8\+\_\+t \{ \newline
+\doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a3a3ea00cfc35332cedf6e5e9a32e94da}{E}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adc33066c3993e0d50896e533fd692ce0}{NE}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad20caec3b48a1eef164cb4ca81ba2587}{L}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632acfe6055d2e0503be378bb63449ec7ba6}{LE}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adfcf28d0734569a6a693bc8194de62bf}{G}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632af803729628adf4199f224c2a225038e9}{GE}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a9d5ed678fe57bcca610140957afab571}{B}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad3dcf429c679f9af82eb9a3b31c4df44}{BE}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a7fc56270e7a70fa81a5935b72eacbe29}{A}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632aea8a1a99f6c94c275a58dcd78f418c1f}{AE}}
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} condition codes \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2}{Alu\+Op}} : uint8\+\_\+t \{ \newline
+\doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2aec211f7c20af43e742bf2570c3cb84f9}{Add}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ae80155eceb940c89e2de63ad05868db2}{Sub}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a62b6d55816cf737bfc6f42e60df1a3f2}{Mul}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac33315685a0cba3ce53be378b3c7874b}{And}}
+, \newline
+\doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a3a2d5fe857d8f9541136a124c2edec6c}{Or}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a76feb79109026728a20736a8c6504548}{Xor}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac9b4c62f6dc1bc5caf3c768b687cbf7e}{Cmp}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a0cbc6611f5540bd0809a388dc95a615b}{Test}}
+ \}
+\begin{DoxyCompactList}\small\item\em ALU op kind. \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06}{Operand\+Size}} : uint8\+\_\+t \{ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aafb0fced528eaac5fe170b763cda5975}{S8}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a6e0b0886efb94aec797f6b830329b72c}{S16}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aa1e28eee0339658d39a8b4d325b56e9c}{S32}}
+, \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a115dca124dc6423c7a400b8a8a0270cc}{S64}}
+ \}
+\begin{DoxyCompactList}\small\item\em Operand size for sign or zero extending moves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ac6396c8dac84b4fdaba4d07a8cd75190}{get\+\_\+operands}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst, std::\+vector$<$ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachOperand}{codegen::\+\+Mach\+Operand}} $>$ \&ops)
+\begin{DoxyCompactList}\small\item\em Collect Mach\+Operands from an \doxylink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst} for the register allocator. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae1c326196c63a2f5f5d9b6d4c40fa23e}{is\+\_\+terminator}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst) noexcept
+\begin{DoxyCompactList}\small\item\em True if this instruction ends a basic block. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af12c7dd69630545412d843b56a6a344d}{is\+\_\+branch}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst) noexcept
+\begin{DoxyCompactList}\small\item\em True if this instruction is a branch. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ba7e8ae91555f85e5a87b946d9935a8}{is\+\_\+move}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst) noexcept
+\begin{DoxyCompactList}\small\item\em True if this is a pure register to register move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{namespacerasi_1_1x86__64_doc-typedef-members}
+\Hypertarget{namespacerasi_1_1x86__64_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}\index{rasi::x86\_64@{rasi::x86\_64}!X86Inst@{X86Inst}}
+\index{X86Inst@{X86Inst}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{X86Inst}{X86Inst}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01} 
+using \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{rasi::\+x86\+\_\+64::\+\+X86\+Inst}}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::variant<}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Alu}{inst::Alu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1AluImm}{inst::AluImm}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Mov}{inst::Mov}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovImm}{inst::MovImm}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovLoad}{inst::MovLoad}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovStore}{inst::MovStore}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Movzx}{inst::Movzx}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Movsx}{inst::Movsx}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Cdq}{inst::Cdq}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Div}{inst::Div}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Idiv}{inst::Idiv}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Push}{inst::Push}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Pop}{inst::Pop}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1LeaFrame}{inst::LeaFrame}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1SetCC}{inst::SetCC}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Jmp}{inst::Jmp}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Jcc}{inst::Jcc}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Call}{inst::Call}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Ret}{inst::Ret}}}
+\DoxyCodeLine{\ \ \ >}
+
+\end{DoxyCode}
+
+
+\label{namespacerasi_1_1x86__64_doc-enum-members}
+\Hypertarget{namespacerasi_1_1x86__64_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2}\index{rasi::x86\_64@{rasi::x86\_64}!AluOp@{AluOp}}
+\index{AluOp@{AluOp}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{AluOp}{AluOp}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2}{rasi::\+x86\+\_\+64::\+\+Alu\+Op}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+ALU op kind. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Add@{Add}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Add@{Add}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2aec211f7c20af43e742bf2570c3cb84f9}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2aec211f7c20af43e742bf2570c3cb84f9} 
+Add&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sub@{Sub}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Sub@{Sub}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ae80155eceb940c89e2de63ad05868db2}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ae80155eceb940c89e2de63ad05868db2} 
+Sub&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mul@{Mul}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Mul@{Mul}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a62b6d55816cf737bfc6f42e60df1a3f2}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a62b6d55816cf737bfc6f42e60df1a3f2} 
+Mul&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{And@{And}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!And@{And}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac33315685a0cba3ce53be378b3c7874b}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac33315685a0cba3ce53be378b3c7874b} 
+And&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Or@{Or}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Or@{Or}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a3a2d5fe857d8f9541136a124c2edec6c}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a3a2d5fe857d8f9541136a124c2edec6c} 
+Or&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Xor@{Xor}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Xor@{Xor}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a76feb79109026728a20736a8c6504548}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a76feb79109026728a20736a8c6504548} 
+Xor&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Cmp@{Cmp}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Cmp@{Cmp}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac9b4c62f6dc1bc5caf3c768b687cbf7e}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ac9b4c62f6dc1bc5caf3c768b687cbf7e} 
+Cmp&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Test@{Test}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!Test@{Test}}
+}\Hypertarget{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a0cbc6611f5540bd0809a388dc95a615b}\label{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a0cbc6611f5540bd0809a388dc95a615b} 
+Test&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632}\index{rasi::x86\_64@{rasi::x86\_64}!CC@{CC}}
+\index{CC@{CC}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{CC}{CC}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632}{rasi::\+x86\+\_\+64::\+\+CC}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} condition codes 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E@{E}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!E@{E}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a3a3ea00cfc35332cedf6e5e9a32e94da}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a3a3ea00cfc35332cedf6e5e9a32e94da} 
+E&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NE@{NE}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!NE@{NE}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adc33066c3993e0d50896e533fd692ce0}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adc33066c3993e0d50896e533fd692ce0} 
+NE&Equal, ZF=1. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L@{L}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!L@{L}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad20caec3b48a1eef164cb4ca81ba2587}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad20caec3b48a1eef164cb4ca81ba2587} 
+L&Not equal, ZF=0. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LE@{LE}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!LE@{LE}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632acfe6055d2e0503be378bb63449ec7ba6}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632acfe6055d2e0503be378bb63449ec7ba6} 
+LE&Less, signed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G@{G}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!G@{G}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adfcf28d0734569a6a693bc8194de62bf}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632adfcf28d0734569a6a693bc8194de62bf} 
+G&Less or equal, signed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GE@{GE}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!GE@{GE}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632af803729628adf4199f224c2a225038e9}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632af803729628adf4199f224c2a225038e9} 
+GE&Greater, signed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B@{B}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!B@{B}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a9d5ed678fe57bcca610140957afab571}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a9d5ed678fe57bcca610140957afab571} 
+B&Greater or equal, signed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BE@{BE}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!BE@{BE}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad3dcf429c679f9af82eb9a3b31c4df44}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632ad3dcf429c679f9af82eb9a3b31c4df44} 
+BE&Below, unsigned. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A@{A}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!A@{A}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a7fc56270e7a70fa81a5935b72eacbe29}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632a7fc56270e7a70fa81a5935b72eacbe29} 
+A&Below or equal, unsigned. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AE@{AE}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!AE@{AE}}
+}\Hypertarget{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632aea8a1a99f6c94c275a58dcd78f418c1f}\label{namespacerasi_1_1x86__64_ab38f0d3d99b5502729ab0cc3e6c55632aea8a1a99f6c94c275a58dcd78f418c1f} 
+AE&Above, unsigned. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06}\index{rasi::x86\_64@{rasi::x86\_64}!OperandSize@{OperandSize}}
+\index{OperandSize@{OperandSize}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{OperandSize}{OperandSize}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06}{rasi::\+x86\+\_\+64::\+\+Operand\+Size}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Operand size for sign or zero extending moves. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S8@{S8}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!S8@{S8}}
+}\Hypertarget{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aafb0fced528eaac5fe170b763cda5975}\label{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aafb0fced528eaac5fe170b763cda5975} 
+S8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S16@{S16}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!S16@{S16}}
+}\Hypertarget{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a6e0b0886efb94aec797f6b830329b72c}\label{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a6e0b0886efb94aec797f6b830329b72c} 
+S16&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S32@{S32}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!S32@{S32}}
+}\Hypertarget{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aa1e28eee0339658d39a8b4d325b56e9c}\label{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aa1e28eee0339658d39a8b4d325b56e9c} 
+S32&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S64@{S64}!rasi::x86\_64@{rasi::x86\_64}}
+\index{rasi::x86\_64@{rasi::x86\_64}!S64@{S64}}
+}\Hypertarget{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a115dca124dc6423c7a400b8a8a0270cc}\label{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a115dca124dc6423c7a400b8a8a0270cc} 
+S64&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{namespacerasi_1_1x86__64_doc-func-members}
+\Hypertarget{namespacerasi_1_1x86__64_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacerasi_1_1x86__64_ac6396c8dac84b4fdaba4d07a8cd75190}\index{rasi::x86\_64@{rasi::x86\_64}!get\_operands@{get\_operands}}
+\index{get\_operands@{get\_operands}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{get\_operands()}{get\_operands()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ac6396c8dac84b4fdaba4d07a8cd75190} 
+void rasi::\+x86\+\_\+64::\+get\+\_\+operands (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&}]{inst}{, }\item[{std::\+vector$<$ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachOperand}{codegen::\+\+Mach\+Operand}} $>$ \&}]{ops}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Collect Mach\+Operands from an \doxylink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst} for the register allocator. 
+
+\Hypertarget{namespacerasi_1_1x86__64_af12c7dd69630545412d843b56a6a344d}\index{rasi::x86\_64@{rasi::x86\_64}!is\_branch@{is\_branch}}
+\index{is\_branch@{is\_branch}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{is\_branch()}{is\_branch()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_af12c7dd69630545412d843b56a6a344d} 
+bool rasi::\+x86\+\_\+64::\+is\+\_\+branch (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&}]{inst}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this instruction is a branch. 
+
+\Hypertarget{namespacerasi_1_1x86__64_a5ba7e8ae91555f85e5a87b946d9935a8}\index{rasi::x86\_64@{rasi::x86\_64}!is\_move@{is\_move}}
+\index{is\_move@{is\_move}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{is\_move()}{is\_move()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a5ba7e8ae91555f85e5a87b946d9935a8} 
+bool rasi::\+x86\+\_\+64::\+is\+\_\+move (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&}]{inst}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this is a pure register to register move. 
+
+\Hypertarget{namespacerasi_1_1x86__64_ae1c326196c63a2f5f5d9b6d4c40fa23e}\index{rasi::x86\_64@{rasi::x86\_64}!is\_terminator@{is\_terminator}}
+\index{is\_terminator@{is\_terminator}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{is\_terminator()}{is\_terminator()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ae1c326196c63a2f5f5d9b6d4c40fa23e} 
+bool rasi::\+x86\+\_\+64::\+is\+\_\+terminator (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&}]{inst}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this instruction ends a basic block. 
+

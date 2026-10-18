@@ -1,0 +1,34 @@
+\doxysection{refs.\+hh}
+\hypertarget{refs_8hh_source}{}\label{refs_8hh_source}\index{include/rasi/ir/refs.hh@{include/rasi/ir/refs.hh}}
+\doxymbox{\hyperlink{refs_8hh}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ griffith\ on\ 17/10/2026.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1ir}{rasi::ir}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Tag>}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref}}\ \{\ uint32\_t\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref_a649cc7eaaa2560123bb1282473eb4231}{id}};\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{ValueRef}}\ \ \ \ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ ValueTag>}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_add7dc92e75c0bdac6fc8e2b8b7a2bd27}{BlockRef}}\ \ \ \ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ BlockTag>}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_ab59f1b9c8e35f63cc0860aad5b43930b}{InstRef}}\ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ InstTag>}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{StringRef}}\ \ \ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ StringTag>}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ FunctionTag>}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacerasi_1_1ir_a7713d6100522af6a9b6fff983b3cc8b3}{ImmRef}}\ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{Ref<struct\ ImmTag>}};}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Tag>}
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }std::formatter<\doxymbox{\hyperlink{namespacerasi}{rasi}}::ir::Ref<Tag>>\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{structstd_1_1formatter_3_01rasi_1_1ir_1_1Ref_3_01Tag_01_4_01_4_a04e9fcff3c876c1d3dd4721cb574366b}{parse}}(\textcolor{keyword}{auto}\&\ ctx)\ \{\ \textcolor{keywordflow}{return}\ ctx.begin();\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{structstd_1_1formatter_3_01rasi_1_1ir_1_1Ref_3_01Tag_01_4_01_4_a8c655d2890389ae187c45c87031e7f6c}{format}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref}{rasi::ir::Ref<Tag>}}\ r,\ \textcolor{keyword}{auto}\&\ ctx)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::format\_to(ctx.out(),\ \textcolor{stringliteral}{"{}\{\}"{}},\ r.\doxymbox{\hyperlink{structrasi_1_1ir_1_1Ref_a649cc7eaaa2560123bb1282473eb4231}{id}});}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \};}
+
+\end{DoxyCode}

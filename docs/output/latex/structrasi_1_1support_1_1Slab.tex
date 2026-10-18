@@ -1,0 +1,80 @@
+\doxysection{rasi::support::Slab Struct Reference}
+\hypertarget{structrasi_1_1support_1_1Slab}{}\label{structrasi_1_1support_1_1Slab}\index{rasi::support::Slab@{rasi::support::Slab}}
+
+
+Heap allocated slab of memory, tracked bump pointer.  
+
+
+
+
+{\ttfamily \+\#include $<$arena.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a1af663880ff29c228a2e114306e49859}{Slab}} (const std::\+size\+\_\+t size)
+\item 
+std::\+size\+\_\+t \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_af3a57d0a4849e85661e68511f1dedc74}{remaining}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+unique\+\_\+ptr$<$ std::\+byte\+[$\,$]\+$>$ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}{data}}
+\item 
+std::\+byte \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4}{cursor}}
+\item 
+std::\+byte \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82}{end}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Heap allocated slab of memory, tracked bump pointer. 
+
+\label{structrasi_1_1support_1_1Slab_doc-constructors}
+\Hypertarget{structrasi_1_1support_1_1Slab_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structrasi_1_1support_1_1Slab_a1af663880ff29c228a2e114306e49859}\index{rasi::support::Slab@{rasi::support::Slab}!Slab@{Slab}}
+\index{Slab@{Slab}!rasi::support::Slab@{rasi::support::Slab}}
+\doxysubsubsection{\texorpdfstring{Slab()}{Slab()}}
+{\footnotesize\ttfamily \label{structrasi_1_1support_1_1Slab_a1af663880ff29c228a2e114306e49859} 
+rasi::\+support::\+\+Slab::\+\+Slab (\begin{DoxyParamCaption}\item[{const std::\+size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{structrasi_1_1support_1_1Slab_doc-func-members}
+\Hypertarget{structrasi_1_1support_1_1Slab_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structrasi_1_1support_1_1Slab_af3a57d0a4849e85661e68511f1dedc74}\index{rasi::support::Slab@{rasi::support::Slab}!remaining@{remaining}}
+\index{remaining@{remaining}!rasi::support::Slab@{rasi::support::Slab}}
+\doxysubsubsection{\texorpdfstring{remaining()}{remaining()}}
+{\footnotesize\ttfamily \label{structrasi_1_1support_1_1Slab_af3a57d0a4849e85661e68511f1dedc74} 
+std::\+size\+\_\+t rasi::\+support::\+\+Slab::\+remaining (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+\label{structrasi_1_1support_1_1Slab_doc-variable-members}
+\Hypertarget{structrasi_1_1support_1_1Slab_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4}\index{rasi::support::Slab@{rasi::support::Slab}!cursor@{cursor}}
+\index{cursor@{cursor}!rasi::support::Slab@{rasi::support::Slab}}
+\doxysubsubsection{\texorpdfstring{cursor}{cursor}}
+{\footnotesize\ttfamily \label{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4} 
+std::\+byte\texorpdfstring{$\ast$}{*} rasi::\+support::\+\+Slab::\+cursor}
+
+\Hypertarget{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}\index{rasi::support::Slab@{rasi::support::Slab}!data@{data}}
+\index{data@{data}!rasi::support::Slab@{rasi::support::Slab}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01} 
+std::\+unique\+\_\+ptr$<$std::\+byte\+[$\,$]\+$>$ rasi::\+support::\+\+Slab::\+data}
+
+\Hypertarget{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82}\index{rasi::support::Slab@{rasi::support::Slab}!end@{end}}
+\index{end@{end}!rasi::support::Slab@{rasi::support::Slab}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily \label{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82} 
+std::\+byte\texorpdfstring{$\ast$}{*} rasi::\+support::\+\+Slab::\+end}
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+support/\doxymbox{\hyperlink{arena_8hh}{arena.\+hh}}\end{DoxyCompactItemize}

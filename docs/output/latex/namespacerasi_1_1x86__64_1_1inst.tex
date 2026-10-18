@@ -1,0 +1,43 @@
+\doxysection{rasi::x86\+\_\+64::inst Namespace Reference}
+\hypertarget{namespacerasi_1_1x86__64_1_1inst}{}\label{namespacerasi_1_1x86__64_1_1inst}\index{rasi::x86\_64::inst@{rasi::x86\_64::inst}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Alu}{Alu}}
+\begin{DoxyCompactList}\small\item\em reg/\+reg ALU: dst op= src \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1AluImm}{Alu\+Imm}}
+\begin{DoxyCompactList}\small\item\em reg/\+imm ALU: dst op= imm \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Mov}{Mov}}
+\begin{DoxyCompactList}\small\item\em Register to register move. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovImm}{Mov\+Imm}}
+\begin{DoxyCompactList}\small\item\em Load 64bit immediate into register. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovLoad}{Mov\+Load}}
+\begin{DoxyCompactList}\small\item\em Load from memory into register. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1MovStore}{Mov\+Store}}
+\begin{DoxyCompactList}\small\item\em Store register into memory. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Movzx}{Movzx}}
+\begin{DoxyCompactList}\small\item\em Zero extending move. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Movsx}{Movsx}}
+\begin{DoxyCompactList}\small\item\em Sign extending move. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Cdq}{Cdq}}
+\begin{DoxyCompactList}\small\item\em Sign extend rax into rdx:rax. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Div}{Div}}
+\begin{DoxyCompactList}\small\item\em Unsigned division: rax / src -\/\texorpdfstring{$>$}{>} rax (quotient), rdx (remainder). \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Idiv}{Idiv}}
+\begin{DoxyCompactList}\small\item\em Signed division: rax / src -\/\texorpdfstring{$>$}{>} rax (quotient), rdx (remainder). \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Push}{Push}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structrasi_1_1x86__64_1_1inst_1_1Push}{Push} register onto stack. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Pop}{Pop}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structrasi_1_1x86__64_1_1inst_1_1Pop}{Pop} stack into register. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1LeaFrame}{Lea\+Frame}}
+\begin{DoxyCompactList}\small\item\em Load effective address of a frame slot into a register. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1SetCC}{Set\+CC}}
+\begin{DoxyCompactList}\small\item\em Set byte register from condition code. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Jmp}{Jmp}}
+\begin{DoxyCompactList}\small\item\em Unconditional jump to a block. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Jcc}{Jcc}}
+\begin{DoxyCompactList}\small\item\em Conditional jump to a block. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Call}{Call}}
+\begin{DoxyCompactList}\small\item\em Direct call to a function by id. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1inst_1_1Ret}{Ret}}
+\begin{DoxyCompactList}\small\item\em Return from function. \end{DoxyCompactList}\end{DoxyCompactItemize}

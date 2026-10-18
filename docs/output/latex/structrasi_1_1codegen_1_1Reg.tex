@@ -1,0 +1,137 @@
+\doxysection{rasi::codegen::Reg Struct Reference}
+\hypertarget{structrasi_1_1codegen_1_1Reg}{}\label{structrasi_1_1codegen_1_1Reg}\index{rasi::codegen::Reg@{rasi::codegen::Reg}}
+
+
+A register, either physical or virtual.  
+
+
+
+
+{\ttfamily \+\#include $<$reg.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr bool \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a1a56fc01ab7bf1bba42137dd456acf80}{is\+\_\+physical}} () const noexcept
+\item 
+constexpr bool \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a8fe2d69acf580e70e6fe80f95b882986}{is\+\_\+virtual}} () const noexcept
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a2e0207bdf38d4697fdf67d4009f3b750}{as\+\_\+vreg}} () const noexcept
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a31d15eee49664f686db29f9014539f69}{as\+\_\+preg}} () const noexcept
+\item 
+constexpr \doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a4af8e1eba1f106fa02ce18a9bb4beab9}{rc}} () const noexcept
+\item 
+constexpr bool \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a0a0db4aa0832dbb67446b5b63829e91c}{valid}} () const noexcept
+\item 
+constexpr bool \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a87ca6895d6977188aec51cd34418d150}{operator==}} (const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} \&) const noexcept=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a849a1da0bdff839b8b56eb3e9830e685}{from\+\_\+vreg}} (const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} vreg) noexcept
+\item 
+static constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a204e32b9341adfadd1238ee1a87b9e40}{from\+\_\+preg}} (const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} preg) noexcept
+\item 
+static constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a30c2a3076219217f615ed8d32deb1e4e}{invalid}} () noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_af0e7433ae34948554aae31b902ce65e8}{bits}} \{ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg_acb3033f5bca1dd9d465cda17d01e5ebe}{VReg::\+invalid\+\_\+bits}} \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a9f15eec81b3faea02a7d435e61339e5b}{pinned\+\_\+count}} = 128
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A register, either physical or virtual. 
+
+\label{structrasi_1_1codegen_1_1Reg_doc-func-members}
+\Hypertarget{structrasi_1_1codegen_1_1Reg_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a31d15eee49664f686db29f9014539f69}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!as\_preg@{as\_preg}}
+\index{as\_preg@{as\_preg}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{as\_preg()}{as\_preg()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a31d15eee49664f686db29f9014539f69} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+codegen::\+\+Reg::\+as\+\_\+preg (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a2e0207bdf38d4697fdf67d4009f3b750}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!as\_vreg@{as\_vreg}}
+\index{as\_vreg@{as\_vreg}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{as\_vreg()}{as\_vreg()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a2e0207bdf38d4697fdf67d4009f3b750} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} rasi::\+codegen::\+\+Reg::\+as\+\_\+vreg (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a204e32b9341adfadd1238ee1a87b9e40}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!from\_preg@{from\_preg}}
+\index{from\_preg@{from\_preg}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{from\_preg()}{from\_preg()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a204e32b9341adfadd1238ee1a87b9e40} 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} rasi::\+codegen::\+\+Reg::\+from\+\_\+preg (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}}}]{preg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a849a1da0bdff839b8b56eb3e9830e685}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!from\_vreg@{from\_vreg}}
+\index{from\_vreg@{from\_vreg}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{from\_vreg()}{from\_vreg()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a849a1da0bdff839b8b56eb3e9830e685} 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} rasi::\+codegen::\+\+Reg::\+from\+\_\+vreg (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}}}]{vreg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a30c2a3076219217f615ed8d32deb1e4e}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!invalid@{invalid}}
+\index{invalid@{invalid}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{invalid()}{invalid()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a30c2a3076219217f615ed8d32deb1e4e} 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} rasi::\+codegen::\+\+Reg::\+invalid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a1a56fc01ab7bf1bba42137dd456acf80}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!is\_physical@{is\_physical}}
+\index{is\_physical@{is\_physical}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{is\_physical()}{is\_physical()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a1a56fc01ab7bf1bba42137dd456acf80} 
+bool rasi::\+codegen::\+\+Reg::\+is\+\_\+physical (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a8fe2d69acf580e70e6fe80f95b882986}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!is\_virtual@{is\_virtual}}
+\index{is\_virtual@{is\_virtual}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{is\_virtual()}{is\_virtual()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a8fe2d69acf580e70e6fe80f95b882986} 
+bool rasi::\+codegen::\+\+Reg::\+is\+\_\+virtual (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a87ca6895d6977188aec51cd34418d150}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!operator==@{operator==}}
+\index{operator==@{operator==}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a87ca6895d6977188aec51cd34418d150} 
+bool rasi::\+codegen::\+\+Reg::\+operator== (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}} \&}]{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a4af8e1eba1f106fa02ce18a9bb4beab9}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!rc@{rc}}
+\index{rc@{rc}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{rc()}{rc()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a4af8e1eba1f106fa02ce18a9bb4beab9} 
+\doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class}} rasi::\+codegen::\+\+Reg::\+rc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a0a0db4aa0832dbb67446b5b63829e91c}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!valid@{valid}}
+\index{valid@{valid}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a0a0db4aa0832dbb67446b5b63829e91c} 
+bool rasi::\+codegen::\+\+Reg::\+valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+\label{structrasi_1_1codegen_1_1Reg_doc-variable-members}
+\Hypertarget{structrasi_1_1codegen_1_1Reg_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structrasi_1_1codegen_1_1Reg_af0e7433ae34948554aae31b902ce65e8}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!bits@{bits}}
+\index{bits@{bits}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{bits}{bits}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_af0e7433ae34948554aae31b902ce65e8} 
+uint32\+\_\+t rasi::\+codegen::\+\+Reg::\+bits \{ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg_acb3033f5bca1dd9d465cda17d01e5ebe}{VReg::\+invalid\+\_\+bits}} \}}
+
+\Hypertarget{structrasi_1_1codegen_1_1Reg_a9f15eec81b3faea02a7d435e61339e5b}\index{rasi::codegen::Reg@{rasi::codegen::Reg}!pinned\_count@{pinned\_count}}
+\index{pinned\_count@{pinned\_count}!rasi::codegen::Reg@{rasi::codegen::Reg}}
+\doxysubsubsection{\texorpdfstring{pinned\_count}{pinned\_count}}
+{\footnotesize\ttfamily \label{structrasi_1_1codegen_1_1Reg_a9f15eec81b3faea02a7d435e61339e5b} 
+uint32\+\_\+t rasi::\+codegen::\+\+Reg::\+pinned\+\_\+count = 128\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+codegen/\doxymbox{\hyperlink{reg_8hh}{reg.\+hh}}\end{DoxyCompactItemize}

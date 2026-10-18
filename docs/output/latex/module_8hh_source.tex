@@ -1,0 +1,96 @@
+\doxysection{module.\+hh}
+\hypertarget{module_8hh_source}{}\label{module_8hh_source}\index{include/rasi/ir/module.hh@{include/rasi/ir/module.hh}}
+\doxymbox{\hyperlink{module_8hh}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ griffith\ on\ 18/10/2026.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{arena_8hh}{rasi/support/arena.hh}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{function_8hh}{rasi/ir/function.hh}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1ir}{rasi::ir}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}(\textcolor{keyword}{const}\ std::size\_t\ arena\_size\ =\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a35fd6f4f0566269b443a9494d97be753}{support::Arena::default\_slab\_size}})}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_arena\{\ arena\_size\ \}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17ed865036c24428904dc51a90b2207f}{IRModule}}(\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&\&)\ noexcept\ \ \ \ \ \ \ \ \ \ \ \ =\ default;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&\ operator=(\doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&\&)\ noexcept\ =\ default;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}(const\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&)\ \ \ \ \ \ \ \ \ \ \ \ =\ delete;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&\ operator=(const\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a17e4506d688c52f41ef4bbe68ad290fb}{IRModule}}\&)\ =\ delete;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ae412d48e2ba5981beeb1653b2c151b4e}{declare}}(}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ const\ std::string\_view\ \ \ \ \ \ \ \ name,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ const\ \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ const\ std::span<const\ \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}}>\ \ \ params\ =\ \{\}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ )\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ fn\ \ \ \ \ \ \ \ \ \ \ \ \ =\ m\_arena.\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ad0f44e9a0171b8acf7862698df595c15}{alloc}}<\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}}>();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \textcolor{keywordtype}{id}\ \ \ \ \ \ \ \ =\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(m\_functions.size());}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction_a08f6190c75c87c59b46bcb4b5725f33a}{arena}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \&m\_arena;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>self\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\{\ \textcolor{keywordtype}{id}\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>name\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4}{intern}}(name).first;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>sig.ret\ \ \ \ \ \ \ \ \ \ =\ ret;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>sig.params\_count\ =\ \textcolor{keyword}{static\_cast<}uint16\_t\textcolor{keyword}{>}(params.size());}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ m\_functions.push\_back(fn);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\{\ \textcolor{keywordtype}{id}\ \};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a372488a05508ebb417b717f2dea8b2da}{declare}}(}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\_view\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{Type}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::initializer\_list<const\ Type>\ params\ =\ \{\}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ )\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ fn\ \ \ \ \ \ \ \ \ \ \ \ \ =\ m\_arena.\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ad0f44e9a0171b8acf7862698df595c15}{alloc}}<\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}}>();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \textcolor{keywordtype}{id}\ \ \ \ \ \ \ \ =\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(m\_functions.size());}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction_a08f6190c75c87c59b46bcb4b5725f33a}{arena}}\ \ \ \ \ \ \ \ \ \ \ \ =\ \&m\_arena;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>self\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\{\ \textcolor{keywordtype}{id}\ \};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>name\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4}{intern}}(name).first;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>sig.ret\ \ \ \ \ \ \ \ \ \ =\ ret;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ fn-\/>sig.params\_count\ =\ \textcolor{keyword}{static\_cast<}uint16\_t\textcolor{keyword}{>}(params.size());}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ m\_functions.push\_back(fn);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\{\ \textcolor{keywordtype}{id}\ \};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::pair<StringRef,\ std::string\_view>\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_ad06fec82a74338dff4745e629b1003b4}{intern}}(\textcolor{keyword}{const}\ std::string\_view\ sv)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ iter\ =\ m\_lookup.find(sv);\ iter\ !=\ m\_lookup.end())}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{StringRef}}\{\ iter-\/>second\ \},\ m\_strings[iter-\/>second]\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ view\ =\ m\_arena.alloc\_str(sv);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \textcolor{keywordtype}{id}\ =\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(m\_strings.size());}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ m\_strings.push\_back(view);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ m\_lookup.emplace(view,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{StringRef}}\{\ \textcolor{keywordtype}{id}\ \},\ view\ \};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::string\_view\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_adeb2c44bc5be1bf248dc17ec572c5adb}{string}}(\doxymbox{\hyperlink{namespacerasi_1_1ir_a0283183c0a953185293a635295b5ccc0}{StringRef}}\ ref)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_strings[ref.id];}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}}*\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_af0d38641f8773226061c6ff4c45bf26c}{get}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\ ref)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_functions[ref.id];}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{IRFunction}}*\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a972b5eddceb06f4cb950c4d52bd36739}{get}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a73a1e63328d05f8f20a77a6fb800466b}{FunctionRef}}\ ref)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_functions[ref.id];}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::span<IRFunction*\ const>\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a954da539ba69099a075ad5d6bc3ba61b}{functions}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_functions;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena}{support::Arena}}\&\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRModule_a8f840147517711b327125601d1ed307c}{arena}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ m\_arena;\ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena}{support::Arena}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_arena;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::vector<IRFunction*>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_functions;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ std::vector<std::string\_view>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_strings;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string\_view,\ uint32\_t>\ \ m\_lookup;}
+\DoxyCodeLine{00092\ \ \ \ \ \};}
+\DoxyCodeLine{00093\ \}}
+
+\end{DoxyCode}

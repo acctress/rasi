@@ -1,0 +1,88 @@
+\doxysection{rasi::codegen::Mach\+Inst\texorpdfstring{$<$}{<} Derived \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classrasi_1_1codegen_1_1MachInst}{}\label{classrasi_1_1codegen_1_1MachInst}\index{rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}}
+
+
+CRTP trait for a target specific machine instruction.  
+
+
+
+
+{\ttfamily \+\#include $<$machinst.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_a58010eaa434a0950c16308a064191c24}{get\+\_\+operands}} (std::\+vector$<$ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachOperand}{Mach\+Operand}} $>$ \&ops)
+\begin{DoxyCompactList}\small\item\em Collect all register operands into {\ttfamily ops} for the register allocator. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_ab7a42c89ad2dcb5bd92470df521dd375}{is\+\_\+terminator}} () const noexcept
+\begin{DoxyCompactList}\small\item\em True if this instruction ends a basic block. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_a2b90e645d675906b033876816315e8be}{is\+\_\+branch}} () const noexcept
+\begin{DoxyCompactList}\small\item\em True if this instruction is a branch. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_ae599f008d683370acb77c6d9539df4aa}{is\+\_\+move}} () const noexcept
+\begin{DoxyCompactList}\small\item\em True if this is a pure reg2reg move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived$>$\newline
+class rasi::\+codegen::\+\+Mach\+Inst$<$ Derived $>$}
+CRTP trait for a target specific machine instruction. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & The concrete backend instruction type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{classrasi_1_1codegen_1_1MachInst_doc-func-members}
+\Hypertarget{classrasi_1_1codegen_1_1MachInst_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrasi_1_1codegen_1_1MachInst_a58010eaa434a0950c16308a064191c24}\index{rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}!get\_operands@{get\_operands}}
+\index{get\_operands@{get\_operands}!rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{get\_operands()}{get\_operands()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1MachInst_a58010eaa434a0950c16308a064191c24} 
+template$<$typename Derived$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{rasi::\+codegen::\+\+Mach\+Inst}}$<$ Derived $>$::\+get\+\_\+operands (\begin{DoxyParamCaption}\item[{std::\+vector$<$ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachOperand}{Mach\+Operand}} $>$ \&}]{ops}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Collect all register operands into {\ttfamily ops} for the register allocator. 
+
+\Hypertarget{classrasi_1_1codegen_1_1MachInst_a2b90e645d675906b033876816315e8be}\index{rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}!is\_branch@{is\_branch}}
+\index{is\_branch@{is\_branch}!rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{is\_branch()}{is\_branch()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1MachInst_a2b90e645d675906b033876816315e8be} 
+template$<$typename Derived$>$ \\
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{rasi::\+codegen::\+\+Mach\+Inst}}$<$ Derived $>$::\+is\+\_\+branch (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this instruction is a branch. 
+
+\Hypertarget{classrasi_1_1codegen_1_1MachInst_ae599f008d683370acb77c6d9539df4aa}\index{rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}!is\_move@{is\_move}}
+\index{is\_move@{is\_move}!rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{is\_move()}{is\_move()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1MachInst_ae599f008d683370acb77c6d9539df4aa} 
+template$<$typename Derived$>$ \\
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{rasi::\+codegen::\+\+Mach\+Inst}}$<$ Derived $>$::\+is\+\_\+move (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this is a pure reg2reg move. 
+
+\Hypertarget{classrasi_1_1codegen_1_1MachInst_ab7a42c89ad2dcb5bd92470df521dd375}\index{rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}!is\_terminator@{is\_terminator}}
+\index{is\_terminator@{is\_terminator}!rasi::codegen::MachInst$<$ Derived $>$@{rasi::codegen::MachInst$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{is\_terminator()}{is\_terminator()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1MachInst_ab7a42c89ad2dcb5bd92470df521dd375} 
+template$<$typename Derived$>$ \\
+bool \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{rasi::\+codegen::\+\+Mach\+Inst}}$<$ Derived $>$::\+is\+\_\+terminator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+True if this instruction ends a basic block. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+codegen/\doxymbox{\hyperlink{machinst_8hh}{machinst.\+hh}}\end{DoxyCompactItemize}

@@ -1,0 +1,94 @@
+\doxysection{rasi::codegen::VCode\+Builder\texorpdfstring{$<$}{<} I \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classrasi_1_1codegen_1_1VCodeBuilder}{}\label{classrasi_1_1codegen_1_1VCodeBuilder}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+
+
+Builder for \doxylink{structrasi_1_1codegen_1_1VCode}{VCode}{\itshape . } 
+
+
+
+
+{\ttfamily \+\#include $<$vcode.\+hh$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}} \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_a2ee1496d57b666a412a6b7926e207f9b}{start\+\_\+block}} (const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} $>$ params=\{\})
+\begin{DoxyCompactList}\small\item\em Begin a new \doxylink{structrasi_1_1codegen_1_1VCode}{VCode} block with the given param vregs. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_a46f030c0fc934ea3920d39b9c44b2885}{end\+\_\+block}} (const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}} $>$ succs, const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} $>$ branch\+\_\+args=\{\})
+\begin{DoxyCompactList}\small\item\em Close the current block with its successors and branch args. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_a4ae4ffc8fea2d95158c36408f5cc4808}{set\+\_\+block}} (const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}} block)
+\begin{DoxyCompactList}\small\item\em Set the active block for next \doxylink{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e}{push()} calls. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e}{push}} (I inst)
+\begin{DoxyCompactList}\small\item\em Push an instruction into the current block. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1VCode}{VCode}}$<$ I $>$ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_ac2703d230ffc1965c7fc69329e740fb9}{finalise}} () \&\&
+\begin{DoxyCompactList}\small\item\em Finalise into an immutable \doxylink{structrasi_1_1codegen_1_1VCode}{VCode}{\itshape . }\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename I$>$\newline
+class rasi::\+codegen::\+\+VCode\+Builder$<$ I $>$}
+Builder for \doxylink{structrasi_1_1codegen_1_1VCode}{VCode}{\itshape . }
+
+\label{classrasi_1_1codegen_1_1VCodeBuilder_doc-func-members}
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_a46f030c0fc934ea3920d39b9c44b2885}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}!end\_block@{end\_block}}
+\index{end\_block@{end\_block}!rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+\doxysubsubsection{\texorpdfstring{end\_block()}{end\_block()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1VCodeBuilder_a46f030c0fc934ea3920d39b9c44b2885} 
+template$<$typename I$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{rasi::\+codegen::\+\+VCode\+Builder}}$<$ I $>$::\+end\+\_\+block (\begin{DoxyParamCaption}\item[{const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}} $>$}]{succs}{, }\item[{const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} $>$}]{branch\+\_\+args}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close the current block with its successors and branch args. 
+
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_ac2703d230ffc1965c7fc69329e740fb9}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}!finalise@{finalise}}
+\index{finalise@{finalise}!rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+\doxysubsubsection{\texorpdfstring{finalise()}{finalise()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1VCodeBuilder_ac2703d230ffc1965c7fc69329e740fb9} 
+template$<$typename I$>$ \\
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1VCode}{VCode}}$<$ I $>$ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{rasi::\+codegen::\+\+VCode\+Builder}}$<$ I $>$::\+finalise (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Finalise into an immutable \doxylink{structrasi_1_1codegen_1_1VCode}{VCode}{\itshape . }
+
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}!push@{push}}
+\index{push@{push}!rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e} 
+template$<$typename I$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{rasi::\+codegen::\+\+VCode\+Builder}}$<$ I $>$::\+push (\begin{DoxyParamCaption}\item[{I}]{inst}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Push an instruction into the current block. 
+
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_a4ae4ffc8fea2d95158c36408f5cc4808}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}!set\_block@{set\_block}}
+\index{set\_block@{set\_block}!rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+\doxysubsubsection{\texorpdfstring{set\_block()}{set\_block()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1VCodeBuilder_a4ae4ffc8fea2d95158c36408f5cc4808} 
+template$<$typename I$>$ \\
+void \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{rasi::\+codegen::\+\+VCode\+Builder}}$<$ I $>$::\+set\+\_\+block (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}}}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the active block for next \doxylink{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e}{push()} calls. 
+
+\Hypertarget{classrasi_1_1codegen_1_1VCodeBuilder_a2ee1496d57b666a412a6b7926e207f9b}\index{rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}!start\_block@{start\_block}}
+\index{start\_block@{start\_block}!rasi::codegen::VCodeBuilder$<$ I $>$@{rasi::codegen::VCodeBuilder$<$ I $>$}}
+\doxysubsubsection{\texorpdfstring{start\_block()}{start\_block()}}
+{\footnotesize\ttfamily \label{classrasi_1_1codegen_1_1VCodeBuilder_a2ee1496d57b666a412a6b7926e207f9b} 
+template$<$typename I$>$ \\
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}} \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{rasi::\+codegen::\+\+VCode\+Builder}}$<$ I $>$::\+start\+\_\+block (\begin{DoxyParamCaption}\item[{const std::\+span$<$ const \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}} $>$}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Begin a new \doxylink{structrasi_1_1codegen_1_1VCode}{VCode} block with the given param vregs. 
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+include/\+rasi/\+codegen/\doxymbox{\hyperlink{vcode_8hh}{vcode.\+hh}}\end{DoxyCompactItemize}
