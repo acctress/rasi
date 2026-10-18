@@ -89,6 +89,5 @@ namespace rasi::ir {
         std::vector<IRFunction*>                        m_functions;
         std::vector<std::string_view>                   m_strings;
         std::unordered_map<std::string_view, uint32_t>  m_lookup;
-        std::size_t                                     m_string_count{};
     };
 }
