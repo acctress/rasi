@@ -3,7 +3,7 @@ var annotated_dup =
     [ "rasi", "namespacerasi.html", [
       [ "codegen", "namespacerasi_1_1codegen.html", [
         [ "BlockId", "structrasi_1_1codegen_1_1BlockId.html", "structrasi_1_1codegen_1_1BlockId" ],
-        [ "MachInst", "classrasi_1_1codegen_1_1MachInst.html", "classrasi_1_1codegen_1_1MachInst" ],
+        [ "MachineEnv", "structrasi_1_1codegen_1_1MachineEnv.html", "structrasi_1_1codegen_1_1MachineEnv" ],
         [ "MachOperand", "structrasi_1_1codegen_1_1MachOperand.html", "structrasi_1_1codegen_1_1MachOperand" ],
         [ "PReg", "structrasi_1_1codegen_1_1PReg.html", "structrasi_1_1codegen_1_1PReg" ],
         [ "Reg", "structrasi_1_1codegen_1_1Reg.html", "structrasi_1_1codegen_1_1Reg" ],
@@ -51,7 +51,9 @@ var annotated_dup =
           [ "Call", "structrasi_1_1x86__64_1_1inst_1_1Call.html", "structrasi_1_1x86__64_1_1inst_1_1Call" ],
           [ "Ret", "structrasi_1_1x86__64_1_1inst_1_1Ret.html", null ]
         ] ],
-        [ "AddressMode", "structrasi_1_1x86__64_1_1AddressMode.html", "structrasi_1_1x86__64_1_1AddressMode" ]
+        [ "AddressMode", "structrasi_1_1x86__64_1_1AddressMode.html", "structrasi_1_1x86__64_1_1AddressMode" ],
+        [ "IRLowerer", "classrasi_1_1x86__64_1_1IRLowerer.html", "classrasi_1_1x86__64_1_1IRLowerer" ],
+        [ "PReg", "structrasi_1_1x86__64_1_1PReg.html", "structrasi_1_1x86__64_1_1PReg" ]
       ] ]
     ] ],
     [ "std", null, [

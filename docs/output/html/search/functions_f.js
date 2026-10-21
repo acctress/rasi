@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['valid_0',['valid',['../structrasi_1_1codegen_1_1PReg.html#ae563349f7ae1f4b59e477933d3d383a6',1,'rasi::codegen::PReg::valid()'],['../structrasi_1_1codegen_1_1VReg.html#a9078fe1c53a11f42b57753684362b23f',1,'rasi::codegen::VReg::valid()'],['../structrasi_1_1codegen_1_1Reg.html#a0a0db4aa0832dbb67446b5b63829e91c',1,'rasi::codegen::Reg::valid()']]],
-  ['visit_5fblock_1',['visit_block',['../classrasi_1_1ir_1_1IRVisitor.html#ac6d4ee7faac7c3b24cbf53be3a0f1e39',1,'rasi::ir::IRVisitor']]],
-  ['visit_5ffunction_2',['visit_function',['../classrasi_1_1ir_1_1IRVisitor.html#a61f24c780fdcefa8359ddf6506c2cc9e',1,'rasi::ir::IRVisitor']]],
-  ['visit_5finst_3',['visit_inst',['../classrasi_1_1ir_1_1IRVisitor.html#ad1fb57d79c97a094c5bd2bd23f3be05c',1,'rasi::ir::IRVisitor']]],
-  ['visit_5fmodule_4',['visit_module',['../classrasi_1_1ir_1_1IRVisitor.html#a8cb34f07f43a7b268fc8247261c7d389',1,'rasi::ir::IRVisitor']]],
-  ['vreg_5',['vreg',['../structrasi_1_1codegen_1_1MachOperand.html#ad67fb312264d59f3283ef64c3dd5e67e',1,'rasi::codegen::MachOperand']]]
+  ['set_5fblock_0',['set_block',['../classrasi_1_1codegen_1_1VCodeBuilder.html#a4ae4ffc8fea2d95158c36408f5cc4808',1,'rasi::codegen::VCodeBuilder::set_block()'],['../classrasi_1_1ir_1_1IRBuilder.html#a4e8019206b70d50529d8932400571573',1,'rasi::ir::IRBuilder::set_block()']]],
+  ['slab_1',['Slab',['../structrasi_1_1support_1_1Slab.html#a1af663880ff29c228a2e114306e49859',1,'rasi::support::Slab']]],
+  ['slab_5fcount_2',['slab_count',['../classrasi_1_1support_1_1Arena.html#ada930628b0783eb0111ad0afa35b38bd',1,'rasi::support::Arena']]],
+  ['start_5fblock_3',['start_block',['../classrasi_1_1codegen_1_1VCodeBuilder.html#a2ee1496d57b666a412a6b7926e207f9b',1,'rasi::codegen::VCodeBuilder']]],
+  ['string_4',['string',['../classrasi_1_1ir_1_1IRModule.html#adeb2c44bc5be1bf248dc17ec572c5adb',1,'rasi::ir::IRModule']]],
+  ['sysv_5fenv_5',['sysv_env',['../namespacerasi_1_1x86__64.html#a524b4775975beb1afc007e8e9b61bc12',1,'rasi::x86_64']]]
 ];

@@ -1,0 +1,23 @@
+\doxysection{machenv.\+hh}
+\hypertarget{codegen_2machenv_8hh_source}{}\label{codegen_2machenv_8hh_source}\index{include/rasi/codegen/machenv.hh@{include/rasi/codegen/machenv.hh}}
+\doxymbox{\hyperlink{codegen_2machenv_8hh}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ griffith\ on\ 19/10/2026.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{codegen_2reg_8hh}{rasi/codegen/reg.hh}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <span>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1codegen}{rasi::codegen}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{MachineEnv}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ std::array<std::span<const\ PReg>,\ 2>\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv_ad6fbf06d5e7571aaff56b5261f3f89eb}{preferred}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::array<std::span<const\ PReg>,\ 2>\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv_a450ecba485890f0950726a1da7366496}{non\_preferred}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::array<PReg,\ 2>\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv_ae23d836484683b38c07d1d06467dc887}{scratch}};}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}

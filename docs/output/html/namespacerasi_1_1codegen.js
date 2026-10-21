@@ -1,7 +1,7 @@
 var namespacerasi_1_1codegen =
 [
     [ "BlockId", "structrasi_1_1codegen_1_1BlockId.html", "structrasi_1_1codegen_1_1BlockId" ],
-    [ "MachInst", "classrasi_1_1codegen_1_1MachInst.html", "classrasi_1_1codegen_1_1MachInst" ],
+    [ "MachineEnv", "structrasi_1_1codegen_1_1MachineEnv.html", "structrasi_1_1codegen_1_1MachineEnv" ],
     [ "MachOperand", "structrasi_1_1codegen_1_1MachOperand.html", "structrasi_1_1codegen_1_1MachOperand" ],
     [ "PReg", "structrasi_1_1codegen_1_1PReg.html", "structrasi_1_1codegen_1_1PReg" ],
     [ "Reg", "structrasi_1_1codegen_1_1Reg.html", "structrasi_1_1codegen_1_1Reg" ],
@@ -9,6 +9,7 @@ var namespacerasi_1_1codegen =
     [ "VCodeBlock", "structrasi_1_1codegen_1_1VCodeBlock.html", "structrasi_1_1codegen_1_1VCodeBlock" ],
     [ "VCodeBuilder", "classrasi_1_1codegen_1_1VCodeBuilder.html", "classrasi_1_1codegen_1_1VCodeBuilder" ],
     [ "VReg", "structrasi_1_1codegen_1_1VReg.html", "structrasi_1_1codegen_1_1VReg" ],
+    [ "MachInst", "conceptrasi_1_1codegen_1_1MachInst.html", null ],
     [ "OperandKind", "namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7", [
       [ "Use", "namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7aad8783089f828b927473fb61d51940ec", null ],
       [ "Def", "namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7adde5c8d4149c5072d2cb798706663e78", null ],

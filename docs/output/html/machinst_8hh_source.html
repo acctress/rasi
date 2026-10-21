@@ -123,36 +123,20 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('machinst_8hh_s
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacerasi.html">   12</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacerasi_1_1codegen.html">rasi::codegen</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Derived&gt;</div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classrasi_1_1codegen_1_1MachInst.html">   16</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classrasi_1_1codegen_1_1MachInst.html">MachInst</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classrasi_1_1codegen_1_1MachInst.html#a58010eaa434a0950c16308a064191c24">   19</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classrasi_1_1codegen_1_1MachInst.html#a58010eaa434a0950c16308a064191c24">get_operands</a>(std::vector&lt;MachOperand&gt;&amp; ops) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            self().get_operands(ops);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        }</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacerasi_1_1codegen.html">rasi::codegen</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> I&gt;</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="conceptrasi_1_1codegen_1_1MachInst.html">   15</a></span>    <span class="keyword">concept </span><a class="code hl_concept" href="conceptrasi_1_1codegen_1_1MachInst.html">MachInst</a> = <span class="keyword">requires</span>(<span class="keyword">const</span> I&amp; inst, std::vector&lt;MachOperand&gt;&amp; ops)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        { inst.get_operands(ops) } -&gt; std::same_as&lt;void&gt;;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        { inst.is_terminator()   } -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        { inst.is_branch()       } -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        { inst.is_move()         } -&gt; std::same_as&lt;bool&gt;;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    };</div>
 </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classrasi_1_1codegen_1_1MachInst.html#ab7a42c89ad2dcb5bd92470df521dd375">   24</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classrasi_1_1codegen_1_1MachInst.html#ab7a42c89ad2dcb5bd92470df521dd375">is_terminator</a>() const noexcept { <span class="keywordflow">return</span> self().is_terminator(); }</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classrasi_1_1codegen_1_1MachInst.html#a2b90e645d675906b033876816315e8be">   27</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classrasi_1_1codegen_1_1MachInst.html#a2b90e645d675906b033876816315e8be">is_branch</a>() const noexcept { <span class="keywordflow">return</span> self().is_branch(); }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classrasi_1_1codegen_1_1MachInst.html#ae599f008d683370acb77c6d9539df4aa">   30</a></span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classrasi_1_1codegen_1_1MachInst.html#ae599f008d683370acb77c6d9539df4aa">is_move</a>() const noexcept { <span class="keywordflow">return</span> self().is_move(); }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        [[nodiscard]] Derived&amp; self()             noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Derived&amp;<span class="keyword">&gt;</span>(*this); }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        [[nodiscard]] <span class="keyword">const</span> Derived&amp; self() const noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>Derived&amp;<span class="keyword">&gt;</span>(*this); }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    };</div>
-</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
-</div>
-<div class="ttc" id="aclassrasi_1_1codegen_1_1MachInst_html"><div class="ttname"><a href="classrasi_1_1codegen_1_1MachInst.html">rasi::codegen::MachInst</a></div><div class="ttdoc">CRTP trait for a target specific machine instruction.</div><div class="ttdef"><b>Definition</b> machinst.hh:16</div></div>
-<div class="ttc" id="aclassrasi_1_1codegen_1_1MachInst_html_a2b90e645d675906b033876816315e8be"><div class="ttname"><a href="classrasi_1_1codegen_1_1MachInst.html#a2b90e645d675906b033876816315e8be">rasi::codegen::MachInst::is_branch</a></div><div class="ttdeci">bool is_branch() const noexcept</div><div class="ttdoc">True if this instruction is a branch.</div><div class="ttdef"><b>Definition</b> machinst.hh:27</div></div>
-<div class="ttc" id="aclassrasi_1_1codegen_1_1MachInst_html_a58010eaa434a0950c16308a064191c24"><div class="ttname"><a href="classrasi_1_1codegen_1_1MachInst.html#a58010eaa434a0950c16308a064191c24">rasi::codegen::MachInst::get_operands</a></div><div class="ttdeci">void get_operands(std::vector&lt; MachOperand &gt; &amp;ops)</div><div class="ttdoc">Collect all register operands into ops for the register allocator.</div><div class="ttdef"><b>Definition</b> machinst.hh:19</div></div>
-<div class="ttc" id="aclassrasi_1_1codegen_1_1MachInst_html_ab7a42c89ad2dcb5bd92470df521dd375"><div class="ttname"><a href="classrasi_1_1codegen_1_1MachInst.html#ab7a42c89ad2dcb5bd92470df521dd375">rasi::codegen::MachInst::is_terminator</a></div><div class="ttdeci">bool is_terminator() const noexcept</div><div class="ttdoc">True if this instruction ends a basic block.</div><div class="ttdef"><b>Definition</b> machinst.hh:24</div></div>
-<div class="ttc" id="aclassrasi_1_1codegen_1_1MachInst_html_ae599f008d683370acb77c6d9539df4aa"><div class="ttname"><a href="classrasi_1_1codegen_1_1MachInst.html#ae599f008d683370acb77c6d9539df4aa">rasi::codegen::MachInst::is_move</a></div><div class="ttdeci">bool is_move() const noexcept</div><div class="ttdoc">True if this is a pure reg2reg move.</div><div class="ttdef"><b>Definition</b> machinst.hh:30</div></div>
-<div class="ttc" id="anamespacerasi_1_1codegen_html"><div class="ttname"><a href="namespacerasi_1_1codegen.html">rasi::codegen</a></div><div class="ttdef"><b>Definition</b> machinst.hh:12</div></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="ttc" id="aconceptrasi_1_1codegen_1_1MachInst_html"><div class="ttname"><a href="conceptrasi_1_1codegen_1_1MachInst.html">rasi::codegen::MachInst</a></div><div class="ttdoc">Concept constraining a target machine instruction type.</div><div class="ttdef"><b>Definition</b> machinst.hh:15</div></div>
+<div class="ttc" id="anamespacerasi_1_1codegen_html"><div class="ttname"><a href="namespacerasi_1_1codegen.html">rasi::codegen</a></div><div class="ttdef"><b>Definition</b> machenv.hh:11</div></div>
 <div class="ttc" id="aoperand_8hh_html"><div class="ttname"><a href="operand_8hh.html">operand.hh</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

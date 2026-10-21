@@ -1,0 +1,126 @@
+\doxysection{lower.\+hh}
+\hypertarget{lower_8hh_source}{}\label{lower_8hh_source}\index{include/rasi/isa/x86/lower.hh@{include/rasi/isa/x86/lower.hh}}
+\doxymbox{\hyperlink{lower_8hh}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ griffith\ on\ 19/10/2026.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{visitor_8hh}{rasi/ir/visitor.hh}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{function_8hh}{rasi/ir/function.hh}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{isa_2x86_2inst_8hh}{rasi/isa/x86/inst.hh}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <rasi/isa/x86/regs.hh>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{codegen_2machenv_8hh}{rasi/codegen/machenv.hh}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{vcode_8hh}{rasi/codegen/vcode.hh}}>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{isa_2x86_2reg_8hh}{reg.hh}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1x86__64}{rasi::x86\_64}}\ \{}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a9fe0629a5d28a31787e53bde955f6c17}{IRLowerer}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor}{ir::IRVisitor}}<IRLowerer>\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a9fe0629a5d28a31787e53bde955f6c17}{IRLowerer}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::MachineEnv}}\&\ env)\ noexcept}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_env\{\ env\ \}\ \{\}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VCode}{codegen::VCode<X86Inst>}}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_aa7a6a49c1248bbf5849bb54aa5821fde}{lower}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&\ fn)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ m\_fn\ \ \ \ \ \ \ \ =\ \&fn;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ m\_vreg\_c\ \ \ \ =\ 0;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ m\_value\_regs.clear();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder\ \ \ =\ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{codegen::VCodeBuilder<X86Inst>}}\{\};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ m\_value\_regs.resize(fn.\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction_a8d3205cf63c762dbfb8bbe827669cfbb}{values}}.size());}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ \{\ 0u\ \};\ i\ <\ fn.\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction_a8d3205cf63c762dbfb8bbe827669cfbb}{values}}.size();\ ++i)\ m\_value\_regs[i]\ =\ alloc\_vreg(fn.\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction_a8d3205cf63c762dbfb8bbe827669cfbb}{values}}[i].type);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1ir_1_1IRVisitor_a61f24c780fdcefa8359ddf6506c2cc9e}{visit\_function}}(fn);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ m\_fn\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(m\_builder).finalise();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_ade46d18b6e10d02e1e49dea05cad1036}{on\_function}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&\ fn)\ \{}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a529e0f3263c0e86260c954a2ae80be61}{on\_function\_end}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&)\ \{\}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a2a3bb55e12ad2204998b464dbf49360a}{on\_block}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&,\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{ir::IRBlock}}\&\ block)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.start\_block();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a1a8679ab840eb9bfbd4ffbd0272288ec}{on\_block\_end}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&,\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{ir::IRBlock}}\&)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.end\_block(\{\});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer_a69c2e57a3386bb78927c36dfa3e77411}{on\_inst}}(\doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}\&\ fn,\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRBlock}{ir::IRBlock}}\&,\ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRInst}{ir::IRInst}}\&\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}})\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }enum\ \doxymbox{\hyperlink{namespacerasi_1_1ir_abf3a8272a8f5feb84240399ea60a5d9c}{ir::IROp}};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}}.op)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ iconst:\ lower\_iconst(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ iadd:\ \ \ lower\_binop(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2aec211f7c20af43e742bf2570c3cb84f9}{AluOp::Add}});\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ isub:\ \ \ lower\_binop(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2ae80155eceb940c89e2de63ad05868db2}{AluOp::Sub}});\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ imul:\ \ \ lower\_binop(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2a62b6d55816cf737bfc6f42e60df1a3f2}{AluOp::Mul}});\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ret:\ \ \ \ lower\_ret(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ idiv:}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ icmp:}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ br:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ brif:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ call:\ std::unreachable();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1ir_1_1IRFunction}{ir::IRFunction}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_fn\ \{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::MachineEnv}}\&\ \ \ \ \ \ m\_env;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{codegen::VCodeBuilder<X86Inst>}}\ \ m\_builder\ \{\};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::vector<codegen::VReg>\ \ \ \ \ \ m\_value\_regs\ \{\};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_vreg\_c\ \{\};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ [[nodiscard]]\ codegen::VReg\ alloc\_vreg(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0}{ir::Type}}\ type)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ rc\ =\ (type\ ==\ \doxymbox{\hyperlink{namespacerasi_1_1ir_ad4658739f3d213b4ef26a901490b57a0a714b98e0a797e8f119f257a4ab802f86}{ir::Type::f64}})}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ \doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7ea22ae0e2b89e5e3d477f988cc36d3272b}{codegen::RegClass::Float}}\ :\ codegen::\doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{RegClass}}::\doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7ea1686a6c336b71b36d77354cea19a8b52}{Int}};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg_a5218ac1e4c7b59790d74ed533dfbb846}{codegen::VReg::make}}(m\_vreg\_c++,\ rc);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ [[nodiscard]]\ codegen::VReg\ vreg\_for(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{ir::ValueRef}}\ ref)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ assert(ref.id\ <\ m\_value\_regs.size());}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_value\_regs[ref.id];}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ [[nodiscard]]\ codegen::Reg\ reg\_for(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacerasi_1_1ir_a5f067fb06c7dd5d1119267a84a15ff74}{ir::ValueRef}}\ ref)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a849a1da0bdff839b8b56eb3e9830e685}{codegen::Reg::from\_vreg}}(vreg\_for(ref));}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ lower\_iconst(\textcolor{keyword}{const}\ ir::IRInst\&\ inst)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.\doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder_a57d53a132cf8d0e3128e389b5925813e}{push}}(inst::MovImm\{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .dst\ =\ reg\_for(inst.result),}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .imm\ =\ \textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(inst.imm),}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ lower\_binop(\textcolor{keyword}{const}\ ir::IRInst\&\ inst,\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af6b2e719c71bf7846ffee684c7cf98e2}{AluOp}}\ op)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ dst\ =\ reg\_for(inst.result);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ lhs\ =\ reg\_for(m\_fn-\/>operands[inst.ops\_offset]);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ rhs\ =\ reg\_for(m\_fn-\/>operands[inst.ops\_offset\ +\ 1]);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.push(inst::Mov\{\ .dst\ =\ dst,\ .src\ =\ lhs\ \});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.push(inst::Alu\{\ .op\ =\ op,\ .dst\ =\ dst,\ .src\ =\ rhs\ \});}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ lower\_ret(\textcolor{keyword}{const}\ ir::IRInst\&\ inst)\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (inst.ops\_count\ >\ 0)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ v\ =\ reg\_for(m\_fn-\/>operands[inst.ops\_offset]);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.push(inst::Mov\{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .dst\ =\ \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg_a204e32b9341adfadd1238ee1a87b9e40}{codegen::Reg::from\_preg}}(\doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b}{RAX}}),}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .src\ =\ v,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ m\_builder.push(inst::Ret\ \{\});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \};}
+\DoxyCodeLine{00122\ \}}
+
+\end{DoxyCode}

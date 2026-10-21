@@ -1,8 +1,10 @@
 #include <rasi/ir/builder.hh>
 #include <rasi/ir/verifier.hh>
+#include <rasi/ir/module.hh>
 #include <print>
 
-#include "rasi/ir/module.hh"
+#include "rasi/isa/x86/abi.hh"
+#include "rasi/isa/x86/lower.hh"
 
 using namespace rasi::ir;
 
@@ -18,11 +20,27 @@ int main() {
     auto x = b.param(0);
     auto y = b.param(1);
     auto z = b.iadd(x, y);
-    // b.ret(z);
+    b.ret(z);
     b.finalise();
 
     IRVerifier verifier;
     verifier.visit_module(module);
     if (!verifier.ok())
         for (const auto& [msg] : verifier.errs) std::println("\x1b[38;5;198m[error]\x1b[0m {}", msg);
+
+    std::println("ok");
+
+    rasi::codegen::MachineEnv mach_env {};
+    rasi::x86_64::X86ABISpec abi_spec {};
+    rasi::x86_64::IRLowerer lowerer { mach_env, abi_spec };
+
+    auto fn = module.get(ref);
+    auto vcode = lowerer.lower(*fn, rasi::codegen::CallConv::SystemV);
+
+
+    std::println("~~ ir function ~~\n{}", *fn);
+
+    std::println("~~ vcode ~~");
+    for (const auto& i : vcode.insts)
+        std::println("{}", i.to_string());
 }

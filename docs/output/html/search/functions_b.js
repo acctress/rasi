@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['ok_0',['ok',['../structrasi_1_1ir_1_1IRVerifier.html#aab9cac65e92db19262332f927eb4d3ca',1,'rasi::ir::IRVerifier']]],
-  ['on_5fblock_1',['on_block',['../classrasi_1_1ir_1_1IRVisitor.html#a3c2977c6b25d1f0aa6209ddfe507afde',1,'rasi::ir::IRVisitor']]],
-  ['on_5fblock_5fend_2',['on_block_end',['../structrasi_1_1ir_1_1IRVerifier.html#a48e8b57feb9ea445ea79b9b899ff059a',1,'rasi::ir::IRVerifier::on_block_end()'],['../classrasi_1_1ir_1_1IRVisitor.html#a284614262c53198f7717ff205b0fefad',1,'rasi::ir::IRVisitor::on_block_end(IRFunction &amp;, IRBlock &amp;)']]],
-  ['on_5ffunction_3',['on_function',['../classrasi_1_1ir_1_1IRVisitor.html#a067c752c49f067afecb5fcf45e0239f6',1,'rasi::ir::IRVisitor']]],
-  ['on_5ffunction_5fend_4',['on_function_end',['../classrasi_1_1ir_1_1IRVisitor.html#a28821bf7dcf60ff06073d228fe50d8fe',1,'rasi::ir::IRVisitor']]],
-  ['on_5finst_5',['on_inst',['../classrasi_1_1ir_1_1IRVisitor.html#a89d1eb04749e2ebf28b8257aced2c349',1,'rasi::ir::IRVisitor']]],
-  ['on_5foperand_6',['on_operand',['../classrasi_1_1ir_1_1IRVisitor.html#aff503ccee0e55249f04a26c6e93a53ca',1,'rasi::ir::IRVisitor']]],
-  ['operator_3d_7',['operator=',['../classrasi_1_1ir_1_1IRModule.html#a0639f3d88b68231d55497379464d257a',1,'rasi::ir::IRModule::operator=(IRModule &amp;&amp;) noexcept=default'],['../classrasi_1_1ir_1_1IRModule.html#a4c0e3eb30508770b1001b2dd9afe5b49',1,'rasi::ir::IRModule::operator=(const IRModule &amp;)=delete'],['../classrasi_1_1support_1_1Arena.html#a87f35a780d3ba40395e08e6b75d2fdaa',1,'rasi::support::Arena::operator=(Arena &amp;&amp;) noexcept=default'],['../classrasi_1_1support_1_1Arena.html#ae590349526e31a1060815e54c43e5367',1,'rasi::support::Arena::operator=(const Arena &amp;)=delete']]],
-  ['operator_3d_3d_8',['operator==',['../structrasi_1_1codegen_1_1MachOperand.html#a62a159423a0cda790cf2d3c3631fb601',1,'rasi::codegen::MachOperand::operator==()'],['../structrasi_1_1codegen_1_1PReg.html#a4429bfb9db81b656f62f3f92e50584af',1,'rasi::codegen::PReg::operator==()'],['../structrasi_1_1codegen_1_1VReg.html#add0cd576fd95733af64642f29ba7a074',1,'rasi::codegen::VReg::operator==()'],['../structrasi_1_1codegen_1_1Reg.html#a87ca6895d6977188aec51cd34418d150',1,'rasi::codegen::Reg::operator==()']]]
+  ['main_0',['main',['../entry_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'entry.cc']]],
+  ['make_1',['make',['../structrasi_1_1codegen_1_1PReg.html#a0272b65cb6deef9179c1f75aacd25685',1,'rasi::codegen::PReg::make()'],['../structrasi_1_1codegen_1_1VReg.html#a5218ac1e4c7b59790d74ed533dfbb846',1,'rasi::codegen::VReg::make()'],['../structrasi_1_1x86__64_1_1PReg.html#a0272b65cb6deef9179c1f75aacd25685',1,'rasi::x86_64::PReg::make()']]],
+  ['mark_2',['mark',['../classrasi_1_1support_1_1Arena.html#af85edb4bf7162322d6e195ecfc680357',1,'rasi::support::Arena']]]
 ];

@@ -14,22 +14,14 @@
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <span>}}
 \DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1codegen}{rasi::codegen}}\ \{}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{MachInst}}\ \{}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_a58010eaa434a0950c16308a064191c24}{get\_operands}}(std::vector<MachOperand>\&\ ops)\ \{}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ self().get\_operands(ops);}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_ab7a42c89ad2dcb5bd92470df521dd375}{is\_terminator}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ self().is\_terminator();\ \}}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_a2b90e645d675906b033876816315e8be}{is\_branch}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ self().is\_branch();\ \}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst_ae599f008d683370acb77c6d9539df4aa}{is\_move}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ self().is\_move();\ \}}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ [[nodiscard]]\ Derived\&\ self()\ \ \ \ \ \ \ \ \ \ \ \ \ noexcept\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Derived\&\textcolor{keyword}{>}(*this);\ \}}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ Derived\&\ self()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Derived\&\textcolor{keyword}{>}(*this);\ \}}
-\DoxyCodeLine{00034\ \ \ \ \ \};}
-\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ I>}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptrasi_1_1codegen_1_1MachInst}{MachInst}}\ =\ \textcolor{keyword}{requires}(\textcolor{keyword}{const}\ I\&\ inst,\ std::vector<MachOperand>\&\ ops)}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \{\ inst.get\_operands(ops)\ \}\ -\/>\ std::same\_as<void>;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \{\ inst.is\_terminator()\ \ \ \}\ -\/>\ std::same\_as<bool>;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{\ inst.is\_branch()\ \ \ \ \ \ \ \}\ -\/>\ std::same\_as<bool>;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \{\ inst.is\_move()\ \ \ \ \ \ \ \ \ \}\ -\/>\ std::same\_as<bool>;}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \}}
 
 \end{DoxyCode}

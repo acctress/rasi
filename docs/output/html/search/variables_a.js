@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['params_5fcount_0',['params_count',['../structrasi_1_1codegen_1_1VCodeBlock.html#aaaf479768f21b7ac87773051baa54e7c',1,'rasi::codegen::VCodeBlock::params_count'],['../structrasi_1_1ir_1_1IRBlock.html#a8d7e88b4aa42b958675fac40ea98bcc8',1,'rasi::ir::IRBlock::params_count'],['../structrasi_1_1ir_1_1IRSig.html#a1955dc1da07aa9e63c92e7b7c49781de',1,'rasi::ir::IRSig::params_count']]],
-  ['params_5foffset_1',['params_offset',['../structrasi_1_1codegen_1_1VCodeBlock.html#a2147a20c3f3a62c7cc986fa66392c489',1,'rasi::codegen::VCodeBlock::params_offset'],['../structrasi_1_1ir_1_1IRBlock.html#adb4973f608118c7a51f2c7e03ebebaae',1,'rasi::ir::IRBlock::params_offset'],['../structrasi_1_1ir_1_1IRSig.html#a1820e462b058341faf5a985a2f0b6135',1,'rasi::ir::IRSig::params_offset']]],
-  ['pinned_5fcount_2',['pinned_count',['../structrasi_1_1codegen_1_1Reg.html#a9f15eec81b3faea02a7d435e61339e5b',1,'rasi::codegen::Reg']]]
+  ['offset_0',['offset',['../structrasi_1_1x86__64_1_1inst_1_1LeaFrame.html#a29610b627c4b246f62ea6e0bed5b4b62',1,'rasi::x86_64::inst::LeaFrame']]],
+  ['op_1',['op',['../structrasi_1_1ir_1_1IRInst.html#a30c614e6c1277ca77ff49df72a63db61',1,'rasi::ir::IRInst::op'],['../structrasi_1_1x86__64_1_1inst_1_1Alu.html#aecd0c691fdf8685299c2e5988de8a39d',1,'rasi::x86_64::inst::Alu::op'],['../structrasi_1_1x86__64_1_1inst_1_1AluImm.html#ae55a379e75d17394189d4bd903b4c234',1,'rasi::x86_64::inst::AluImm::op']]],
+  ['operand_5franges_2',['operand_ranges',['../structrasi_1_1codegen_1_1VCode.html#a464c3746b8c62d3108ebc0df9aba1697',1,'rasi::codegen::VCode']]],
+  ['operands_3',['operands',['../structrasi_1_1codegen_1_1VCode.html#a6eb3a5b91e3664c4d712a3b412823de0',1,'rasi::codegen::VCode::operands'],['../structrasi_1_1ir_1_1IRFunction.html#a812ba67c5979cd499ba08f4eb894fa56',1,'rasi::ir::IRFunction::operands']]],
+  ['ops_5fcount_4',['ops_count',['../structrasi_1_1ir_1_1IRInst.html#adcf5c2d82fd4b8217d168d03a729d36d',1,'rasi::ir::IRInst']]],
+  ['ops_5foffset_5',['ops_offset',['../structrasi_1_1ir_1_1IRInst.html#a53fac09f9dfaa0d2472e3eb8d5b3c946',1,'rasi::ir::IRInst']]]
 ];

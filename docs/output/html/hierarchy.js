@@ -32,13 +32,16 @@ var hierarchy =
     [ "rasi::ir::IRModule", "classrasi_1_1ir_1_1IRModule.html", null ],
     [ "rasi::ir::IRSig", "structrasi_1_1ir_1_1IRSig.html", null ],
     [ "rasi::ir::IRVisitor&lt; Derived &gt;", "classrasi_1_1ir_1_1IRVisitor.html", null ],
+    [ "rasi::ir::IRVisitor&lt; IRLowerer &gt;", "classrasi_1_1ir_1_1IRVisitor.html", [
+      [ "rasi::x86_64::IRLowerer", "classrasi_1_1x86__64_1_1IRLowerer.html", null ]
+    ] ],
     [ "rasi::ir::IRVisitor&lt; IRVerifier &gt;", "classrasi_1_1ir_1_1IRVisitor.html", [
       [ "rasi::ir::IRVerifier", "structrasi_1_1ir_1_1IRVerifier.html", null ]
     ] ],
     [ "rasi::x86_64::inst::Jcc", "structrasi_1_1x86__64_1_1inst_1_1Jcc.html", null ],
     [ "rasi::x86_64::inst::Jmp", "structrasi_1_1x86__64_1_1inst_1_1Jmp.html", null ],
     [ "rasi::x86_64::inst::LeaFrame", "structrasi_1_1x86__64_1_1inst_1_1LeaFrame.html", null ],
-    [ "rasi::codegen::MachInst&lt; Derived &gt;", "classrasi_1_1codegen_1_1MachInst.html", null ],
+    [ "rasi::codegen::MachineEnv", "structrasi_1_1codegen_1_1MachineEnv.html", null ],
     [ "rasi::codegen::MachOperand", "structrasi_1_1codegen_1_1MachOperand.html", null ],
     [ "rasi::x86_64::inst::Mov", "structrasi_1_1x86__64_1_1inst_1_1Mov.html", null ],
     [ "rasi::x86_64::inst::MovImm", "structrasi_1_1x86__64_1_1inst_1_1MovImm.html", null ],
@@ -48,6 +51,7 @@ var hierarchy =
     [ "rasi::x86_64::inst::Movzx", "structrasi_1_1x86__64_1_1inst_1_1Movzx.html", null ],
     [ "rasi::x86_64::inst::Pop", "structrasi_1_1x86__64_1_1inst_1_1Pop.html", null ],
     [ "rasi::codegen::PReg", "structrasi_1_1codegen_1_1PReg.html", null ],
+    [ "rasi::x86_64::PReg", "structrasi_1_1x86__64_1_1PReg.html", null ],
     [ "rasi::x86_64::inst::Push", "structrasi_1_1x86__64_1_1inst_1_1Push.html", null ],
     [ "rasi::ir::Ref&lt; Tag &gt;", "structrasi_1_1ir_1_1Ref.html", null ],
     [ "rasi::codegen::Reg", "structrasi_1_1codegen_1_1Reg.html", null ],

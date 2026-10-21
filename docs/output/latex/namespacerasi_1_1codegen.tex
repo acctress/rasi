@@ -5,10 +5,10 @@
 \item 
 struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1BlockId}{Block\+Id}}
 \begin{DoxyCompactList}\small\item\em An opaque index into a \doxylink{structrasi_1_1codegen_1_1VCode}{VCode} block table. \end{DoxyCompactList}\item 
-class \doxymbox{\hyperlink{classrasi_1_1codegen_1_1MachInst}{Mach\+Inst}}
-\begin{DoxyCompactList}\small\item\em CRTP trait for a target specific machine instruction. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{Machine\+Env}}
+\begin{DoxyCompactList}\small\item\em Register environment for a target ISA, register allocation facing Describes which registers the allocator may use and in what order. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachOperand}{Mach\+Operand}}
-\begin{DoxyCompactList}\small\item\em A packed register operand for a \doxylink{classrasi_1_1codegen_1_1MachInst}{Mach\+Inst}. Layout: bits 63:43 -\/ vreg index bit 42 -\/ vreg class bits 41:40 -\/ \doxylink{namespacerasi_1_1codegen_a95f42a374befe499c75c355a85bf33c7}{Operand\+Kind} bit 39 -\/ \doxylink{namespacerasi_1_1codegen_a75040cb52a1f403664b547a9dd2bdc59}{Operand\+Pos} bit 38 -\/ constraint kind bits 37:8 -\/ reserved bits 7:0 -\/ \doxylink{structrasi_1_1codegen_1_1PReg}{PReg} bits if Fixed, else 0. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A packed register operand for a \doxylink{conceptrasi_1_1codegen_1_1MachInst}{Mach\+Inst}. Layout: bits 63:43 -\/ vreg index bit 42 -\/ vreg class bits 41:40 -\/ \doxylink{namespacerasi_1_1codegen_a95f42a374befe499c75c355a85bf33c7}{Operand\+Kind} bit 39 -\/ \doxylink{namespacerasi_1_1codegen_a75040cb52a1f403664b547a9dd2bdc59}{Operand\+Pos} bit 38 -\/ constraint kind bits 37:8 -\/ reserved bits 7:0 -\/ \doxylink{structrasi_1_1codegen_1_1PReg}{PReg} bits if Fixed, else 0. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}}
 \begin{DoxyCompactList}\small\item\em A physical register Hardware encoding and register class packed into a single byte (6 bits, 1 bit). Layout: bit 0 -\/ \doxylink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class} bits 6:1 -\/ hardware encoding bit 7 -\/ reserved. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1Reg}{Reg}}
@@ -21,6 +21,11 @@ class \doxymbox{\hyperlink{classrasi_1_1codegen_1_1VCodeBuilder}{VCode\+Builder}
 \begin{DoxyCompactList}\small\item\em Builder for \doxylink{structrasi_1_1codegen_1_1VCode}{VCode}{\itshape . }\end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{structrasi_1_1codegen_1_1VReg}{VReg}}
 \begin{DoxyCompactList}\small\item\em A virtual register Layout: bit 0 -\/ \doxylink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class} bits 31:1 -\/ vreg index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{conceptrasi_1_1codegen_1_1MachInst}{Mach\+Inst}}
+\begin{DoxyCompactList}\small\item\em Concept constraining a target machine instruction type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 

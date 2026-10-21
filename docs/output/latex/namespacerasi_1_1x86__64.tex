@@ -9,7 +9,11 @@ namespace \doxymbox{\hyperlink{namespacerasi_1_1x86__64_1_1inst}{inst}}
 \begin{DoxyCompactItemize}
 \item 
 struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1AddressMode}{Address\+Mode}}
-\begin{DoxyCompactList}\small\item\em \doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} memory addressing mode \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} memory addressing mode \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classrasi_1_1x86__64_1_1IRLowerer}{IRLowerer}}
+\begin{DoxyCompactList}\small\item\em Lowers a single IR function to \doxylink{namespacerasi_1_1x86__64}{x86\+\_\+64} VCode. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg}{PReg}}
+\begin{DoxyCompactList}\small\item\em A physical register Hardware encoding and register class packed into a single byte (6 bits, 1 bit). Layout: bit 0 -\/ \doxylink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class} bits 6:1 -\/ hardware encoding bit 7 -\/ reserved. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,7 +54,9 @@ enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad
 , \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06aa1e28eee0339658d39a8b4d325b56e9c}{S32}}
 , \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a48f4eda24fbca4a0e058ad3bc9c15a06a115dca124dc6423c7a400b8a8a0270cc}{S64}}
  \}
-\begin{DoxyCompactList}\small\item\em Operand size for sign or zero extending moves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Operand size for sign or zero extending moves. \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1x86__64_adaee5b962fda789cdd870325ee2c9d7e}{Reg\+Class}} 
+\begin{DoxyCompactList}\small\item\em Register class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,7 +67,94 @@ bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae1c326196c63a2f5f5d9b6d4c40f
 bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af12c7dd69630545412d843b56a6a344d}{is\+\_\+branch}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst) noexcept
 \begin{DoxyCompactList}\small\item\em True if this instruction is a branch. \end{DoxyCompactList}\item 
 bool \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ba7e8ae91555f85e5a87b946d9935a8}{is\+\_\+move}} (const \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9e03f10763abcf60830bdf6b7b990c01}{X86\+Inst}} \&inst) noexcept
-\begin{DoxyCompactList}\small\item\em True if this is a pure register to register move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em True if this is a pure register to register move. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::\+\+Machine\+Env}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a524b4775975beb1afc007e8e9b61bc12}{sysv\+\_\+env}} () noexcept
+\begin{DoxyCompactList}\small\item\em Machine\+Env factories. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::\+\+Machine\+Env}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aae6e8473c7d15b84b5b349510eefe0f1}{win64\+\_\+env}} () noexcept
+\begin{DoxyCompactList}\small\item\em Construct a Machine\+Env for Windows x64 ABI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae44bf962f029b8cad3de38a57aee58bf}{k\+\_\+sysv\+\_\+preferred\+\_\+int}} \+[$\,$]
+\begin{DoxyCompactList}\small\item\em sysv \end{DoxyCompactList}\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a2fa8faf982b58d347def189b3228f69a}{k\+\_\+sysv\+\_\+non\+\_\+preferred\+\_\+int}} \+[$\,$]
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a8d21b6d6f0adab50e3a3ac7c9981b08d}{k\+\_\+sysv\+\_\+preferred\+\_\+float}} \+[$\,$]
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a27b291ddbd8ce1096e0174a8313e8a85}{k\+\_\+sysv\+\_\+non\+\_\+preferred\+\_\+float}} \+[$\,$] = \{\}
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a1c8c2ea84cc8bdca13f1fa5720469c5c}{k\+\_\+win64\+\_\+preferred\+\_\+int}} \+[$\,$]
+\begin{DoxyCompactList}\small\item\em win64 \end{DoxyCompactList}\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a4c27531eedd7a35ad3e902aadc7aaf5a}{k\+\_\+win64\+\_\+non\+\_\+preferred\+\_\+int}} \+[$\,$]
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5e3f9625c94909c0f5abe8ba6f758dcf}{k\+\_\+win64\+\_\+preferred\+\_\+float}} \+[$\,$]
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a28c67ceb35d37bf1bd3d805459d205ae}{k\+\_\+win64\+\_\+non\+\_\+preferred\+\_\+float}} \+[$\,$]
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b}{RAX}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(0, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ad29563dc41fefe98ce7e69896d98fc0b}{RCX}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(1, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a82aa79449c05fa4d4c713cd382382f7c}{RDX}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(2, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a10c5784de933bb5eaff64da67b630f54}{RBX}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(3, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a055dc93e4a38a1efde2f7c297aa02559}{RSP}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(4, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a68f20e924c45ec312a6e9bac6146919c}{RBP}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(5, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a84e3dca53955d823fd882c341fca43f1}{RSI}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(6, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a762c4a93d25be5fcfdf4bf27a23dfe8e}{RDI}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(7, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a050ce41557e94fb7ae19de5a27f9135f}{R8}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(8, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae705fa97bcda5e36b99e95e46ac39f59}{R9}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(9, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a620259bb7bfaabb9f95074642cc6ac07}{R10}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(10, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae34f4171b62d14d7c3fd5c89a16efc79}{R11}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(11, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf8b7577ee4fbc1735934d2838b7ccaa}{R12}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(12, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aecd03c113925f7e148758dbcea14af07}{R13}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(13, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a450ff47e5ec4b11eab4227dfed772668}{R14}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(14, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a913264a20faac3773b60d340e63be106}{R15}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(15, Reg\+Class::\+\+Int)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a289f3e593a4912bcbdea64087eaab800}{XMM0}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(0, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae9e12f9f944bb314b722cc90dfccdd3d}{XMM1}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(1, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a619657144cbd1e84c6d27acce18f7385}{XMM2}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(2, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a4a0a3319483b6470d35f2d684daa9410}{XMM3}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(3, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a585558db0ab0484f9377d356c8a08a05}{XMM4}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(4, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aa00d23f1f66f265762f5b53c87a17040}{XMM5}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(5, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aeb776946e5f3d28e613ab00dab50a195}{XMM6}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(6, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a147cbfa21c3a2494b53fd9f3b47857e5}{XMM7}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(7, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af93e13da534136720d942d7f49b7aeab}{XMM8}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(8, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9077bc4553ca106642bc96447ba8f508}{XMM9}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(9, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf694abed50bf55fc81a19d226c6e5ce}{XMM10}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(10, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5021e93b12d341903e1b1ca91e08c323}{XMM11}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(11, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a83067b8b1f0d2f20032f0596a074d8b3}{XMM12}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(12, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a6a5efe6cca79623b97687c7dd5ac4f7d}{XMM13}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(13, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abd09aca05511d5e7b97b89f2e8e713d3}{XMM14}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(14, Reg\+Class::\+\+Float)
+\item 
+constexpr \doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a3bca6f0c1e09dc3f6e1efb789c2c02a1}{XMM15}} = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(15, Reg\+Class::\+\+Float)
+\end{DoxyCompactItemize}
 
 
 \label{namespacerasi_1_1x86__64_doc-typedef-members}
@@ -271,6 +364,16 @@ S64&\\
 \hline
 
 \end{DoxyEnumFields}
+\Hypertarget{namespacerasi_1_1x86__64_adaee5b962fda789cdd870325ee2c9d7e}\index{rasi::x86\_64@{rasi::x86\_64}!RegClass@{RegClass}}
+\index{RegClass@{RegClass}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RegClass}{RegClass}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_adaee5b962fda789cdd870325ee2c9d7e} 
+enum class \doxymbox{\hyperlink{namespacerasi_1_1codegen_adaee5b962fda789cdd870325ee2c9d7e}{rasi::\+codegen::\+\+Reg\+Class}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Register class. 
+
 
 
 \label{namespacerasi_1_1x86__64_doc-func-members}
@@ -315,4 +418,327 @@ bool rasi::\+x86\+\_\+64::\+is\+\_\+terminator (\begin{DoxyParamCaption}\item[{c
 
 
 True if this instruction ends a basic block. 
+
+\Hypertarget{namespacerasi_1_1x86__64_a524b4775975beb1afc007e8e9b61bc12}\index{rasi::x86\_64@{rasi::x86\_64}!sysv\_env@{sysv\_env}}
+\index{sysv\_env@{sysv\_env}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{sysv\_env()}{sysv\_env()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a524b4775975beb1afc007e8e9b61bc12} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::\+\+Machine\+Env}} rasi::\+x86\+\_\+64::\+sysv\+\_\+env (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Machine\+Env factories. 
+
+Construct a Machine\+Env for System V AMD64 ABI \Hypertarget{namespacerasi_1_1x86__64_aae6e8473c7d15b84b5b349510eefe0f1}\index{rasi::x86\_64@{rasi::x86\_64}!win64\_env@{win64\_env}}
+\index{win64\_env@{win64\_env}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{win64\_env()}{win64\_env()}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_aae6e8473c7d15b84b5b349510eefe0f1} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1MachineEnv}{codegen::\+\+Machine\+Env}} rasi::\+x86\+\_\+64::\+win64\+\_\+env (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Construct a Machine\+Env for Windows x64 ABI. 
+
+
+
+\label{namespacerasi_1_1x86__64_doc-var-members}
+\Hypertarget{namespacerasi_1_1x86__64_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerasi_1_1x86__64_a27b291ddbd8ce1096e0174a8313e8a85}\index{rasi::x86\_64@{rasi::x86\_64}!k\_sysv\_non\_preferred\_float@{k\_sysv\_non\_preferred\_float}}
+\index{k\_sysv\_non\_preferred\_float@{k\_sysv\_non\_preferred\_float}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_sysv\_non\_preferred\_float}{k\_sysv\_non\_preferred\_float}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a27b291ddbd8ce1096e0174a8313e8a85} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+sysv\+\_\+non\+\_\+preferred\+\_\+float\+[$\,$] = \{\}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a2fa8faf982b58d347def189b3228f69a}\index{rasi::x86\_64@{rasi::x86\_64}!k\_sysv\_non\_preferred\_int@{k\_sysv\_non\_preferred\_int}}
+\index{k\_sysv\_non\_preferred\_int@{k\_sysv\_non\_preferred\_int}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_sysv\_non\_preferred\_int}{k\_sysv\_non\_preferred\_int}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a2fa8faf982b58d347def189b3228f69a} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+sysv\+\_\+non\+\_\+preferred\+\_\+int\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a10c5784de933bb5eaff64da67b630f54}{RBX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf8b7577ee4fbc1735934d2838b7ccaa}{R12}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aecd03c113925f7e148758dbcea14af07}{R13}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a450ff47e5ec4b11eab4227dfed772668}{R14}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a913264a20faac3773b60d340e63be106}{R15}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacerasi_1_1x86__64_a8d21b6d6f0adab50e3a3ac7c9981b08d}\index{rasi::x86\_64@{rasi::x86\_64}!k\_sysv\_preferred\_float@{k\_sysv\_preferred\_float}}
+\index{k\_sysv\_preferred\_float@{k\_sysv\_preferred\_float}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_sysv\_preferred\_float}{k\_sysv\_preferred\_float}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a8d21b6d6f0adab50e3a3ac7c9981b08d} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+sysv\+\_\+preferred\+\_\+float\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a289f3e593a4912bcbdea64087eaab800}{XMM0}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae9e12f9f944bb314b722cc90dfccdd3d}{XMM1}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a619657144cbd1e84c6d27acce18f7385}{XMM2}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a4a0a3319483b6470d35f2d684daa9410}{XMM3}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a585558db0ab0484f9377d356c8a08a05}{XMM4}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aa00d23f1f66f265762f5b53c87a17040}{XMM5}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aeb776946e5f3d28e613ab00dab50a195}{XMM6}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a147cbfa21c3a2494b53fd9f3b47857e5}{XMM7}},}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af93e13da534136720d942d7f49b7aeab}{XMM8}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9077bc4553ca106642bc96447ba8f508}{XMM9}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf694abed50bf55fc81a19d226c6e5ce}{XMM10}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5021e93b12d341903e1b1ca91e08c323}{XMM11}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a83067b8b1f0d2f20032f0596a074d8b3}{XMM12}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a6a5efe6cca79623b97687c7dd5ac4f7d}{XMM13}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abd09aca05511d5e7b97b89f2e8e713d3}{XMM14}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a3bca6f0c1e09dc3f6e1efb789c2c02a1}{XMM15}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacerasi_1_1x86__64_ae44bf962f029b8cad3de38a57aee58bf}\index{rasi::x86\_64@{rasi::x86\_64}!k\_sysv\_preferred\_int@{k\_sysv\_preferred\_int}}
+\index{k\_sysv\_preferred\_int@{k\_sysv\_preferred\_int}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_sysv\_preferred\_int}{k\_sysv\_preferred\_int}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ae44bf962f029b8cad3de38a57aee58bf} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+sysv\+\_\+preferred\+\_\+int\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b}{RAX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ad29563dc41fefe98ce7e69896d98fc0b}{RCX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a82aa79449c05fa4d4c713cd382382f7c}{RDX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a84e3dca53955d823fd882c341fca43f1}{RSI}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a762c4a93d25be5fcfdf4bf27a23dfe8e}{RDI}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a050ce41557e94fb7ae19de5a27f9135f}{R8}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae705fa97bcda5e36b99e95e46ac39f59}{R9}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a620259bb7bfaabb9f95074642cc6ac07}{R10}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae34f4171b62d14d7c3fd5c89a16efc79}{R11}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+sysv 
+
+\Hypertarget{namespacerasi_1_1x86__64_a28c67ceb35d37bf1bd3d805459d205ae}\index{rasi::x86\_64@{rasi::x86\_64}!k\_win64\_non\_preferred\_float@{k\_win64\_non\_preferred\_float}}
+\index{k\_win64\_non\_preferred\_float@{k\_win64\_non\_preferred\_float}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_win64\_non\_preferred\_float}{k\_win64\_non\_preferred\_float}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a28c67ceb35d37bf1bd3d805459d205ae} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+win64\+\_\+non\+\_\+preferred\+\_\+float\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aeb776946e5f3d28e613ab00dab50a195}{XMM6}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a147cbfa21c3a2494b53fd9f3b47857e5}{XMM7}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_af93e13da534136720d942d7f49b7aeab}{XMM8}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a9077bc4553ca106642bc96447ba8f508}{XMM9}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf694abed50bf55fc81a19d226c6e5ce}{XMM10}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5021e93b12d341903e1b1ca91e08c323}{XMM11}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a83067b8b1f0d2f20032f0596a074d8b3}{XMM12}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a6a5efe6cca79623b97687c7dd5ac4f7d}{XMM13}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abd09aca05511d5e7b97b89f2e8e713d3}{XMM14}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a3bca6f0c1e09dc3f6e1efb789c2c02a1}{XMM15}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacerasi_1_1x86__64_a4c27531eedd7a35ad3e902aadc7aaf5a}\index{rasi::x86\_64@{rasi::x86\_64}!k\_win64\_non\_preferred\_int@{k\_win64\_non\_preferred\_int}}
+\index{k\_win64\_non\_preferred\_int@{k\_win64\_non\_preferred\_int}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_win64\_non\_preferred\_int}{k\_win64\_non\_preferred\_int}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a4c27531eedd7a35ad3e902aadc7aaf5a} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+win64\+\_\+non\+\_\+preferred\+\_\+int\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a10c5784de933bb5eaff64da67b630f54}{RBX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a84e3dca53955d823fd882c341fca43f1}{RSI}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a762c4a93d25be5fcfdf4bf27a23dfe8e}{RDI}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_abf8b7577ee4fbc1735934d2838b7ccaa}{R12}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aecd03c113925f7e148758dbcea14af07}{R13}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a450ff47e5ec4b11eab4227dfed772668}{R14}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a913264a20faac3773b60d340e63be106}{R15}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacerasi_1_1x86__64_a5e3f9625c94909c0f5abe8ba6f758dcf}\index{rasi::x86\_64@{rasi::x86\_64}!k\_win64\_preferred\_float@{k\_win64\_preferred\_float}}
+\index{k\_win64\_preferred\_float@{k\_win64\_preferred\_float}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_win64\_preferred\_float}{k\_win64\_preferred\_float}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a5e3f9625c94909c0f5abe8ba6f758dcf} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+win64\+\_\+preferred\+\_\+float\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a289f3e593a4912bcbdea64087eaab800}{XMM0}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae9e12f9f944bb314b722cc90dfccdd3d}{XMM1}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a619657144cbd1e84c6d27acce18f7385}{XMM2}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a4a0a3319483b6470d35f2d684daa9410}{XMM3}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a585558db0ab0484f9377d356c8a08a05}{XMM4}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_aa00d23f1f66f265762f5b53c87a17040}{XMM5}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacerasi_1_1x86__64_a1c8c2ea84cc8bdca13f1fa5720469c5c}\index{rasi::x86\_64@{rasi::x86\_64}!k\_win64\_preferred\_int@{k\_win64\_preferred\_int}}
+\index{k\_win64\_preferred\_int@{k\_win64\_preferred\_int}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{k\_win64\_preferred\_int}{k\_win64\_preferred\_int}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a1c8c2ea84cc8bdca13f1fa5720469c5c} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+k\+\_\+win64\+\_\+preferred\+\_\+int\+[$\,$]\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b}{RAX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ad29563dc41fefe98ce7e69896d98fc0b}{RCX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a82aa79449c05fa4d4c713cd382382f7c}{RDX}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a050ce41557e94fb7ae19de5a27f9135f}{R8}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae705fa97bcda5e36b99e95e46ac39f59}{R9}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_a620259bb7bfaabb9f95074642cc6ac07}{R10}},\ \doxymbox{\hyperlink{namespacerasi_1_1x86__64_ae34f4171b62d14d7c3fd5c89a16efc79}{R11}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+win64 
+
+\Hypertarget{namespacerasi_1_1x86__64_a620259bb7bfaabb9f95074642cc6ac07}\index{rasi::x86\_64@{rasi::x86\_64}!R10@{R10}}
+\index{R10@{R10}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R10}{R10}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a620259bb7bfaabb9f95074642cc6ac07} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R10 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(10, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_ae34f4171b62d14d7c3fd5c89a16efc79}\index{rasi::x86\_64@{rasi::x86\_64}!R11@{R11}}
+\index{R11@{R11}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R11}{R11}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ae34f4171b62d14d7c3fd5c89a16efc79} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R11 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(11, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_abf8b7577ee4fbc1735934d2838b7ccaa}\index{rasi::x86\_64@{rasi::x86\_64}!R12@{R12}}
+\index{R12@{R12}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R12}{R12}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_abf8b7577ee4fbc1735934d2838b7ccaa} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R12 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(12, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_aecd03c113925f7e148758dbcea14af07}\index{rasi::x86\_64@{rasi::x86\_64}!R13@{R13}}
+\index{R13@{R13}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R13}{R13}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_aecd03c113925f7e148758dbcea14af07} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R13 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(13, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a450ff47e5ec4b11eab4227dfed772668}\index{rasi::x86\_64@{rasi::x86\_64}!R14@{R14}}
+\index{R14@{R14}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R14}{R14}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a450ff47e5ec4b11eab4227dfed772668} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R14 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(14, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a913264a20faac3773b60d340e63be106}\index{rasi::x86\_64@{rasi::x86\_64}!R15@{R15}}
+\index{R15@{R15}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R15}{R15}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a913264a20faac3773b60d340e63be106} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R15 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(15, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a050ce41557e94fb7ae19de5a27f9135f}\index{rasi::x86\_64@{rasi::x86\_64}!R8@{R8}}
+\index{R8@{R8}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R8}{R8}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a050ce41557e94fb7ae19de5a27f9135f} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R8 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(8, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_ae705fa97bcda5e36b99e95e46ac39f59}\index{rasi::x86\_64@{rasi::x86\_64}!R9@{R9}}
+\index{R9@{R9}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{R9}{R9}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ae705fa97bcda5e36b99e95e46ac39f59} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+R9 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(9, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b}\index{rasi::x86\_64@{rasi::x86\_64}!RAX@{RAX}}
+\index{RAX@{RAX}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RAX}{RAX}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a5ce678a84bb18f54fb9654367648823b} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RAX = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(0, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a68f20e924c45ec312a6e9bac6146919c}\index{rasi::x86\_64@{rasi::x86\_64}!RBP@{RBP}}
+\index{RBP@{RBP}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RBP}{RBP}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a68f20e924c45ec312a6e9bac6146919c} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RBP = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(5, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a10c5784de933bb5eaff64da67b630f54}\index{rasi::x86\_64@{rasi::x86\_64}!RBX@{RBX}}
+\index{RBX@{RBX}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RBX}{RBX}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a10c5784de933bb5eaff64da67b630f54} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RBX = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(3, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_ad29563dc41fefe98ce7e69896d98fc0b}\index{rasi::x86\_64@{rasi::x86\_64}!RCX@{RCX}}
+\index{RCX@{RCX}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RCX}{RCX}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ad29563dc41fefe98ce7e69896d98fc0b} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RCX = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(1, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a762c4a93d25be5fcfdf4bf27a23dfe8e}\index{rasi::x86\_64@{rasi::x86\_64}!RDI@{RDI}}
+\index{RDI@{RDI}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RDI}{RDI}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a762c4a93d25be5fcfdf4bf27a23dfe8e} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RDI = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(7, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a82aa79449c05fa4d4c713cd382382f7c}\index{rasi::x86\_64@{rasi::x86\_64}!RDX@{RDX}}
+\index{RDX@{RDX}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RDX}{RDX}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a82aa79449c05fa4d4c713cd382382f7c} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RDX = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(2, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a84e3dca53955d823fd882c341fca43f1}\index{rasi::x86\_64@{rasi::x86\_64}!RSI@{RSI}}
+\index{RSI@{RSI}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RSI}{RSI}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a84e3dca53955d823fd882c341fca43f1} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RSI = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(6, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a055dc93e4a38a1efde2f7c297aa02559}\index{rasi::x86\_64@{rasi::x86\_64}!RSP@{RSP}}
+\index{RSP@{RSP}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{RSP}{RSP}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a055dc93e4a38a1efde2f7c297aa02559} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+RSP = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(4, Reg\+Class::\+\+Int)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a289f3e593a4912bcbdea64087eaab800}\index{rasi::x86\_64@{rasi::x86\_64}!XMM0@{XMM0}}
+\index{XMM0@{XMM0}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM0}{XMM0}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a289f3e593a4912bcbdea64087eaab800} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM0 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(0, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_ae9e12f9f944bb314b722cc90dfccdd3d}\index{rasi::x86\_64@{rasi::x86\_64}!XMM1@{XMM1}}
+\index{XMM1@{XMM1}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM1}{XMM1}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_ae9e12f9f944bb314b722cc90dfccdd3d} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM1 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(1, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_abf694abed50bf55fc81a19d226c6e5ce}\index{rasi::x86\_64@{rasi::x86\_64}!XMM10@{XMM10}}
+\index{XMM10@{XMM10}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM10}{XMM10}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_abf694abed50bf55fc81a19d226c6e5ce} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM10 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(10, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a5021e93b12d341903e1b1ca91e08c323}\index{rasi::x86\_64@{rasi::x86\_64}!XMM11@{XMM11}}
+\index{XMM11@{XMM11}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM11}{XMM11}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a5021e93b12d341903e1b1ca91e08c323} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM11 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(11, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a83067b8b1f0d2f20032f0596a074d8b3}\index{rasi::x86\_64@{rasi::x86\_64}!XMM12@{XMM12}}
+\index{XMM12@{XMM12}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM12}{XMM12}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a83067b8b1f0d2f20032f0596a074d8b3} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM12 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(12, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a6a5efe6cca79623b97687c7dd5ac4f7d}\index{rasi::x86\_64@{rasi::x86\_64}!XMM13@{XMM13}}
+\index{XMM13@{XMM13}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM13}{XMM13}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a6a5efe6cca79623b97687c7dd5ac4f7d} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM13 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(13, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_abd09aca05511d5e7b97b89f2e8e713d3}\index{rasi::x86\_64@{rasi::x86\_64}!XMM14@{XMM14}}
+\index{XMM14@{XMM14}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM14}{XMM14}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_abd09aca05511d5e7b97b89f2e8e713d3} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM14 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(14, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a3bca6f0c1e09dc3f6e1efb789c2c02a1}\index{rasi::x86\_64@{rasi::x86\_64}!XMM15@{XMM15}}
+\index{XMM15@{XMM15}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM15}{XMM15}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a3bca6f0c1e09dc3f6e1efb789c2c02a1} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM15 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(15, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a619657144cbd1e84c6d27acce18f7385}\index{rasi::x86\_64@{rasi::x86\_64}!XMM2@{XMM2}}
+\index{XMM2@{XMM2}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM2}{XMM2}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a619657144cbd1e84c6d27acce18f7385} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM2 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(2, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a4a0a3319483b6470d35f2d684daa9410}\index{rasi::x86\_64@{rasi::x86\_64}!XMM3@{XMM3}}
+\index{XMM3@{XMM3}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM3}{XMM3}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a4a0a3319483b6470d35f2d684daa9410} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM3 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(3, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a585558db0ab0484f9377d356c8a08a05}\index{rasi::x86\_64@{rasi::x86\_64}!XMM4@{XMM4}}
+\index{XMM4@{XMM4}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM4}{XMM4}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a585558db0ab0484f9377d356c8a08a05} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM4 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(4, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_aa00d23f1f66f265762f5b53c87a17040}\index{rasi::x86\_64@{rasi::x86\_64}!XMM5@{XMM5}}
+\index{XMM5@{XMM5}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM5}{XMM5}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_aa00d23f1f66f265762f5b53c87a17040} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM5 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(5, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_aeb776946e5f3d28e613ab00dab50a195}\index{rasi::x86\_64@{rasi::x86\_64}!XMM6@{XMM6}}
+\index{XMM6@{XMM6}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM6}{XMM6}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_aeb776946e5f3d28e613ab00dab50a195} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM6 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(6, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a147cbfa21c3a2494b53fd9f3b47857e5}\index{rasi::x86\_64@{rasi::x86\_64}!XMM7@{XMM7}}
+\index{XMM7@{XMM7}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM7}{XMM7}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a147cbfa21c3a2494b53fd9f3b47857e5} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM7 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(7, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_af93e13da534136720d942d7f49b7aeab}\index{rasi::x86\_64@{rasi::x86\_64}!XMM8@{XMM8}}
+\index{XMM8@{XMM8}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM8}{XMM8}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_af93e13da534136720d942d7f49b7aeab} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM8 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(8, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespacerasi_1_1x86__64_a9077bc4553ca106642bc96447ba8f508}\index{rasi::x86\_64@{rasi::x86\_64}!XMM9@{XMM9}}
+\index{XMM9@{XMM9}!rasi::x86\_64@{rasi::x86\_64}}
+\doxysubsubsection{\texorpdfstring{XMM9}{XMM9}}
+{\footnotesize\ttfamily \label{namespacerasi_1_1x86__64_a9077bc4553ca106642bc96447ba8f508} 
+\doxymbox{\hyperlink{structrasi_1_1codegen_1_1PReg}{PReg}} rasi::\+x86\+\_\+64::\+\+XMM9 = \doxymbox{\hyperlink{structrasi_1_1x86__64_1_1PReg_a0272b65cb6deef9179c1f75aacd25685}{PReg::\+make}}(9, Reg\+Class::\+\+Float)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 

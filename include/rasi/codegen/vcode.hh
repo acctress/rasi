@@ -28,7 +28,7 @@ namespace rasi::codegen {
     };
 
     //! @brief Immutable virtual register code for one function
-    template <typename I>
+    template <MachInstC I>
     struct VCode {
         std::vector<I>                              insts;
         std::vector<MachOperand>                    operands;
@@ -40,7 +40,7 @@ namespace rasi::codegen {
     };
 
     //! @brief Builder for VCode<I>
-    template <typename I>
+    template <MachInstC I>
     class VCodeBuilder {
     public:
         //! @brief Begin a new VCode block with the given param vregs
