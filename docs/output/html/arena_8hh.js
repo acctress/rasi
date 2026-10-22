@@ -1,6 +1,6 @@
 var arena_8hh =
 [
-    [ "rasi::support::Slab", "structrasi_1_1support_1_1Slab.html", "structrasi_1_1support_1_1Slab" ],
-    [ "rasi::support::Checkpoint", "structrasi_1_1support_1_1Checkpoint.html", "structrasi_1_1support_1_1Checkpoint" ],
-    [ "rasi::support::Arena", "classrasi_1_1support_1_1Arena.html", "classrasi_1_1support_1_1Arena" ]
+    [ "xiao::support::Slab", "structxiao_1_1support_1_1Slab.html", "structxiao_1_1support_1_1Slab" ],
+    [ "xiao::support::Checkpoint", "structxiao_1_1support_1_1Checkpoint.html", "structxiao_1_1support_1_1Checkpoint" ],
+    [ "xiao::support::Arena", "classxiao_1_1support_1_1Arena.html", "classxiao_1_1support_1_1Arena" ]
 ];

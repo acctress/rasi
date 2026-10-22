@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lower_2ehh_0',['lower.hh',['../lower_8hh.html',1,'']]]
+  ['inst_2ehh_0',['inst.hh',['../ir_2inst_8hh.html',1,'(Global Namespace)'],['../isa_2x86_2inst_8hh.html',1,'(Global Namespace)']]]
 ];

@@ -1,5 +1,5 @@
 \doxysection{arena.\+hh}
-\hypertarget{arena_8hh_source}{}\label{arena_8hh_source}\index{include/rasi/support/arena.hh@{include/rasi/support/arena.hh}}
+\hypertarget{arena_8hh_source}{}\label{arena_8hh_source}\index{include/xiao/support/arena.hh@{include/xiao/support/arena.hh}}
 \doxymbox{\hyperlink{arena_8hh}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{//}}
@@ -16,45 +16,45 @@
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <span>}}
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacerasi_1_1support}{rasi::support}}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacexiao_1_1support}{xiao::support}}}
 \DoxyCodeLine{00016\ \{}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a1af663880ff29c228a2e114306e49859}{Slab}}\ \{}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::unique\_ptr<std::byte[]>\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}{data}};}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::byte*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4}{cursor}};}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::byte*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82}{end}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_aba142a93c614654478ab575cc175f350}{Slab}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::unique\_ptr<std::byte[]>\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_abff8d0d8aeab173ff5ee5748a858e61c}{data}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::byte*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_ad47e466b2b212eb23ee32b2fa61da38b}{cursor}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::byte*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_a0c1580973dcc00c1c5150798de3a7f97}{end}};}
 \DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a1af663880ff29c228a2e114306e49859}{Slab}}(\textcolor{keyword}{const}\ std::size\_t\ size)}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}{data}}\{\ std::make\_unique\_for\_overwrite<std::byte[]>(size)\ \}}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ ,\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4}{cursor}}\{\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}{data}}.get()\ \}}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ ,\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82}{end}}\ \{\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a23a8098c8855135e3cae2d3f41068e01}{data}}.get()\ +\ size\ \}\ \{\}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_aba142a93c614654478ab575cc175f350}{Slab}}(\textcolor{keyword}{const}\ std::size\_t\ size)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_abff8d0d8aeab173ff5ee5748a858e61c}{data}}\{\ std::make\_unique\_for\_overwrite<std::byte[]>(size)\ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ ,\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_ad47e466b2b212eb23ee32b2fa61da38b}{cursor}}\{\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_abff8d0d8aeab173ff5ee5748a858e61c}{data}}.get()\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ ,\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_a0c1580973dcc00c1c5150798de3a7f97}{end}}\ \{\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_abff8d0d8aeab173ff5ee5748a858e61c}{data}}.get()\ +\ size\ \}\ \{\}}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_af3a57d0a4849e85661e68511f1dedc74}{remaining}}()\ const\ noexcept\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a574144333da5c265f2607a507dddfd82}{end}}\ -\/\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Slab_a9df615edc8de94c9e627afdde697d2d4}{cursor}});}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_afb613e22113ca09ad7c1d09facc9044a}{remaining}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_a0c1580973dcc00c1c5150798de3a7f97}{end}}\ -\/\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Slab_ad47e466b2b212eb23ee32b2fa61da38b}{cursor}});}
 \DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00031\ \ \ \ \ \};}
 \DoxyCodeLine{00032\ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structrasi_1_1support_1_1Checkpoint}{Checkpoint}}\ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Checkpoint_acb2ecb4c5c5071318e9fa7977addc390}{slab}};\ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::byte*\ \ \doxymbox{\hyperlink{structrasi_1_1support_1_1Checkpoint_a4e9a04989f802dd5c2326dfc0a6500d8}{cursor}};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structxiao_1_1support_1_1Checkpoint}{Checkpoint}}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::size\_t\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Checkpoint_ad7d66da04c46b2f84ddfc6e535cac0ff}{slab}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::byte*\ \ \doxymbox{\hyperlink{structxiao_1_1support_1_1Checkpoint_aa5e7b30ef6d4f5c68fc0426dd20e39a1}{cursor}};}
 \DoxyCodeLine{00037\ \ \ \ \ \};}
 \DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\ \{}
 \DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::size\_t\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a35fd6f4f0566269b443a9494d97be753}{default\_slab\_size}}\ =\ 4096\ *\ 4;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::size\_t\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a537d1ef24d7c2a3dc3ee47384d168c80}{default\_slab\_size}}\ =\ 4096\ *\ 4;}
 \DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}(\textcolor{keyword}{const}\ std::size\_t\ slab\_size\ =\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a35fd6f4f0566269b443a9494d97be753}{default\_slab\_size}})\ noexcept}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}(\textcolor{keyword}{const}\ std::size\_t\ slab\_size\ =\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a537d1ef24d7c2a3dc3ee47384d168c80}{default\_slab\_size}})\ noexcept}
 \DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_slab\_size\{\ slab\_size\ \}}
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{\}}
 \DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_afbd2c175586c0886b94337f99f082986}{Arena}}(\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&\&)\ noexcept\ =\ default;}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&\ operator=(\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&\&)\ noexcept\ =\ default;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a5718b1a172041a912201bda4fe54a73a}{Arena}}(\doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&\&)\ noexcept\ =\ default;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&\ operator=(\doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&\&)\ noexcept\ =\ default;}
 \DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}(const\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&)\ =\ delete;}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&\ operator=(const\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}\&)\ =\ delete;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}(const\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&)\ =\ delete;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&\ operator=(const\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}\&)\ =\ delete;}
 \DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \string~\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a7e59d00f0f631b026cb177a7cbd826c0}{Arena}}()\ =\ default;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \string~\doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aaf21771bde9a04db2bc98bc181d79665}{Arena}}()\ =\ default;}
 \DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a0a00df47d30a355e9bc15a5cfb3ea57b}{allocate}}(}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ad03545fcfd01bc9e92d9878ebc098d58}{allocate}}(}
 \DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ const\ std::\textcolor{keywordtype}{size\_t}\ size,}
 \DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ const\ std::\textcolor{keywordtype}{size\_t}\ align\ =\ alignof(std::max\_align\_t)}
 \DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ )\ \{}
@@ -82,63 +82,63 @@
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}...\ Args>}
 \DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{requires}\ std::is\_constructible\_v<T,\ Args...>\ \&\&}
 \DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::is\_trivially\_destructible\_v<T>}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ [[nodiscard]]\ T*\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ad0f44e9a0171b8acf7862698df595c15}{alloc}}(Args\&\&...\ args)\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a0a00df47d30a355e9bc15a5cfb3ea57b}{allocate}}(\textcolor{keyword}{sizeof}(T),\ \textcolor{keyword}{alignof}(T));}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ [[nodiscard]]\ T*\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a7e8bdb7cc018875d345c16385048c819}{alloc}}(Args\&\&...\ args)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ad03545fcfd01bc9e92d9878ebc098d58}{allocate}}(\textcolor{keyword}{sizeof}(T),\ \textcolor{keyword}{alignof}(T));}
 \DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ::new\ (mem)\ T(std::forward<Args>(args)...);}
 \DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00088\ }
 \DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keyword}{requires}\ std::is\_trivially\_destructible\_v<T>}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::span<T>\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ab4017899d69061c78a7dc8a5060f964c}{alloc\_array}}(\textcolor{keyword}{const}\ std::size\_t\ n)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::span<T>\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a802aa78c8932ec0e0f330548d68a7b69}{alloc\_array}}(\textcolor{keyword}{const}\ std::size\_t\ n)\ \{}
 \DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)\ \textcolor{keywordflow}{return}\ \{\};}
 \DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a0a00df47d30a355e9bc15a5cfb3ea57b}{allocate}}(\textcolor{keyword}{sizeof}(T)\ *\ n,\ \textcolor{keyword}{alignof}(T));}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ad03545fcfd01bc9e92d9878ebc098d58}{allocate}}(\textcolor{keyword}{sizeof}(T)\ *\ n,\ \textcolor{keyword}{alignof}(T));}
 \DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ ::new\ (mem)\ T[n](),\ n\ \};}
 \DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00098\ }
 \DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{requires}\ std::is\_trivially\_destructible\_v<T>}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::span<T>\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a31482cecaa732620753d2d6c3242481f}{alloc\_array\_uninit}}(\textcolor{keyword}{const}\ std::size\_t\ n)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::span<T>\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ade1f4e8a0c5077a24a0c9139e4c35ca9}{alloc\_array\_uninit}}(\textcolor{keyword}{const}\ std::size\_t\ n)\ \{}
 \DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)\ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a0a00df47d30a355e9bc15a5cfb3ea57b}{allocate}}(\textcolor{keyword}{sizeof}(T)\ *\ n,\ \textcolor{keyword}{alignof}(T));}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ mem\ =\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ad03545fcfd01bc9e92d9878ebc098d58}{allocate}}(\textcolor{keyword}{sizeof}(T)\ *\ n,\ \textcolor{keyword}{alignof}(T));}
 \DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(mem),\ n\ \};}
 \DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00107\ }
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::string\_view\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a9a8cef2455fcc494ce59b5fed244e7c4}{alloc\_str}}(\textcolor{keyword}{const}\ std::string\_view\ sv)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::string\_view\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a97dfb63c983d8240f73f4d94aecf163b}{alloc\_str}}(\textcolor{keyword}{const}\ std::string\_view\ sv)\ \{}
 \DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sv.empty())\ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a0a00df47d30a355e9bc15a5cfb3ea57b}{allocate}}(sv.size(),\ \textcolor{keyword}{alignof}(\textcolor{keywordtype}{char})));}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_ad03545fcfd01bc9e92d9878ebc098d58}{allocate}}(sv.size(),\ \textcolor{keyword}{alignof}(\textcolor{keywordtype}{char})));}
 \DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ std::ranges::copy(sv,\ p);}
 \DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ p,\ sv.size()\ \};}
 \DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00116\ }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Checkpoint}{Checkpoint}}\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_af85edb4bf7162322d6e195ecfc680357}{mark}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Checkpoint}{Checkpoint}}\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a3470b5059aefb3a67567164da75d9b34}{mark}}()\ const\ noexcept\ \{}
 \DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_slabs.empty())\ \textcolor{keywordflow}{return}\ \{\ .slab\ =\ 0,\ .cursor\ =\ \textcolor{keyword}{nullptr}\ \};}
 \DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ .slab\ =\ m\_slabs.size()\ -\/\ 1,\ .cursor\ =\ m\_slabs.back().cursor\ \};}
 \DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00122\ }
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ae74abbe39629d7289bac1dda951da936}{rewind}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrasi_1_1support_1_1Checkpoint}{Checkpoint}}\&\ c)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_aac62b431cbfc03e17ad3485cdf8d73d1}{rewind}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structxiao_1_1support_1_1Checkpoint}{Checkpoint}}\&\ c)\ \textcolor{keyword}{noexcept}\ \{}
 \DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_slabs.empty())\ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ \{\ c.slab\ +\ 1\};\ i\ <\ m\_slabs.size();\ ++i)}
 \DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_slabs[i].cursor\ =\ m\_slabs[i].data.get();}
 \DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c.cursor\ !=\ \textcolor{keyword}{nullptr})\ m\_slabs[c.slab].cursor\ =\ c.cursor;}
 \DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00130\ }
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_aa14dceec9f0f9fd316624faefccf5be5}{reset}}()\ noexcept\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a71d6abae603e3eacb1e83230c4f9932b}{reset}}()\ noexcept\ \{}
 \DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ s\ :\ m\_slabs)\ s.cursor\ =\ s.data.get();}
 \DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00135\ }
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ad50984b7426259b07c9fafdebf731a9a}{release}}()\ noexcept\ \{\ m\_slabs.clear();\ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a3adfd523246a8e11cff0255044a80bf2}{release}}()\ noexcept\ \{\ m\_slabs.clear();\ \}}
 \DoxyCodeLine{00138\ }
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ada930628b0783eb0111ad0afa35b38bd}{slab\_count}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ m\_slabs.size();\ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a118cd159f8e0a6aef630ebcb15c28ada}{slab\_count}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ m\_slabs.size();\ \}}
 \DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_a8c8190879fe1f5e13213f3a93f796d9c}{bytes\_allocated}}()\ \ const\ noexcept\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a21769c4a2218b80d6ffc1793cac1d1fd}{bytes\_allocated}}()\ \ const\ noexcept\ \{}
 \DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ std::size\_t\ total\ =\ 0;}
 \DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ s\ :\ m\_slabs)}
 \DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ total\ +=\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(s.end\ -\/\ s.data.get());}
 \DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ total;}
 \DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00147\ }
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classrasi_1_1support_1_1Arena_ac5e0133b5b73e9ce68e3b0c3d10d884a}{bytes\_used}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::size\_t\ \doxymbox{\hyperlink{classxiao_1_1support_1_1Arena_a3d7d5f7756d93866770ff463f55ac809}{bytes\_used}}()\ const\ noexcept\ \{}
 \DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ std::size\_t\ total\ =\ 0;}
 \DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ s\ :\ m\_slabs)}
 \DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ total\ +=\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(s.cursor\ -\/\ s.data.get());}

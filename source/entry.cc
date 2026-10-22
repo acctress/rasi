@@ -1,12 +1,12 @@
-#include <rasi/ir/builder.hh>
-#include <rasi/ir/verifier.hh>
-#include <rasi/ir/module.hh>
+#include <xiao/ir/builder.hh>
+#include <xiao/ir/verifier.hh>
+#include <xiao/ir/module.hh>
 #include <print>
 
-#include "rasi/isa/x86/abi.hh"
-#include "rasi/isa/x86/lower.hh"
+#include "xiao/isa/x86/abi.hh"
+#include "xiao/isa/x86/lower.hh"
 
-using namespace rasi::ir;
+using namespace xiao::ir;
 
 int main() {
     IRModule module;
@@ -30,12 +30,12 @@ int main() {
 
     std::println("ok");
 
-    rasi::codegen::MachineEnv mach_env {};
-    rasi::x86_64::X86ABISpec abi_spec {};
-    rasi::x86_64::IRLowerer lowerer { mach_env, abi_spec };
+    xiao::codegen::MachineEnv mach_env {};
+    xiao::x86_64::X86ABISpec abi_spec {};
+    xiao::x86_64::IRLowerer lowerer { mach_env, abi_spec };
 
     auto fn = module.get(ref);
-    auto vcode = lowerer.lower(*fn, rasi::codegen::CallConv::SystemV);
+    auto vcode = lowerer.lower(*fn, xiao::codegen::CallConv::SystemV);
 
 
     std::println("~~ ir function ~~\n{}", *fn);

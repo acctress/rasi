@@ -1,11 +1,11 @@
 var refs_8hh =
 [
-    [ "rasi::ir::Ref&lt; Tag &gt;", "structrasi_1_1ir_1_1Ref.html", "structrasi_1_1ir_1_1Ref" ],
-    [ "std::formatter&lt; rasi::ir::Ref&lt; Tag &gt; &gt;", "structstd_1_1formatter_3_01rasi_1_1ir_1_1Ref_3_01Tag_01_4_01_4.html", "structstd_1_1formatter_3_01rasi_1_1ir_1_1Ref_3_01Tag_01_4_01_4" ],
-    [ "rasi::ir::BlockRef", "namespacerasi_1_1ir.html#add7dc92e75c0bdac6fc8e2b8b7a2bd27", null ],
-    [ "rasi::ir::FunctionRef", "namespacerasi_1_1ir.html#a73a1e63328d05f8f20a77a6fb800466b", null ],
-    [ "rasi::ir::ImmRef", "namespacerasi_1_1ir.html#a7713d6100522af6a9b6fff983b3cc8b3", null ],
-    [ "rasi::ir::InstRef", "namespacerasi_1_1ir.html#ab59f1b9c8e35f63cc0860aad5b43930b", null ],
-    [ "rasi::ir::StringRef", "namespacerasi_1_1ir.html#a0283183c0a953185293a635295b5ccc0", null ],
-    [ "rasi::ir::ValueRef", "namespacerasi_1_1ir.html#a5f067fb06c7dd5d1119267a84a15ff74", null ]
+    [ "xiao::ir::Ref&lt; Tag &gt;", "structxiao_1_1ir_1_1Ref.html", "structxiao_1_1ir_1_1Ref" ],
+    [ "std::formatter&lt; xiao::ir::Ref&lt; Tag &gt; &gt;", "structstd_1_1formatter_3_01xiao_1_1ir_1_1Ref_3_01Tag_01_4_01_4.html", "structstd_1_1formatter_3_01xiao_1_1ir_1_1Ref_3_01Tag_01_4_01_4" ],
+    [ "xiao::ir::BlockRef", "namespacexiao_1_1ir.html#adce27e1b92f31de91f837887cf466a61", null ],
+    [ "xiao::ir::FunctionRef", "namespacexiao_1_1ir.html#af797d8e76ccbec59a5ae9bd140381361", null ],
+    [ "xiao::ir::ImmRef", "namespacexiao_1_1ir.html#af9bd2fb068f5bda86e77da4ae59620f2", null ],
+    [ "xiao::ir::InstRef", "namespacexiao_1_1ir.html#a2f2d02f85233f9e0209e29491c4be0c1", null ],
+    [ "xiao::ir::StringRef", "namespacexiao_1_1ir.html#a1817af3ff3012e194ba11e4a269b753e", null ],
+    [ "xiao::ir::ValueRef", "namespacexiao_1_1ir.html#a3c6f38c38dc4f75306f47a9c6033e364", null ]
 ];

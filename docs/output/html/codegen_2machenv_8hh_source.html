@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rasi: include/rasi/codegen/machenv.hh Source File</title>
+<title>xiao: include/xiao/codegen/machenv.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">rasi
+   <div id="projectname">xiao
    </div>
   </td>
  </tr>
@@ -118,34 +118,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('codegen_2mache
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="codegen_2reg_8hh.html">rasi/codegen/reg.hh</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="codegen_2reg_8hh.html">xiao/codegen/reg.hh</a>&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;span&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacerasi.html">   11</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacerasi_1_1codegen.html">rasi::codegen</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacexiao_1_1codegen.html">xiao::codegen</a> {</div>
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structrasi_1_1codegen_1_1MachineEnv.html">   14</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structrasi_1_1codegen_1_1MachineEnv.html">MachineEnv</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structrasi_1_1codegen_1_1MachineEnv.html#ad6fbf06d5e7571aaff56b5261f3f89eb">   16</a></span>        std::array&lt;std::span&lt;const PReg&gt;, 2&gt; <a class="code hl_variable" href="structrasi_1_1codegen_1_1MachineEnv.html#ad6fbf06d5e7571aaff56b5261f3f89eb">preferred</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structrasi_1_1codegen_1_1MachineEnv.html#a450ecba485890f0950726a1da7366496">   18</a></span>        std::array&lt;std::span&lt;const PReg&gt;, 2&gt; <a class="code hl_variable" href="structrasi_1_1codegen_1_1MachineEnv.html#a450ecba485890f0950726a1da7366496">non_preferred</a>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structrasi_1_1codegen_1_1MachineEnv.html#ae23d836484683b38c07d1d06467dc887">   20</a></span>        std::array&lt;PReg, 2&gt; <a class="code hl_variable" href="structrasi_1_1codegen_1_1MachineEnv.html#ae23d836484683b38c07d1d06467dc887">scratch</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structxiao_1_1codegen_1_1MachineEnv.html">   14</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structxiao_1_1codegen_1_1MachineEnv.html">MachineEnv</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structxiao_1_1codegen_1_1MachineEnv.html#a060fff6b902f9b2156d8f316e577e35f">   16</a></span>        std::array&lt;std::span&lt;const PReg&gt;, 2&gt; <a class="code hl_variable" href="structxiao_1_1codegen_1_1MachineEnv.html#a060fff6b902f9b2156d8f316e577e35f">preferred</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structxiao_1_1codegen_1_1MachineEnv.html#a8e73695d6cfb27ae0490fa0a05ef2ef3">   18</a></span>        std::array&lt;std::span&lt;const PReg&gt;, 2&gt; <a class="code hl_variable" href="structxiao_1_1codegen_1_1MachineEnv.html#a8e73695d6cfb27ae0490fa0a05ef2ef3">non_preferred</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structxiao_1_1codegen_1_1MachineEnv.html#a848a1670b134280024056f8ad5108250">   20</a></span>        std::array&lt;PReg, 2&gt; <a class="code hl_variable" href="structxiao_1_1codegen_1_1MachineEnv.html#a848a1670b134280024056f8ad5108250">scratch</a>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    };</div>
 </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
-</div>
 <div class="ttc" id="acodegen_2reg_8hh_html"><div class="ttname"><a href="codegen_2reg_8hh.html">reg.hh</a></div></div>
-<div class="ttc" id="anamespacerasi_1_1codegen_html"><div class="ttname"><a href="namespacerasi_1_1codegen.html">rasi::codegen</a></div><div class="ttdef"><b>Definition</b> machenv.hh:11</div></div>
-<div class="ttc" id="astructrasi_1_1codegen_1_1MachineEnv_html"><div class="ttname"><a href="structrasi_1_1codegen_1_1MachineEnv.html">rasi::codegen::MachineEnv</a></div><div class="ttdoc">Register environment for a target ISA, register allocation facing Describes which registers the alloc...</div><div class="ttdef"><b>Definition</b> machenv.hh:14</div></div>
-<div class="ttc" id="astructrasi_1_1codegen_1_1MachineEnv_html_a450ecba485890f0950726a1da7366496"><div class="ttname"><a href="structrasi_1_1codegen_1_1MachineEnv.html#a450ecba485890f0950726a1da7366496">rasi::codegen::MachineEnv::non_preferred</a></div><div class="ttdeci">std::array&lt; std::span&lt; const PReg &gt;, 2 &gt; non_preferred</div><div class="ttdoc">Registers the allocator would use to fallback when preferred are exhausted.</div><div class="ttdef"><b>Definition</b> machenv.hh:18</div></div>
-<div class="ttc" id="astructrasi_1_1codegen_1_1MachineEnv_html_ad6fbf06d5e7571aaff56b5261f3f89eb"><div class="ttname"><a href="structrasi_1_1codegen_1_1MachineEnv.html#ad6fbf06d5e7571aaff56b5261f3f89eb">rasi::codegen::MachineEnv::preferred</a></div><div class="ttdeci">std::array&lt; std::span&lt; const PReg &gt;, 2 &gt; preferred</div><div class="ttdoc">Registers the allocator would prefer to use.</div><div class="ttdef"><b>Definition</b> machenv.hh:16</div></div>
-<div class="ttc" id="astructrasi_1_1codegen_1_1MachineEnv_html_ae23d836484683b38c07d1d06467dc887"><div class="ttname"><a href="structrasi_1_1codegen_1_1MachineEnv.html#ae23d836484683b38c07d1d06467dc887">rasi::codegen::MachineEnv::scratch</a></div><div class="ttdeci">std::array&lt; PReg, 2 &gt; scratch</div><div class="ttdoc">One scratch register per class, reserved for spill.</div><div class="ttdef"><b>Definition</b> machenv.hh:20</div></div>
+<div class="ttc" id="anamespacexiao_1_1codegen_html"><div class="ttname"><a href="namespacexiao_1_1codegen.html">xiao::codegen</a></div><div class="ttdef"><b>Definition</b> abi.hh:12</div></div>
+<div class="ttc" id="astructxiao_1_1codegen_1_1MachineEnv_html"><div class="ttname"><a href="structxiao_1_1codegen_1_1MachineEnv.html">xiao::codegen::MachineEnv</a></div><div class="ttdoc">Register environment for a target ISA, register allocation facing Describes which registers the alloc...</div><div class="ttdef"><b>Definition</b> machenv.hh:14</div></div>
+<div class="ttc" id="astructxiao_1_1codegen_1_1MachineEnv_html_a060fff6b902f9b2156d8f316e577e35f"><div class="ttname"><a href="structxiao_1_1codegen_1_1MachineEnv.html#a060fff6b902f9b2156d8f316e577e35f">xiao::codegen::MachineEnv::preferred</a></div><div class="ttdeci">std::array&lt; std::span&lt; const PReg &gt;, 2 &gt; preferred</div><div class="ttdoc">Registers the allocator would prefer to use.</div><div class="ttdef"><b>Definition</b> machenv.hh:16</div></div>
+<div class="ttc" id="astructxiao_1_1codegen_1_1MachineEnv_html_a848a1670b134280024056f8ad5108250"><div class="ttname"><a href="structxiao_1_1codegen_1_1MachineEnv.html#a848a1670b134280024056f8ad5108250">xiao::codegen::MachineEnv::scratch</a></div><div class="ttdeci">std::array&lt; PReg, 2 &gt; scratch</div><div class="ttdoc">One scratch register per class, reserved for spill.</div><div class="ttdef"><b>Definition</b> machenv.hh:20</div></div>
+<div class="ttc" id="astructxiao_1_1codegen_1_1MachineEnv_html_a8e73695d6cfb27ae0490fa0a05ef2ef3"><div class="ttname"><a href="structxiao_1_1codegen_1_1MachineEnv.html#a8e73695d6cfb27ae0490fa0a05ef2ef3">xiao::codegen::MachineEnv::non_preferred</a></div><div class="ttdeci">std::array&lt; std::span&lt; const PReg &gt;, 2 &gt; non_preferred</div><div class="ttdoc">Registers the allocator would use to fallback when preferred are exhausted.</div><div class="ttdef"><b>Definition</b> machenv.hh:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_37ac76943fc963c4145647c9e29eb10e.html">rasi</a></li><li class="navelem"><a href="dir_4fae5758d0feecc887f373e2975939e9.html">codegen</a></li><li class="navelem"><a href="codegen_2machenv_8hh.html">machenv.hh</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_b410dd95898eb29563a44b0fb91819d3.html">xiao</a></li><li class="navelem"><a href="dir_f5421c036c9ffd03a5441c83afc9e927.html">codegen</a></li><li class="navelem"><a href="codegen_2machenv_8hh.html">machenv.hh</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
   </ul>
 </div>

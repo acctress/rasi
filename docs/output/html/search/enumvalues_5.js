@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['f32_0',['f32',['../namespacerasi_1_1ir.html#ad4658739f3d213b4ef26a901490b57a0a512dc597be7ae761876315165dc8bd2e',1,'rasi::ir']]],
-  ['f64_1',['f64',['../namespacerasi_1_1ir.html#ad4658739f3d213b4ef26a901490b57a0a714b98e0a797e8f119f257a4ab802f86',1,'rasi::ir']]],
-  ['float_2',['Float',['../namespacerasi_1_1codegen.html#adaee5b962fda789cdd870325ee2c9d7ea22ae0e2b89e5e3d477f988cc36d3272b',1,'rasi::codegen']]]
+  ['f32_0',['f32',['../namespacexiao_1_1ir.html#a307713cf4121f80d62a84fb66835ef8fa512dc597be7ae761876315165dc8bd2e',1,'xiao::ir']]],
+  ['f64_1',['f64',['../namespacexiao_1_1ir.html#a307713cf4121f80d62a84fb66835ef8fa714b98e0a797e8f119f257a4ab802f86',1,'xiao::ir']]],
+  ['float_2',['Float',['../namespacexiao_1_1codegen.html#a5bdfce66bc89d50cd7def0cda69899c6a22ae0e2b89e5e3d477f988cc36d3272b',1,'xiao::codegen']]]
 ];

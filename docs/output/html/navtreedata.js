@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "rasi", "index.html", [
+  [ "xiao", "index.html", [
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -43,7 +43,8 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -59,9 +60,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"abi_8hh.html",
-"namespacerasi_1_1ir.html#a1aa2111ad1aacc7e26473d3007e560aca3c19c5dd9d58ca90ab5654b8a519b179",
-"structrasi_1_1ir_1_1IRFunction.html#af10c29ae423580330ad9c557e8ed5308"
+"annotated.html",
+"namespacemembers_enum.html",
+"structxiao_1_1codegen_1_1PReg.html#a41532ce7482d43577b95a4b3c1e92b41",
+"structxiao_1_1x86__64_1_1inst_1_1Jcc.html#ab295a555e1065934ed5fec222f488848"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

@@ -1,4 +1,4 @@
-PROJECT_NAME            = "rasi"
+PROJECT_NAME            = "xiao"
 FILE_PATTERNS           = *.cc *.hh
 INPUT                   = source include
 RECURSIVE               = YES

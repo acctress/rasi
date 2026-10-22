@@ -1,4 +1,4 @@
 var module_8hh =
 [
-    [ "rasi::ir::IRModule", "classrasi_1_1ir_1_1IRModule.html", "classrasi_1_1ir_1_1IRModule" ]
+    [ "xiao::ir::IRModule", "classxiao_1_1ir_1_1IRModule.html", "classxiao_1_1ir_1_1IRModule" ]
 ];

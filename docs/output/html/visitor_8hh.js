@@ -1,4 +1,4 @@
 var visitor_8hh =
 [
-    [ "rasi::ir::IRVisitor&lt; Derived &gt;", "classrasi_1_1ir_1_1IRVisitor.html", "classrasi_1_1ir_1_1IRVisitor" ]
+    [ "xiao::ir::IRVisitor&lt; Derived &gt;", "classxiao_1_1ir_1_1IRVisitor.html", "classxiao_1_1ir_1_1IRVisitor" ]
 ];

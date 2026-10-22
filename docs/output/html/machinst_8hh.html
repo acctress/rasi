@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rasi: include/rasi/codegen/machinst.hh File Reference</title>
+<title>xiao: include/xiao/codegen/machinst.hh File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">rasi
+   <div id="projectname">xiao
    </div>
   </td>
  </tr>
@@ -112,22 +112,39 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('machinst_8hh.h
   <div class="headertitle"><div class="title">machinst.hh File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="operand_8hh_source.html">rasi/codegen/operand.hh</a>&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="codegen_2reg_8hh_source.html">xiao/codegen/reg.hh</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="operand_8hh_source.html">xiao/codegen/operand.hh</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="types_8hh_source.html">xiao/ir/types.hh</a>&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;span&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="machinst_8hh_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:xiao_3A_3Acodegen_3A_3AMachInst_3C_20Derived_2C_20LabelUse_20_3E" id="r_xiao_3A_3Acodegen_3A_3AMachInst_3C_20Derived_2C_20LabelUse_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classxiao_1_1codegen_1_1MachInst.html">xiao::codegen::MachInst&lt; Derived, LabelUse &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRTP base for a <a class="el" href="classxiao_1_1codegen_1_1MachInst.html" title="CRTP base for a MachInst contract.">MachInst</a> contract.  <a href="classxiao_1_1codegen_1_1MachInst.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:rasi" id="r_rasi"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi.html">rasi</a></td></tr>
-<tr class="memitem:rasi_3A_3Acodegen" id="r_rasi_3A_3Acodegen"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi_1_1codegen.html">rasi::codegen</a></td></tr>
+<tr class="memitem:xiao" id="r_xiao"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao.html">xiao</a></td></tr>
+<tr class="memitem:xiao_3A_3Acodegen" id="r_xiao_3A_3Acodegen"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao_1_1codegen.html">xiao::codegen</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
-<tr class="memitem:rasi_3A_3Acodegen_3A_3AMachInst" id="r_rasi_3A_3Acodegen_3A_3AMachInst"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptrasi_1_1codegen_1_1MachInst.html">rasi::codegen::MachInst</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept constraining a target machine instruction type. <br /></td></tr>
+<tr class="memitem:xiao_3A_3Acodegen_3A_3AMachInstC" id="r_xiao_3A_3Acodegen_3A_3AMachInstC"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptxiao_1_1codegen_1_1MachInstC.html">xiao::codegen::MachInstC</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aa722ecb0ef0a99616802a913e5e3c008" id="r_aa722ecb0ef0a99616802a913e5e3c008"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008">xiao::codegen::MachTerminator</a> : uint8_t { <a class="el" href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008a6adf97f83acf6453d4a6a4b1070f3754">xiao::codegen::None</a>
+, <a class="el" href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008aa4228a09dd66155de8e93a39245768bd">xiao::codegen::Ret</a>
+, <a class="el" href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008adacdb83ade6c4e8878717e206175dfd8">xiao::codegen::Branch</a>
+, <a class="el" href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008acf318911898d0b10b63adc173f49a595">xiao::codegen::CondBranch</a>
+ }</td></tr>
+<tr class="memdesc:aa722ecb0ef0a99616802a913e5e3c008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes how a block ends.  <a href="namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008">More...</a><br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -142,7 +159,7 @@ Concepts</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_37ac76943fc963c4145647c9e29eb10e.html">rasi</a></li><li class="navelem"><a href="dir_4fae5758d0feecc887f373e2975939e9.html">codegen</a></li><li class="navelem"><a href="machinst_8hh.html">machinst.hh</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_b410dd95898eb29563a44b0fb91819d3.html">xiao</a></li><li class="navelem"><a href="dir_f5421c036c9ffd03a5441c83afc9e927.html">codegen</a></li><li class="navelem"><a href="machinst_8hh.html">machinst.hh</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
   </ul>
 </div>

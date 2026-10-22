@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['regclass_0',['RegClass',['../namespacerasi_1_1codegen.html#adaee5b962fda789cdd870325ee2c9d7e',1,'rasi::codegen::RegClass'],['../namespacerasi_1_1x86__64.html#adaee5b962fda789cdd870325ee2c9d7e',1,'rasi::x86_64::RegClass']]]
+  ['machterminator_0',['MachTerminator',['../namespacexiao_1_1codegen.html#aa722ecb0ef0a99616802a913e5e3c008',1,'xiao::codegen']]]
 ];

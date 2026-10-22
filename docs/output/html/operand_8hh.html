@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rasi: include/rasi/codegen/operand.hh File Reference</title>
+<title>xiao: include/xiao/codegen/operand.hh File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">rasi
+   <div id="projectname">xiao
    </div>
   </td>
  </tr>
@@ -112,32 +112,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('operand_8hh.ht
   <div class="headertitle"><div class="title">operand.hh File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="codegen_2reg_8hh_source.html">rasi/codegen/reg.hh</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="codegen_2reg_8hh_source.html">xiao/codegen/reg.hh</a>&gt;</code><br />
 </div>
 <p><a href="operand_8hh_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:rasi_3A_3Acodegen_3A_3AMachOperand" id="r_rasi_3A_3Acodegen_3A_3AMachOperand"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structrasi_1_1codegen_1_1MachOperand.html">rasi::codegen::MachOperand</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A packed register operand for a <a class="el" href="conceptrasi_1_1codegen_1_1MachInst.html" title="Concept constraining a target machine instruction type.">MachInst</a>. Layout: bits 63:43 - vreg index bit 42 - vreg class bits 41:40 - <a class="el" href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7" title="The kind of operand an instruction will be using.">OperandKind</a> bit 39 - <a class="el" href="namespacerasi_1_1codegen.html#a75040cb52a1f403664b547a9dd2bdc59" title="Whether the operand is live before or after the instruction.">OperandPos</a> bit 38 - constraint kind bits 37:8 - reserved bits 7:0 - <a class="el" href="structrasi_1_1codegen_1_1PReg.html" title="A physical register Hardware encoding and register class packed into a single byte (6 bits,...">PReg</a> bits if Fixed, else 0.  <a href="structrasi_1_1codegen_1_1MachOperand.html#details">More...</a><br /></td></tr>
-<tr class="memitem:std_3A_3Aformatter_3C_20rasi_3A_3Acodegen_3A_3AMachOperand_20_3E" id="r_std_3A_3Aformatter_3C_20rasi_3A_3Acodegen_3A_3AMachOperand_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01rasi_1_1codegen_1_1MachOperand_01_4.html">std::formatter&lt; rasi::codegen::MachOperand &gt;</a></td></tr>
+<tr class="memitem:xiao_3A_3Acodegen_3A_3AMachOperand" id="r_xiao_3A_3Acodegen_3A_3AMachOperand"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structxiao_1_1codegen_1_1MachOperand.html">xiao::codegen::MachOperand</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A packed register operand for a <a class="el" href="classxiao_1_1codegen_1_1MachInst.html" title="CRTP base for a MachInst contract.">MachInst</a>. Layout: bits 63:43 - vreg index bit 42 - vreg class bits 41:40 - <a class="el" href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7b" title="The kind of operand an instruction will be using.">OperandKind</a> bit 39 - <a class="el" href="namespacexiao_1_1codegen.html#a318f5ddbbcd950f939a08d496ec90dfe" title="Whether the operand is live before or after the instruction.">OperandPos</a> bit 38 - constraint kind bits 37:8 - reserved bits 7:0 - <a class="el" href="structxiao_1_1codegen_1_1PReg.html" title="A physical register Hardware encoding and register class packed into a single byte (6 bits,...">PReg</a> bits if Fixed, else 0.  <a href="structxiao_1_1codegen_1_1MachOperand.html#details">More...</a><br /></td></tr>
+<tr class="memitem:std_3A_3Aformatter_3C_20xiao_3A_3Acodegen_3A_3AMachOperand_20_3E" id="r_std_3A_3Aformatter_3C_20xiao_3A_3Acodegen_3A_3AMachOperand_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structstd_1_1formatter_3_01xiao_1_1codegen_1_1MachOperand_01_4.html">std::formatter&lt; xiao::codegen::MachOperand &gt;</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:rasi" id="r_rasi"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi.html">rasi</a></td></tr>
-<tr class="memitem:rasi_3A_3Acodegen" id="r_rasi_3A_3Acodegen"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi_1_1codegen.html">rasi::codegen</a></td></tr>
+<tr class="memitem:xiao" id="r_xiao"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao.html">xiao</a></td></tr>
+<tr class="memitem:xiao_3A_3Acodegen" id="r_xiao_3A_3Acodegen"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao_1_1codegen.html">xiao::codegen</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a95f42a374befe499c75c355a85bf33c7" id="r_a95f42a374befe499c75c355a85bf33c7"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7">rasi::codegen::OperandKind</a> : uint8_t { <a class="el" href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7aad8783089f828b927473fb61d51940ec">rasi::codegen::Use</a> = 0
-, <a class="el" href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7adde5c8d4149c5072d2cb798706663e78">rasi::codegen::Def</a> = 1
-, <a class="el" href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7af4cf2b0ec494cef0ef13b854a249ad13">rasi::codegen::UseDef</a> = 2
+<tr class="memitem:a0ffda67b6b2c0f7317dd01cc4e986c7b" id="r_a0ffda67b6b2c0f7317dd01cc4e986c7b"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7b">xiao::codegen::OperandKind</a> : uint8_t { <a class="el" href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7baad8783089f828b927473fb61d51940ec">xiao::codegen::Use</a> = 0
+, <a class="el" href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7badde5c8d4149c5072d2cb798706663e78">xiao::codegen::Def</a> = 1
+, <a class="el" href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7baf4cf2b0ec494cef0ef13b854a249ad13">xiao::codegen::UseDef</a> = 2
  }</td></tr>
-<tr class="memdesc:a95f42a374befe499c75c355a85bf33c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The kind of operand an instruction will be using.  <a href="namespacerasi_1_1codegen.html#a95f42a374befe499c75c355a85bf33c7">More...</a><br /></td></tr>
-<tr class="memitem:a75040cb52a1f403664b547a9dd2bdc59" id="r_a75040cb52a1f403664b547a9dd2bdc59"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacerasi_1_1codegen.html#a75040cb52a1f403664b547a9dd2bdc59">rasi::codegen::OperandPos</a> : uint8_t { <a class="el" href="namespacerasi_1_1codegen.html#a75040cb52a1f403664b547a9dd2bdc59a9060587edeb01a63e3d3edc959678d1e">rasi::codegen::Before</a> = 0
-, <a class="el" href="namespacerasi_1_1codegen.html#a75040cb52a1f403664b547a9dd2bdc59a7bfcadb5535fe8aad5032762b7bfe159">rasi::codegen::After</a> = 1
+<tr class="memdesc:a0ffda67b6b2c0f7317dd01cc4e986c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The kind of operand an instruction will be using.  <a href="namespacexiao_1_1codegen.html#a0ffda67b6b2c0f7317dd01cc4e986c7b">More...</a><br /></td></tr>
+<tr class="memitem:a318f5ddbbcd950f939a08d496ec90dfe" id="r_a318f5ddbbcd950f939a08d496ec90dfe"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="namespacexiao_1_1codegen.html#a318f5ddbbcd950f939a08d496ec90dfe">xiao::codegen::OperandPos</a> : uint8_t { <a class="el" href="namespacexiao_1_1codegen.html#a318f5ddbbcd950f939a08d496ec90dfea9060587edeb01a63e3d3edc959678d1e">xiao::codegen::Before</a> = 0
+, <a class="el" href="namespacexiao_1_1codegen.html#a318f5ddbbcd950f939a08d496ec90dfea7bfcadb5535fe8aad5032762b7bfe159">xiao::codegen::After</a> = 1
  }</td></tr>
-<tr class="memdesc:a75040cb52a1f403664b547a9dd2bdc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the operand is live before or after the instruction.  <a href="namespacerasi_1_1codegen.html#a75040cb52a1f403664b547a9dd2bdc59">More...</a><br /></td></tr>
+<tr class="memdesc:a318f5ddbbcd950f939a08d496ec90dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the operand is live before or after the instruction.  <a href="namespacexiao_1_1codegen.html#a318f5ddbbcd950f939a08d496ec90dfe">More...</a><br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -152,7 +152,7 @@ Enumerations</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_37ac76943fc963c4145647c9e29eb10e.html">rasi</a></li><li class="navelem"><a href="dir_4fae5758d0feecc887f373e2975939e9.html">codegen</a></li><li class="navelem"><a href="operand_8hh.html">operand.hh</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_b410dd95898eb29563a44b0fb91819d3.html">xiao</a></li><li class="navelem"><a href="dir_f5421c036c9ffd03a5441c83afc9e927.html">codegen</a></li><li class="navelem"><a href="operand_8hh.html">operand.hh</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
   </ul>
 </div>

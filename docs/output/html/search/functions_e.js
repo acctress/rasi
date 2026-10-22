@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['rc_0',['rc',['../structrasi_1_1codegen_1_1PReg.html#aade09f92f4c0fb3776615beab41ebdcf',1,'rasi::codegen::PReg::rc()'],['../structrasi_1_1codegen_1_1VReg.html#a8c338316128165d9bf11ffa3d7fc1acf',1,'rasi::codegen::VReg::rc()'],['../structrasi_1_1codegen_1_1Reg.html#a4af8e1eba1f106fa02ce18a9bb4beab9',1,'rasi::codegen::Reg::rc()'],['../structrasi_1_1x86__64_1_1PReg.html#aade09f92f4c0fb3776615beab41ebdcf',1,'rasi::x86_64::PReg::rc()']]],
-  ['release_1',['release',['../classrasi_1_1support_1_1Arena.html#ad50984b7426259b07c9fafdebf731a9a',1,'rasi::support::Arena']]],
-  ['remaining_2',['remaining',['../structrasi_1_1support_1_1Slab.html#af3a57d0a4849e85661e68511f1dedc74',1,'rasi::support::Slab']]],
-  ['reset_3',['reset',['../classrasi_1_1support_1_1Arena.html#aa14dceec9f0f9fd316624faefccf5be5',1,'rasi::support::Arena']]],
-  ['ret_4',['ret',['../classrasi_1_1ir_1_1IRBuilder.html#a019fd00f893e0c40219666b5768fee3b',1,'rasi::ir::IRBuilder']]],
-  ['rewind_5',['rewind',['../classrasi_1_1support_1_1Arena.html#ae74abbe39629d7289bac1dda951da936',1,'rasi::support::Arena']]]
+  ['rc_0',['rc',['../structxiao_1_1codegen_1_1PReg.html#a41532ce7482d43577b95a4b3c1e92b41',1,'xiao::codegen::PReg::rc()'],['../structxiao_1_1codegen_1_1VReg.html#a691b1868b1ded8e4f609827a4f7afc82',1,'xiao::codegen::VReg::rc()'],['../structxiao_1_1codegen_1_1Reg.html#abf0b6858a002a7fc01e5b1c31ffb99df',1,'xiao::codegen::Reg::rc()'],['../structxiao_1_1x86__64_1_1PReg.html#a41532ce7482d43577b95a4b3c1e92b41',1,'xiao::x86_64::PReg::rc()']]],
+  ['reg_1',['reg',['../structxiao_1_1codegen_1_1ArgLoc.html#a879d6a171913dac5f2380a5ee6c4775f',1,'xiao::codegen::ArgLoc']]],
+  ['release_2',['release',['../classxiao_1_1support_1_1Arena.html#a3adfd523246a8e11cff0255044a80bf2',1,'xiao::support::Arena']]],
+  ['remaining_3',['remaining',['../structxiao_1_1support_1_1Slab.html#afb613e22113ca09ad7c1d09facc9044a',1,'xiao::support::Slab']]],
+  ['reset_4',['reset',['../classxiao_1_1support_1_1Arena.html#a71d6abae603e3eacb1e83230c4f9932b',1,'xiao::support::Arena']]],
+  ['ret_5',['ret',['../classxiao_1_1ir_1_1IRBuilder.html#a6ca2e8455627d0f1cebc7e517ccf5d52',1,'xiao::ir::IRBuilder']]],
+  ['rewind_6',['rewind',['../classxiao_1_1support_1_1Arena.html#aac62b431cbfc03e17ad3485cdf8d73d1',1,'xiao::support::Arena']]]
 ];

@@ -1,4 +1,4 @@
 var namespaces_dup =
 [
-    [ "rasi", "namespacerasi.html", "namespacerasi" ]
+    [ "xiao", "namespacexiao.html", "namespacexiao" ]
 ];
